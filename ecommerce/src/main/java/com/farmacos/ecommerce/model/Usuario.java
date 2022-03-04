@@ -48,5 +48,11 @@ public class Usuario {
 	
 	@Column(name = "SENHA", nullable = false)
 	private String Senha;
+        
+        @Column(name = "STATUS", nullable = false)
+	private String status;
+        
+        @Column(name = "CPF", nullable = false, unique = true)
+	private String CPF;
 	
 }
