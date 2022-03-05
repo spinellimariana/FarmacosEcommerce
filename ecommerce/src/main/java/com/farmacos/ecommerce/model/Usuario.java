@@ -29,30 +29,30 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, unique = true, nullable = false)
-	private UUID id;
-	
+	private Long id;
+
 	@Column(name = "NOME", nullable = false)
 	private String nome;
-	
+
 	@Column(name = "TELEFONE")
 	private String telefone;
-	
+
 	@Column(name = "EMAIL", nullable = false, unique = true)
 	private String email;
-	
+
 	@Column(name = "DATA_ANIVERSARIO")
 	private Date dtNascimento;
-	
+
 	@Column(name = "CARGO", nullable = false)
-	private String Cargo;
-	
+	private String cargo;
+
 	@Column(name = "SENHA", nullable = false)
-	private String Senha;
-        
-        @Column(name = "STATUS", nullable = false)
+	private String senha;
+
+	@Column(name = "STATUS", nullable = false)
 	private String status;
-        
-        @Column(name = "CPF", nullable = false, unique = true)
+
+	@Column(name = "CPF", nullable = false, unique = true)
 	private String CPF;
-	
+
 }
