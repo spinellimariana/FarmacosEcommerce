@@ -2,17 +2,17 @@ package com.farmacos.ecommerce.service;
 
 import java.util.List;
 
+import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.model.Usuario;
-import com.farmacos.ecommerce.model.dto.UsuarioResponse;
-
-import enums.StatusUsuario;
+import com.farmacos.ecommerce.model.dto.request.UsuarioRequest;
+import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
 
 
 public interface UsuarioService {
 
 	public Usuario salvarUsuario(Usuario usuario); 	
 	
-	public UsuarioResponse alterarUsuario(Usuario usuario);
+	public UsuarioResponse alterarUsuario(long id, UsuarioRequest usuario);
 	
 	public Usuario status(Long id, StatusUsuario status);
 	

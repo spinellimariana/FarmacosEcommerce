@@ -1,4 +1,4 @@
-package enums;
+package com.farmacos.ecommerce.enums;
 
 public enum StatusUsuario {
 

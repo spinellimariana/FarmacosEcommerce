@@ -1,4 +1,4 @@
-package com.farmacos.ecommerce.model.dto;
+package com.farmacos.ecommerce.model.dto.request;
 
 import java.util.Date;
 
@@ -7,30 +7,27 @@ import org.modelmapper.ModelMapper;
 import com.farmacos.ecommerce.model.Usuario;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class UsuarioResponse {
+@NoArgsConstructor
+public class UsuarioRequest {
 
 	private String nome;
 	private String telefone;
-	private String email;
 	private Date dtNascimento;
 	private String cargo;
 	private String status;
-	private String CPF;
 	private String senha;
 	
-	public UsuarioResponse(Usuario usuario) {
+	
+	
+	public UsuarioRequest(Usuario usuario) {
 		this.nome = usuario.getNome();
-		this.telefone = usuario.getNome();
+		this.telefone = usuario.getTelefone();
 		this.dtNascimento = usuario.getDtNascimento();
 		this.cargo = usuario.getCargo();
 		this.status = usuario.getStatus();
 	}
 
-	public Usuario toEntity() {
-		ModelMapper modelMapper = new ModelMapper();
-		Usuario entity = modelMapper.map(this, Usuario.class);
-		return entity;
-	}
 }
