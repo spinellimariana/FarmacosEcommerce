@@ -14,7 +14,7 @@ public interface UsuarioService {
 	
 	public UsuarioResponse alterarUsuario(long id, UsuarioRequest usuario);
 	
-	public Usuario status(Long id, StatusUsuario status);
+	public UsuarioResponse status(Long id, StatusUsuario status);
 	
 	public List<Usuario> getAllUsuarios();
 }

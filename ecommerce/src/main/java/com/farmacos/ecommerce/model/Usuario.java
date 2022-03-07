@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.farmacos.ecommerce.enums.StatusUsuario;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,7 +50,7 @@ public class Usuario {
 	private String senha;
 
 	@Column(name = "STATUS", nullable = false)
-	private String status;
+	private StatusUsuario status;
 
 	@Column(name = "CPF", nullable = false, unique = true)
 	private String CPF;

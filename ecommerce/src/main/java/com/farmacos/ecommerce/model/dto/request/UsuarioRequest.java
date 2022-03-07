@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.modelmapper.ModelMapper;
 
+import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.model.Usuario;
 
 import lombok.Data;
@@ -17,7 +18,7 @@ public class UsuarioRequest {
 	private String telefone;
 	private Date dtNascimento;
 	private String cargo;
-	private String status;
+	private StatusUsuario status;
 	private String senha;
 	
 	
