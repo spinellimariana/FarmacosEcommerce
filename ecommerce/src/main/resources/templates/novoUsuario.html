@@ -20,7 +20,7 @@ and open the template in the editor.
             <h1>Gerenciamento de Usuário</h1>
             <hr>
             <h2>Salvar Usuário</h2>
-
+            <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
             <form action="#" th:action="@{/usuario/saveUsuario}" th:object="${usuario}" method="POST">
                 
                 <input type="text" th:field="*{nome}" placeholder="Nome do Usuário" 
