@@ -16,10 +16,15 @@ public interface UsuarioService {
 	
 	public UsuarioResponse status(Long id, StatusUsuario status);
 	
-	public List<Usuario> getAllUsuarios();
-        //List<Usuario> getAllUsuarios();
-        
+	
+        //COM THYMELEAF ABAIXO
+        public List<Usuario> getAllUsuarios();
+                
         void saveUsuario(Usuario usuario);
+        
+        Usuario getUsuarioID(long id);
+        
+        //void ativoInativo(long id);
         
         
 }
