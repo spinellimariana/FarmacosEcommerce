@@ -24,29 +24,21 @@ and open the template in the editor.
 
                 <input type="hidden" th:field="*{id}"/>
 
-                <input type="text" th:field="*{nome}" 
+                <input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Usuário*" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{cpf}" 
+                <input id="cpf" type="text" required cpf="cpf" th:field="*{cpf}" placeholder="CPF*" 
                        class="form-control mb-4 col-4" readonly>
-                <input type="text" th:field="*{email}" 
+                <input id="email" type="text" required email="email" th:field="*{email}" placeholder="E-mail*" 
                        class="form-control mb-4 col-4" readonly>
-                <input type="text" th:field="*{telefone}" 
+                <input type="text" th:field="*{telefone}" placeholder="Telefone" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{dtNascimento}" 
+                <input type="text" th:field="*{dtNascimento}" placeholder="Data de Nascimento" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{senha}" 
+                <input id="senha" type="text" required senha="senha" th:field="*{senha}" placeholder="Senha*" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{cargo}" 
+                <input id="cargo" type="text" required cargo="cargo" th:field="*{cargo}" placeholder="Cargo*" 
                        class="form-control mb-4 col-4">
-
-                <!--<select class="form-control" placeholder="status">
-                    <option th:field="*{status}">Ativo</option>
-                    <option th:field="*{status}">Inativo</option>
-                </select>-->
-
-
-
-                <input type="text" th:field="*{status}" placeholder="Status" 
+                <input id="status" type="text" required cargo="status" th:field="*{status}" placeholder="Status*" 
                        class="form-control mb-4 col-4">
 
                 <button type="submit" class="btn btn-info col-2">Atualizar</button>

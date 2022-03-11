@@ -23,19 +23,19 @@ and open the template in the editor.
             <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
             <form action="#" th:action="@{/usuario/saveUsuario}" th:object="${usuario}" method="POST">
 
-                <input type="text" th:field="*{nome}" placeholder="Nome do Usuário" 
+                <input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Usuário*" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{cpf}" placeholder="CPF" 
+                <input id="cpf" type="text" required cpf="cpf" th:field="*{cpf}" placeholder="CPF*" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{email}" placeholder="E-mail" 
+                <input id="email" type="text" required email="email" th:field="*{email}" placeholder="E-mail*" 
                        class="form-control mb-4 col-4">
                 <input type="text" th:field="*{telefone}" placeholder="Telefone" 
                        class="form-control mb-4 col-4">
                 <input type="text" th:field="*{dtNascimento}" placeholder="Data de Nascimento" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{senha}" placeholder="Senha" 
+                <input id="senha" type="text" required senha="senha" th:field="*{senha}" placeholder="Senha*" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{cargo}" placeholder="Cargo" 
+                <input id="cargo" type="text" required cargo="cargo" th:field="*{cargo}" placeholder="Cargo*" 
                        class="form-control mb-4 col-4">
 
                 <!--<select class="form-control" placeholder="status">
@@ -45,7 +45,7 @@ and open the template in the editor.
                 
 
 
-                <input type="text" th:field="*{status}" placeholder="Status" 
+                <input id="status" type="text" required cargo="status" th:field="*{status}" placeholder="Status*" 
                        class="form-control mb-4 col-4">
 
                 <button type="submit" class="btn btn-info col-2">Salvar</button>
