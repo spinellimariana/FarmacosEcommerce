@@ -13,6 +13,7 @@ import com.farmacos.ecommerce.model.dto.request.UsuarioRequest;
 import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
 import com.farmacos.ecommerce.repository.UsuarioRepository;
 import com.farmacos.ecommerce.service.UsuarioService;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -28,7 +29,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
         return this.usuarioRepository.save(usuario);
     }*/
-
     @Override
     public UsuarioResponse alterarUsuario(long id, UsuarioRequest usuario) {
 
@@ -62,16 +62,32 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuResponse;
     }
 
-    @Override
+    @Override //lista todos usuarios
     public List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    @Override
+    @Override //cadastrar novo usuário
     public void saveUsuario(Usuario usuario) {
         this.usuarioRepository.save(usuario);
     }
+
+    @Override //alterar usuário
+    public Usuario getUsuarioID(long id) {
+        Optional<Usuario> optional = usuarioRepository.findById(id);
+        Usuario usuario =null;
+        if(optional.isPresent()){
+            usuario = optional.get();
+            
+        }else{
+            throw new RuntimeException("Usuário não encontrato no ID :: " +  id);
+        }
+        return usuario;
+               
+    }
     
-    
+    /*public void ativoInativo(long id){
+        this.usuarioRepository.getById(id); //??? como programar isso?
+    }*/
 
 }

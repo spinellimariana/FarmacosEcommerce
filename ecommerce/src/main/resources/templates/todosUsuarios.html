@@ -33,6 +33,7 @@ and open the template in the editor.
                         <th>Senha</th>
                         <th>Cargo</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,12 @@ and open the template in the editor.
                         <td th:text="${usuario.senha}"></td>
                         <td th:text="${usuario.cargo}"></td>
                         <td th:text="${usuario.status}"></td>
+
+                        <td> <a th:href="@{/usuario/showFormForUptade/{id}(id=${usuario.id})}" 
+                                class="btn btn-primary">Atualizar</a> </td>
+
+                        <td> <a th:href="@{/usuario/ativoInativo/{id}(id=${usuario.id})}" 
+                                class="btn btn-primary">Ativar/Inativar</a> </td>
 
                     </tr>
                 </tbody>

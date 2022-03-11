@@ -1,5 +1,8 @@
 package com.farmacos.ecommerce.controller;
 
+import com.farmacos.ecommerce.enums.StatusUsuario;
+import static com.farmacos.ecommerce.enums.StatusUsuario.ativo;
+import static com.farmacos.ecommerce.enums.StatusUsuario.inativo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,44 +25,67 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 @RequestMapping(value = "/usuario") //o que esta no get maping
 public class UsuarioController {
+    
+    @Autowired
+    private UsuarioService usuarioService;
 
-	@Autowired
-	private UsuarioService usuarioService;
+    //listar todos usuários
+    @GetMapping()
+    public String viewHomePage(Model model) {
+        model.addAttribute("listaUsuarios", usuarioService.getAllUsuarios());
+        return "todosUsuarios";
+    }
+    
+    @GetMapping("/showNewUsuarioForm")
+    public String showNewUsuarioForm(Model model) {
+        Usuario usuario = new Usuario();
+        model.addAttribute("usuario", usuario);
+        return "novoUsuario"; // mesmo nome do html
+    }
+    
+    @PostMapping("/saveUsuario") //salvar usuario no BD
+    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario) {
+        usuarioService.saveUsuario(usuario);
+        return "redirect:/usuario";
+    }
+    
+    @GetMapping("/showFormForUptade/{id}")
+    public String showFormForUptade(@PathVariable(value = "id") long id, Model model) {
+        Usuario usuario = usuarioService.getUsuarioID(id);
+        model.addAttribute("usuario", usuario);
+        return "atualizarUsuario";
+    }
+    
+    @GetMapping("/ativoInativo/{id}") //metodo para ativar/inativar no BD
+    public String ativoInativo(@PathVariable(value = "id") long id, Model model) {
+        //chama o metodo que tá na service impl
+        Usuario usuario = usuarioService.getUsuarioID(id);
         
-        //listar todos usuários
-        @GetMapping()
-        public String viewHomePage(Model model){
-            model.addAttribute("listaUsuarios", usuarioService.getAllUsuarios());
-            return "todosUsuarios";
+        if (usuario.getStatus().ordinal() == 0) {
+            usuario.setStatus(inativo);
+        }else if(usuario.getStatus().ordinal() == 1){
+            usuario.setStatus(ativo);
         }
         
-        @GetMapping("/showNewUsuarioForm")
-        public String showNewUsuarioForm(Model model){
-            Usuario usuario = new Usuario();
-            model.addAttribute("usuario", usuario);
-            return "novoUsuario"; // mesmo nome do html
-        }
-        
-        @PostMapping("/saveUsuario") //salvar usuario no BD
-        public String saveUsuario(@ModelAttribute("usuario") Usuario usuario){
-            usuarioService.saveUsuario(usuario);
-            return "redirect:/usuario";
-        }
+        Model addAttribute = model.addAttribute("usuario", usuario);
 
-	/*@PostMapping
+        //como programar ativação inativação?
+        return "redirect:/usuario";
+    }
+    
+    /*@PatchMapping(value = "{id}")
+    public ResponseEntity<UsuarioResponse> alterarUsuario(@RequestBody UsuarioRequest usuario, @PathVariable Long id) {
+        return ResponseEntity.ok().body(this.usuarioService.alterarUsuario(id, usuario));
+    }*/
+
+    /*@PostMapping
 	public ResponseEntity<Usuario> salvarUsuario(@RequestBody Usuario usuario) throws Exception {
 		Usuario user = this.usuarioService.salvarUsuario(usuario);
 		return ResponseEntity.ok().body(user);
 	}*/
 
-	/*@GetMapping
+ /*@GetMapping
 	public ResponseEntity<List<Usuario>> getAllUsuarios() {
 		return ResponseEntity.ok().body(usuarioService.getAllUsuarios());
 	}*/
-
-	@PatchMapping(value = "{id}")
-	public ResponseEntity<UsuarioResponse> alterarUsuario(@RequestBody UsuarioRequest usuario, @PathVariable Long id) {
-		return ResponseEntity.ok().body(this.usuarioService.alterarUsuario(id,usuario));
-	}
-
 }
