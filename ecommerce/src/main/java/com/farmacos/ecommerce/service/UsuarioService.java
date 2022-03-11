@@ -10,11 +10,16 @@ import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
 
 public interface UsuarioService {
 
-	public Usuario salvarUsuario(Usuario usuario); 	
+	//public Usuario salvarUsuario(Usuario usuario); 	
 	
 	public UsuarioResponse alterarUsuario(long id, UsuarioRequest usuario);
 	
 	public UsuarioResponse status(Long id, StatusUsuario status);
 	
 	public List<Usuario> getAllUsuarios();
+        //List<Usuario> getAllUsuarios();
+        
+        void saveUsuario(Usuario usuario);
+        
+        
 }

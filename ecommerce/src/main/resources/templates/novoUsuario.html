@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Gerenciamento de Usuários</title>
+
+        <!-- BOOTSTRAP -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+              rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+              crossorigin="anonymous"><!-- comment -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Gerenciamento de Usuário</h1>
+            <hr>
+            <h2>Salvar Usuário</h2>
+
+            <form action="#" th:action="@{/usuario/saveUsuario}" th:object="${usuario}" method="POST">
+                
+                <input type="text" th:field="*{nome}" placeholder="Nome do Usuário" 
+                       class="form-control mb-4 col-4">
+                <input type="text" th:field="*{cpf}" placeholder="CPF" 
+                       class="form-control mb-4 col-4">
+                <input type="text" th:field="*{email}" placeholder="E-mail" 
+                       class="form-control mb-4 col-4">
+                <input type="text" th:field="*{telefone}" placeholder="Telefone" 
+                       class="form-control mb-4 col-4">
+                <input type="text" th:field="*{dtNascimento}" placeholder="dtNascimento" 
+                       class="form-control mb-4 col-4">
+                <input type="text" th:field="*{senha}" placeholder="senha" 
+                       class="form-control mb-4 col-4">
+                <input type="text" th:field="*{cargo}" placeholder="cargo" 
+                       class="form-control mb-4 col-4">
+                <input type="text" th:field="*{status}" placeholder="status" 
+                       class="form-control mb-4 col-4">
+                
+                <button type="submit" class="btn btn-info col-2">Salvar</button>
+                
+                
+            </form>
+
+
+
+        </div>
+    </body>
+</html>

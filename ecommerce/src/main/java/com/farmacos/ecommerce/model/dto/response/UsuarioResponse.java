@@ -14,7 +14,8 @@ public class UsuarioResponse {
 
 	private String nome;
 	private String telefone;
-	private Date dtNascimento;
+	//private Date dtNascimento;
+        private String dtNascimento;
 	private String cargo;
 	private StatusUsuario status;
 	
