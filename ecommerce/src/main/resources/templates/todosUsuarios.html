@@ -17,14 +17,16 @@ and open the template in the editor.
     <body>
         <div class="container my-2">
             <h1>Lista de Usuários:</h1>
+            <br>
+            <form action="">
+                <input name="nomepesquisa" placeholder="Pesquisa por nome*" class="form-control mb-2 col-2">
+                <input type="submit" value="Pesquisar" class="btn btn-primary">
+            </form>
             <div align="right">
                 <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
                 <a th:href="@{/usuario/showNewUsuarioForm}" class="btn btn-primary btn-sm mb-3">+</a>
-
             </div>
-
-            <br>
-
+            
             <table border="1" class="table table-striped table-reponsive-md">
                 <thead>
                     <tr>
