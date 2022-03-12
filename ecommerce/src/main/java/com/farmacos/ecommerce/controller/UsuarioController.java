@@ -21,6 +21,7 @@ import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
 import com.farmacos.ecommerce.repository.UsuarioRepository;
 import com.farmacos.ecommerce.service.UsuarioService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-    //private UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     //listar todos usuários
     @GetMapping()
@@ -44,7 +45,7 @@ public class UsuarioController {
         //CÓDIGO ANTIGO SEM PAGINAÇÃO
         model.addAttribute("listaUsuarios", usuarioService.getAllUsuarios());
         return "todosUsuarios";
-        */
+         */
     }
 
     @GetMapping("/page/{pageNo}") //listar todos os usuários com paginação
@@ -83,13 +84,16 @@ public class UsuarioController {
         return "atualizarUsuario";
     }
 
-    //@PostMapping("**/pesquisarPessoa")
-    /*public ModelAndView pesquisar(@RequestParam("nomePesquisa") String nomePesquisa){
-        ModelAndView modelAndView = new ModelAndView("todosUsuarios");
-       // modelAndView.addObject("listaUsuarios", usuarioRepository.filtroNome(nomePesquisa));
-        modelAndView.addObject("usuario", new Usuario());
-        return modelAndView;
-    }*/
+     @PostMapping("/usuario") //pesquisar o usuario
+     public String pesquisaUsuario(Model model, @Param("keyword") String keyword){
+         List<Usuario> usuario = usuarioService.findUsuario(keyword);
+         model.addAttribute("usuario", usuario);
+         model.addAttribute("keyword", keyword);
+         return findPaginated(1, model);
+     }
+
+
+
     @GetMapping("/ativoInativo/{id}") //metodo para ativar/inativar no BD
     public String ativoInativo(@PathVariable(value = "id") long id, Model model) {
         //chama o metodo que tá na service impl
@@ -107,12 +111,7 @@ public class UsuarioController {
         return "redirect:/usuario";
     }
 
-    
-    
-    
-    
     //CÓDIGO DO VINI
-    
     /*@PatchMapping(value = "{id}")
     public ResponseEntity<UsuarioResponse> alterarUsuario(@RequestBody UsuarioRequest usuario, @PathVariable Long id) {
         return ResponseEntity.ok().body(this.usuarioService.alterarUsuario(id, usuario));

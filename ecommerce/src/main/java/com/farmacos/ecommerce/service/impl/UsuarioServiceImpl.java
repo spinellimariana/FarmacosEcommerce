@@ -98,4 +98,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     /*public void ativoInativo(long id){
         this.usuarioRepository.getById(id); //??? como programar isso?
     }*/
+
+    @Override
+    public List<Usuario> findUsuario(String keyword) {
+        if(keyword != null){
+            return usuarioRepository.search(keyword);
+        }
+        return (List<Usuario>) usuarioRepository.findAll();
+    }
 }
