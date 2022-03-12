@@ -6,6 +6,7 @@ import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.model.Usuario;
 import com.farmacos.ecommerce.model.dto.request.UsuarioRequest;
 import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
+import org.springframework.data.domain.Page;
 
 
 public interface UsuarioService {
@@ -25,6 +26,10 @@ public interface UsuarioService {
         Usuario getUsuarioID(long id);
         
         //void ativoInativo(long id);
+        
+        Page<Usuario> findPaginated(int pageNo, int pageSize);
+        
+
         
         
 }
