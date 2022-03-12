@@ -14,6 +14,9 @@ import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
 import com.farmacos.ecommerce.repository.UsuarioRepository;
 import com.farmacos.ecommerce.service.UsuarioService;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -75,19 +78,24 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override //alterar usuário
     public Usuario getUsuarioID(long id) {
         Optional<Usuario> optional = usuarioRepository.findById(id);
-        Usuario usuario =null;
-        if(optional.isPresent()){
+        Usuario usuario = null;
+        if (optional.isPresent()) {
             usuario = optional.get();
-            
-        }else{
-            throw new RuntimeException("Usuário não encontrato no ID :: " +  id);
+
+        } else {
+            throw new RuntimeException("Usuário não encontrato no ID :: " + id);
         }
         return usuario;
-               
+
     }
-    
+
+    @Override //paginação
+    public Page<Usuario> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.usuarioRepository.findAll(pageable);
+    }
+
     /*public void ativoInativo(long id){
         this.usuarioRepository.getById(id); //??? como programar isso?
     }*/
-
 }
