@@ -17,7 +17,7 @@ public interface UsuarioService extends UserDetailsService{
     //public Usuario salvarUsuario(Usuario usuario); 	
     public UsuarioResponse alterarUsuario(long id, UsuarioRequest usuario);
 
-    public UsuarioResponse status(Long id, StatusUsuario status);
+    public void status(Long id);
 
     //COM THYMELEAF ABAIXO
     public List<Usuario> getAllUsuarios();

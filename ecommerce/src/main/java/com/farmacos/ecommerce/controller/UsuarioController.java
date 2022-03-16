@@ -97,16 +97,7 @@ public class UsuarioController {
     @GetMapping("/ativoInativo/{id}") //metodo para ativar/inativar no BD
     public String ativoInativo(@PathVariable(value = "id") long id, Model model) {
         //chama o metodo que tá na service impl
-        Usuario usuario = usuarioService.getUsuarioID(id);
-
-        if (usuario.getStatus().ordinal() == 0) {
-            usuario.setStatus(inativo);
-        } else if (usuario.getStatus().ordinal() == 1) {
-            usuario.setStatus(ativo);
-        }
-
-        Model addAttribute = model.addAttribute("usuario", usuario);
-
+        usuarioService.status(id);
         //como programar ativação inativação?
         return "redirect:/usuario";
     }

@@ -63,18 +63,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public UsuarioResponse status(Long id, StatusUsuario status) {
+	public void status(Long id) {
 		Usuario usu = this.usuarioRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Usuario não existente"));
 		try {
-			usu.setStatus(status);
+			
+			if(usu.getStatus() == StatusUsuario.ativo) {
+				usu.setStatus(StatusUsuario.inativo);
+			}else if(usu.getStatus() == StatusUsuario.inativo){
+				usu.setStatus(StatusUsuario.ativo);
+			}
 			this.usuarioRepository.save(usu);
 
 		} catch (Exception e) {
 			new Exception("");
 		}
-		UsuarioResponse usuResponse = new UsuarioResponse(usu);
-		return usuResponse;
+
 	}
 
 	@Override // lista todos usuarios
