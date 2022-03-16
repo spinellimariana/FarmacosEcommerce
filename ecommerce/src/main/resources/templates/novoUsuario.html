@@ -25,11 +25,11 @@ and open the template in the editor.
 
                 <input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Usuário*" 
                        class="form-control mb-4 col-4">
-                <input id="cpf" type="text" required cpf="cpf" oninput="mascara(this)" th:field="*{cpf}" placeholder="CPF*" 
+                <input id="cpf" type="text" required cpf="cpf" oninput="mascaraCPF(this)" th:field="*{cpf}" placeholder="CPF*" 
                        class="form-control mb-4 col-4">
                 <input id="email" type="email" required email="email" th:field="*{email}" placeholder="E-mail*" 
                        class="form-control mb-4 col-4">
-                <input type="text" th:field="*{telefone}" placeholder="Telefone" 
+                <input id="telefone" type="text" th:field="*{telefone}" maxlength="14" placeholder="Telefone" 
                        class="form-control mb-4 col-4">
                 <input type="date" th:field="*{dtNascimento}" placeholder="Data de Nascimento" 
                        class="form-control mb-4 col-4">
@@ -49,10 +49,10 @@ and open the template in the editor.
                 <button type="submit" class="btn btn-info col-2">Salvar</button>
 
             </form>
-            
+
             <!-- VALIDAÇÃO DO FORMATO DE ENTRADA DO CPF -->
             <script>
-                function mascara(i) {
+                function mascaraCPF(i) {
                     var v = i.value;
                     if (isNaN(v[v.length - 1])) { // impede entrar outro caractere que não seja número
                         i.value = v.substring(0, v.length - 1);

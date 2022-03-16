@@ -84,7 +84,7 @@ public class UsuarioController {
         return "atualizarUsuario";
     }
 
-     @PostMapping("/usuario") //pesquisar o usuario
+     @PostMapping("/pesquisaUsuario") //pesquisar o usuario
      public String pesquisaUsuario(Model model, @Param("keyword") String keyword){
          List<Usuario> usuario = usuarioService.findUsuario(keyword);
          model.addAttribute("usuario", usuario);
