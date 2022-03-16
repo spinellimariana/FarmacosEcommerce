@@ -16,4 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     @Query("select u from Usuario u where u.nome like %?1%")
     public List<Usuario> search(String keyword);
     
+     Usuario findByEmail(String email);
+    
 }

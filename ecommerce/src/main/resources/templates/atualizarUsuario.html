@@ -5,50 +5,64 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Gerenciamento de Usuários</title>
-        <!-- BOOTSTRAP -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-              rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-              crossorigin="anonymous"><!-- comment -->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div class="container my-2">
-            <h1>Gerenciamento de Usuário</h1>
-            <hr>
-            <h2>Atualizar Usuário</h2>
-            <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
-            <form action="#" th:action="@{/usuario/saveUsuario}" th:object="${usuario}" method="POST">
 
-                <input type="hidden" th:field="*{id}"/>
+<head>
+	<title>Gerenciamento de Usuários</title>
+	<!-- BOOTSTRAP -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- comment -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-                <input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Usuário*" 
-                       class="form-control mb-4 col-4">
-                <input id="cpf" type="text" required cpf="cpf" th:field="*{cpf}" placeholder="CPF*" 
-                       class="form-control mb-4 col-4" readonly>
-                <input id="email" type="text" required email="email" th:field="*{email}" placeholder="E-mail*" 
-                       class="form-control mb-4 col-4" readonly>
-                <input type="text" th:field="*{telefone}" placeholder="Telefone" 
-                       class="form-control mb-4 col-4">
-                <input type="date" th:field="*{dtNascimento}" placeholder="Data de Nascimento" 
-                       class="form-control mb-4 col-4">
-                <input id="senha" type="password" required senha="senha" th:field="*{senha}" placeholder="Senha*" 
-                       class="form-control mb-4 col-4">
-                <input id="cargo" type="text" required cargo="cargo" th:field="*{cargo}" placeholder="Cargo*" 
-                       class="form-control mb-4 col-4">
-                <input id="status" type="text" required cargo="status" th:field="*{status}" placeholder="Status*" 
-                       class="form-control mb-4 col-4">
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#" th:href="@{/}">Farmacos</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container my-2">
+		<h1>Gerenciamento de Usuário</h1>
+		<hr>
+		<h2>Atualizar Usuário</h2>
+		<!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
+		<form action="#" th:action="@{/usuario/saveUsuario}" th:object="${usuario}" method="POST">
 
-                <button type="submit" class="btn btn-info col-2">Atualizar</button>
+			<input type="hidden" th:field="*{id}" />
+
+			<input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Usuário*"
+				class="form-control mb-4 col-4">
+			<input id="cpf" type="text" required cpf="cpf" th:field="*{cpf}" placeholder="CPF*"
+				class="form-control mb-4 col-4" readonly>
+			<input id="email" type="text" required email="email" th:field="*{email}" placeholder="E-mail*"
+				class="form-control mb-4 col-4" readonly>
+			<input type="text" th:field="*{telefone}" placeholder="Telefone" class="form-control mb-4 col-4">
+			<input type="date" th:field="*{dtNascimento}" placeholder="Data de Nascimento"
+				class="form-control mb-4 col-4">
+			<input id="senha" type="password" required senha="senha" th:field="*{senha}" placeholder="Senha*"
+				class="form-control mb-4 col-4">
+			<input id="cargo" type="text" required cargo="cargo" th:field="*{cargo}" placeholder="Cargo*"
+				class="form-control mb-4 col-4">
+			<input id="status" type="text" required cargo="status" th:field="*{status}" placeholder="Status*"
+				class="form-control mb-4 col-4">
+
+			<button type="submit" class="btn btn-info col-2">Atualizar</button>
 
 
-            </form>
+		</form>
 
 
 
-        </div>
+	</div>
 
-    </body>
+</body>
+
 </html>

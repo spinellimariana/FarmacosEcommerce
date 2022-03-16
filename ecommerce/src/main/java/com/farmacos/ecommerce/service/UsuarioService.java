@@ -9,8 +9,9 @@ import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
 import com.farmacos.ecommerce.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UsuarioService {
+public interface UsuarioService extends UserDetailsService{
 
 
     //public Usuario salvarUsuario(Usuario usuario); 	

@@ -16,9 +16,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
     
-    @GetMapping
+    @GetMapping("/")
     public String showIndex(){
         return "index";
+    }
+	
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
     
 }
