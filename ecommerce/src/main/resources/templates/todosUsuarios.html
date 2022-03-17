@@ -32,12 +32,16 @@ and open the template in the editor.
 	<div class="container my-2">
 		<h1>Lista de Usuários:</h1>
 		<br>
-		<!--
-            <form action="#" th:action="@{/usuario/pesquisaUsuario}" method="POST">
-                <input th:field="*{keyword}" placeholder="Pesquisa por nome*">
-                <input type="submit" value="Pesquisar" class="btn btn-primary">
-            </form>
-            -->
+
+<!--		<form th:action="@{/usuario}" method="GET">-->
+<!--			<input type="text" th:value="${usuario}" placeholder="Pesquisa por nome*">-->
+<!--			<input type="submit" value="Search" class="btn btn-primary">-->
+<!--		</form>-->
+<!---->
+
+
+
+
 		<div align="right">
 			<!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
 			<a th:href="@{/usuario/showNewUsuarioForm}" class="btn btn-primary btn-sm mb-3">+</a>
@@ -71,7 +75,6 @@ and open the template in the editor.
 
 					<td> <a th:href="@{/usuario/ativoInativo/{id}(id=${usuario.id})}"
 							class="btn btn-primary">Ativar/Inativar</a> </td>
-
 				</tr>
 			</tbody>
 		</table>

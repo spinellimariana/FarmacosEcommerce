@@ -113,17 +113,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return this.usuarioRepository.findAll(pageable);
 	}
 
-	/*
-	 * public void ativoInativo(long id){ this.usuarioRepository.getById(id); //???
-	 * como programar isso? }
-	 */
-
 	@Override
 	public List<Usuario> findUsuario(String keyword) {
 		if (keyword != null) {
 			return usuarioRepository.search(keyword);
 		}
-		return (List<Usuario>) usuarioRepository.findAll();
+		return usuarioRepository.findAll();
 	}
 
 	@Override
@@ -132,6 +127,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario user = usuarioRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Usuario inválido");
+		}
+		else if(user.getStatus() == StatusUsuario.inativo) {
+			throw new UsernameNotFoundException("Usuario Inativo");
 		}
 		return new User(user.getEmail(), user.getSenha(), mapRoleAuthorities(user.getRole()));
 	}

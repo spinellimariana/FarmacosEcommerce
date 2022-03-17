@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     
     //essa query está certa?
-    @Query("select u from Usuario u where u.nome like %?1%")
+    @Query("SELECT u FROM Usuario u WHERE u.nome like %?1%")
     public List<Usuario> search(String keyword);
     
      Usuario findByEmail(String email);

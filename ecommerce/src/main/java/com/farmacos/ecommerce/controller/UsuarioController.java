@@ -84,12 +84,11 @@ public class UsuarioController {
         return "atualizarUsuario";
     }
 
-     @PostMapping("/usuario") //pesquisar o usuario
-     public String pesquisaUsuario(Model model, @Param("keyword") String keyword){
-         List<Usuario> usuario = usuarioService.findUsuario(keyword);
-         model.addAttribute("usuario", usuario);
-         model.addAttribute("keyword", keyword);
-         return findPaginated(1, model);
+     @GetMapping("/usuario") //pesquisar o usuario
+     public String pesquisaUsuario(Model model, @RequestParam("keyword") String keyword){
+         model.addAttribute("usuario", usuarioService.findUsuario(keyword));
+//         model.addAttribute("keyword", keyword);
+         return "usuarios";
      }
 
 
