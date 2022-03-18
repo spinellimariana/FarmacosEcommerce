@@ -27,7 +27,7 @@ public interface UsuarioService extends UserDetailsService{
     Usuario getUsuarioID(long id);
 
     //void ativoInativo(long id);
-    Page<Usuario> findPaginated(int pageNo, int pageSize);
+    Page<Usuario> findPaginated(int pageNo, int pageSize, String keyword);
     
     public List<Usuario> findUsuario(String keyword);
 

@@ -1,31 +1,21 @@
 package com.farmacos.ecommerce.controller;
 
-import com.farmacos.ecommerce.enums.StatusUsuario;
-import static com.farmacos.ecommerce.enums.StatusUsuario.ativo;
-import static com.farmacos.ecommerce.enums.StatusUsuario.inativo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.farmacos.ecommerce.model.Usuario;
-import com.farmacos.ecommerce.model.dto.request.UsuarioRequest;
-import com.farmacos.ecommerce.model.dto.response.UsuarioResponse;
 import com.farmacos.ecommerce.repository.UsuarioRepository;
 import com.farmacos.ecommerce.service.UsuarioService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/usuario") //o que esta no get maping
@@ -33,12 +23,11 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-    private UsuarioRepository usuarioRepository;
 
     //listar todos usuários
     @GetMapping()
-    public String viewHomePage(Model model) {
-        return findPaginated(1, model);
+    public String viewHomePage(Model model, @RequestParam(value="keyword", required = false) String keyword) {
+        return findPaginated(1, model, keyword);
         //chamo o método paginated abaixo e aí ele dá o display de todos os usuários
 
         /*
@@ -49,10 +38,10 @@ public class UsuarioController {
     }
 
     @GetMapping("/page/{pageNo}") //listar todos os usuários com paginação
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model, @RequestParam(value="keyword", required = false) String keyword) {
         int pageSize = 10;
 
-        Page<Usuario> page = usuarioService.findPaginated(pageNo, pageSize);
+        Page<Usuario> page = usuarioService.findPaginated(pageNo, pageSize, keyword);
         List<Usuario> listUsuarios = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
@@ -84,12 +73,12 @@ public class UsuarioController {
         return "atualizarUsuario";
     }
 
-     @GetMapping("/usuario") //pesquisar o usuario
-     public String pesquisaUsuario(Model model, @RequestParam("keyword") String keyword){
-         model.addAttribute("usuario", usuarioService.findUsuario(keyword));
+//     @GetMapping("/usuario") //pesquisar o usuario
+//     public String pesquisaUsuario(Model model, @RequestParam("keyword") String keyword){
+//         model.addAttribute("listaUsuarios", usuarioService.findUsuario(keyword));
 //         model.addAttribute("keyword", keyword);
-         return "usuarios";
-     }
+//         return "todosUsuarios";
+//     }
 
 
 

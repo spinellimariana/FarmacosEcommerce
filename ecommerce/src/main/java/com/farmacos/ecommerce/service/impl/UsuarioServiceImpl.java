@@ -108,9 +108,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override // paginação
-	public Page<Usuario> findPaginated(int pageNo, int pageSize) {
+	public Page<Usuario> findPaginated(int pageNo, int pageSize, String keyword) {
+		
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-		return this.usuarioRepository.findAll(pageable);
+		
+		if(keyword == null) {
+			return this.usuarioRepository.findAll(pageable);
+		}
+		return this.usuarioRepository.search(keyword, pageable);
+		
 	}
 
 	@Override
