@@ -52,4 +52,11 @@ public class ProdutoController {
 
     }
 
+    @GetMapping("/ativoInativo/{id}") //metodo para ativar/inativar no BD
+    public String ativoInativo(@PathVariable(value = "id") long id, Model model) {
+        //chama o metodo que tá na service impl
+        produtoService.status(id);
+        return "redirect:/produto";
+    }
+
 }

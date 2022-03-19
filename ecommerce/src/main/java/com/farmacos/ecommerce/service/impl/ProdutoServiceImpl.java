@@ -5,6 +5,8 @@
  */
 package com.farmacos.ecommerce.service.impl;
 
+import com.farmacos.ecommerce.enums.StatusUsuario;
+import com.farmacos.ecommerce.exception.ObjectNotFoundException;
 import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.repository.ProdutoRepository;
 import com.farmacos.ecommerce.service.ProdutoService;
@@ -48,6 +50,25 @@ public class ProdutoServiceImpl implements ProdutoService {
             return produtoRepository.search(keyword);
         }
         return produtoRepository.findAll();
+
+    }
+
+    @Override
+    public void status(Long id) {
+        Produto prod = this.produtoRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Produto não existente"));
+        try {
+
+            if (prod.getStatus() == StatusUsuario.ativo) {
+                prod.setStatus(StatusUsuario.inativo);
+            } else if (prod.getStatus() == StatusUsuario.inativo) {
+                prod.setStatus(StatusUsuario.ativo);
+            }
+            this.produtoRepository.save(prod);
+
+        } catch (Exception e) {
+            new Exception("");
+        }
 
     }
 

@@ -20,5 +20,7 @@ public interface ProdutoService {
     Page<Produto> findPaginated(int pageNo, int pageSize, String keyword); //listar com paginaçao
 
     public List<Produto> findProduto(String keyword); //pesquisar com paginação
+    
+    public void status(Long id);
 
-}
+   }
