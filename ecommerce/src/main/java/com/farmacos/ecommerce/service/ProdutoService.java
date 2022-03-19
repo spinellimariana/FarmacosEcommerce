@@ -15,10 +15,10 @@ import org.springframework.data.domain.Page;
  */
 public interface ProdutoService {
 
-    public List<Produto> getAllProdutos();
+    public List<Produto> getAllProdutos(); //listar
 
-    Page<Produto> findPaginated(int pageNo, int pageSize);
+    Page<Produto> findPaginated(int pageNo, int pageSize, String keyword); //listar com paginaçao
 
-    public List<Produto> findProduto(String keyword);
+    public List<Produto> findProduto(String keyword); //pesquisar com paginação
 
 }

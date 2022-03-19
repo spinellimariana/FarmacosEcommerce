@@ -30,9 +30,15 @@ and open the template in the editor.
         </nav>
 
         <div class="container my-2">
-            <h1>Lista de Usuários:</h1>
+            <h1>Lista de Produtos:</h1>
             <br>
-            <!-- Botao para o cadastro de produto -->
+
+            <form th:action="@{/produto}" method="GET">
+                <input type="text" name="keyword" placeholder="Pesquisa por nome*">
+                <input type="submit" value="Search" class="btn btn-primary">
+            </form>
+
+
 
             <div align="right">
                 <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
@@ -46,8 +52,9 @@ and open the template in the editor.
                         <th>Nome</th>
                         <th>QTD</th>
                         <th>Preço</th>
-                        <th>Descrição</th>
-                        <th>Avaliação</th>
+                        <!--<th>Descrição</th>-->
+                        <!--<<th>Avaliação</th>-->
+                        <!--<th>Foto</th>-->
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -58,9 +65,10 @@ and open the template in the editor.
                         <td th:text="${produto.nome}"></td>
                         <td th:text="${produto.qtdEstoque}"></td>
                         <td th:text="${produto.valorVenda}"></td>
-                        <td th:text="${produto.descricao}"></td>
-                        <td th:text="${produto.avaliacao}"></td>
-                        <td th:text="${usuario.status}"></td>
+                        <!--<td th:text="${produto.descricao}"></td>-->
+                        <!--<td th:text="${produto.avaliacao}"></td>-->
+                        <!--<td th:text="${produto.foto}"></td>-->           
+                        <td th:text="${produto.status}"></td>
 
                         <td> <a th:href="@{/produto/showFormForUptade/{id}(id=${produto.id})}"
                                 class="btn btn-primary">Atualizar</a> </td>
@@ -68,7 +76,7 @@ and open the template in the editor.
                         <td> <a th:href="@{/produto/ativoInativo/{id}(id=${produto.id})}"
                                 class="btn btn-primary">Ativar/Inativar</a> </td>
 
-                        <td> <a th:href="@{}"
+                        <td> <a th:href="@{/produto/visualizar/{id}(id=${produto.id})}"
                                 class="btn btn-primary">Ver</a> </td>
 
                     </tr>

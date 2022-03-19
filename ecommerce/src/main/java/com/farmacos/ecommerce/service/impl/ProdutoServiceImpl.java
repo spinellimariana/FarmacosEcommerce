@@ -5,10 +5,50 @@
  */
 package com.farmacos.ecommerce.service.impl;
 
+import com.farmacos.ecommerce.model.Produto;
+import com.farmacos.ecommerce.repository.ProdutoRepository;
+import com.farmacos.ecommerce.service.ProdutoService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author maris
  */
-public class ProdutoServiceImpl {
-    
+@Service
+public class ProdutoServiceImpl implements ProdutoService {
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
+    @Override //listar todos os usuários
+    public List<Produto> getAllProdutos() {
+        return produtoRepository.findAll();
+    }
+
+    @Override //paginação
+    public Page<Produto> findPaginated(int pageNo, int pageSize, String keyword) {
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+
+        if (keyword == null) {
+            return this.produtoRepository.findAll(pageable);
+        }
+        return this.produtoRepository.search(keyword, pageable);
+    }
+
+    @Override
+    public List<Produto> findProduto(String keyword) {
+
+        if (keyword != null) {
+            return produtoRepository.search(keyword);
+        }
+        return produtoRepository.findAll();
+
+    }
+
 }
