@@ -5,12 +5,14 @@
  */
 package com.farmacos.ecommerce.service.impl;
 
+import com.farmacos.ecommerce.enums.AvaliacaoProduto;
 import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.exception.ObjectNotFoundException;
 import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Usuario;
 import com.farmacos.ecommerce.repository.ProdutoRepository;
 import com.farmacos.ecommerce.service.ProdutoService;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -74,24 +78,47 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     }
 
-    @Override
+    @Override //SALVAR PRODUTO FUNCIONANDO SEM IMAGEM
     public void saveProduto(Produto produto) {
         this.produtoRepository.save(produto);
     }
+    
+    /*@Override //TENTATIVA DE SALVAR COM IMAGEM
+    public void saveProduto(String name, int qtd, double preco, StatusUsuario status, String descricao, AvaliacaoProduto avaliacao, MultipartFile foto) {
+        Produto produto = new Produto();
+        String fileName = StringUtils.cleanPath(foto.getOriginalFilename());
+        
+        if (fileName.contains("..")) {
+            System.out.println("arquivo inválido");
+        }
+        
+        try {
+            produto.setFoto(Base64.getEncoder().encodeToString(foto.getBytes()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        produto.setDescricao(descricao);
+        produto.setNome(name);
+        produto.setValorVenda(preco);
+        produto.setQtdEstoque(qtd);
+        produto.setStatus(status);
+        produto.setAvaliacao(avaliacao);
+        
+        this.produtoRepository.save(produto);
+    }*/
 
     @Override //alterar produto. Dá pra usar no verProduto também????
     public Produto getProdutoID(long id) {
         Optional<Produto> optional = produtoRepository.findById(id);
         Produto produto = null;
-        
-        if(optional.isPresent()){
+
+        if (optional.isPresent()) {
             produto = optional.get();
         } else {
             throw new RuntimeException("Produto não encontrato no ID :: " + id);
         }
         return produto;
     }
-    
-    
 
 }
