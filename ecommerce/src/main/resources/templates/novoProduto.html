@@ -34,25 +34,26 @@ and open the template in the editor.
             <hr>
             <h2>Salvar Produto</h2>
             <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
-            <form action="#" th:action="@{/produto/saveProduto}" th:object="${produto}" method="POST">
+            <form action="#" enctype="multipart/form-data" th:action="@{/produto/saveProduto}" th:object="${produto}" method="POST">
                 <div class="form-group"> <!--<!-- descricao -->
 
-                    <input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Produto*" 
+                    <input id="nome" name="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Produto*" 
                            class="form-control mb-4 col-4">
 
-                    <input id="qtd" type="number" required nome="qtd" th:field="*{qtdEstoque}" placeholder="QTD*" 
+                    <input id="qtd" name="qtd" type="number" required nome="qtd" th:field="*{qtdEstoque}" placeholder="QTD*" 
                            class="form-control mb-4 col-4">
 
-                    <input id= "preco" type="number" required nome="preco" th:field="*{valorVenda}" 
+                    <input id= "preco" name="preco" type="number" required nome="preco" th:field="*{valorVenda}" 
                            placeholder="Preço*" step="0.01" min="0" max="10000" class="form-control mb-4 col-4">
 
                     <textarea class="form-control mb-4 col-4" id="descricao" 
                               name="descricao" rows='5' placeholder="Descrição" th:field="*{descricao}"></textarea>
 
-                    <input id="status" type="text" required cargo="status" th:field="*{status}" placeholder="Status*" 
+                    <input id="status" name="status" type="text" required cargo="status" th:field="*{status}" placeholder="Status*" 
                            class="form-control mb-4 col-4">
 
-                    <input type="file" class="form-control-file mb-4 col-4" id="imagem" th:field="*{foto}">
+                    <input id="imagem" type="file" name="file" class="form-control-file mb-4 col-4" th:field="*{foto}">
+                    <!-- problema de nao subir a página parece estar aqui -->
                     <br>
                     <button type="submit" class="btn btn-info col-2">Salvar</button>
                 </div>
