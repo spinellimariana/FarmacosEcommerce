@@ -6,6 +6,7 @@
 package com.farmacos.ecommerce.service;
 
 import com.farmacos.ecommerce.model.Produto;
+import com.farmacos.ecommerce.model.Usuario;
 import java.util.List;
 import org.springframework.data.domain.Page;
 
@@ -22,5 +23,9 @@ public interface ProdutoService {
     public List<Produto> findProduto(String keyword); //pesquisar com paginação
     
     public void status(Long id);
+    
+    void saveProduto(Produto produto);
+    
+    Produto getProdutoID(long id);
 
    }

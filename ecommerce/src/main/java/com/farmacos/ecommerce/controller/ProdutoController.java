@@ -13,7 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -57,6 +59,29 @@ public class ProdutoController {
         //chama o metodo que tá na service impl
         produtoService.status(id);
         return "redirect:/produto";
+    }
+    
+    @GetMapping("/showNewProdutoForm")
+    public String showNewProdutoForm(Model model){
+        Produto produto = new Produto();
+        model.addAttribute("produto", produto);
+        return "novoProduto";
+    }
+    
+    @PostMapping("/saveProduto")
+    public String saveProduto(@ModelAttribute("produto") Produto produto){
+        produtoService.saveProduto(produto);
+        return "redirect:/produto";
+    }
+    
+    
+    
+    @GetMapping("/showVerProduto/{id}") //visualizar pagina do produto
+    public String showVerProduto(@PathVariable(value = "id") long id, Model model){
+        //programar produto
+        Produto produto = produtoService.getProdutoID(id);
+        model.addAttribute("produto", produto);
+        return "verProduto";
     }
 
 }

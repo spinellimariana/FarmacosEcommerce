@@ -8,9 +8,11 @@ package com.farmacos.ecommerce.service.impl;
 import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.exception.ObjectNotFoundException;
 import com.farmacos.ecommerce.model.Produto;
+import com.farmacos.ecommerce.model.Usuario;
 import com.farmacos.ecommerce.repository.ProdutoRepository;
 import com.farmacos.ecommerce.service.ProdutoService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -71,5 +73,25 @@ public class ProdutoServiceImpl implements ProdutoService {
         }
 
     }
+
+    @Override
+    public void saveProduto(Produto produto) {
+        this.produtoRepository.save(produto);
+    }
+
+    @Override //alterar produto. Dá pra usar no verProduto também????
+    public Produto getProdutoID(long id) {
+        Optional<Produto> optional = produtoRepository.findById(id);
+        Produto produto = null;
+        
+        if(optional.isPresent()){
+            produto = optional.get();
+        } else {
+            throw new RuntimeException("Produto não encontrato no ID :: " + id);
+        }
+        return produto;
+    }
+    
+    
 
 }
