@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -61,7 +62,9 @@ public class Produto {
     @Enumerated(value = EnumType.ORDINAL)
     private AvaliacaoProduto avaliacao;
 
-    @Column(name = "FOTO")
+    //@Lob
+    //@Column(name = "FOTO", columnDefinition = "MEDIUMLOB", length = 2000)
+    @Column(name = "FOTO", length = 2000)
     private String foto;
 
 }

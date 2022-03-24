@@ -10,6 +10,7 @@ import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Usuario;
 import com.farmacos.ecommerce.repository.ProdutoRepository;
+import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,11 +30,12 @@ public interface ProdutoService {
     
     public void status(Long id); //status ativo inativo
     
-    void saveProduto(Produto produto); //salvar FUNCIONANDO SEM IMAGEM
+    void saveProduto(Produto produto, MultipartFile foto) throws IOException; //salvar FUNCIONANDO SEM IMAGEM
         
     /*//TENTATIVA DE SALVAR COM IMAGEM
-    void saveProduto(String name, int qtd, double preco, StatusUsuario status, String descricao, AvaliacaoProduto avaliacao, MultipartFile foto);
-    */
+    void saveProduto(String name, int qtd, double preco, 
+            StatusUsuario status, String descricao, AvaliacaoProduto avaliacao, MultipartFile foto);*/
+    
     Produto getProdutoID(long id); //pegar o produto por id para alterar, mostrar etc.
 
    
