@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package com.farmacos.ecommerce.service.impl;
-
+import java.io.*;
+import java.nio.file.*;
 import com.farmacos.ecommerce.enums.AvaliacaoProduto;
 import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.exception.ObjectNotFoundException;
@@ -12,6 +13,7 @@ import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Usuario;
 import com.farmacos.ecommerce.repository.ProdutoRepository;
 import com.farmacos.ecommerce.service.ProdutoService;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -79,10 +81,36 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override //SALVAR PRODUTO FUNCIONANDO SEM IMAGEM
-    public void saveProduto(Produto produto) {
-        this.produtoRepository.save(produto);
+    public void saveProduto(Produto produto, MultipartFile foto) throws IOException
+    {
+        
+        String fileName = StringUtils.cleanPath(foto.getOriginalFilename());
+        produto.setFoto(fileName);
+        
+        Produto prod =  this.produtoRepository.save(produto);
+
+        String uploadDir = "produtos/" + prod.getId();
+        
+        saveFile(uploadDir, fileName, foto);
     }
     
+    public static void saveFile(String uploadDir, String fileName,
+            MultipartFile multipartFile) throws IOException {
+        //Colocar o caminho do seu computador!!!
+        Path uploadPath = Path.of(("C:/Users/009432631/Documents/" + uploadDir));
+         
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+         
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) {        
+            throw new IOException("Could not save image file: " + fileName, ioe);
+        }      
+    }
+
     /*@Override //TENTATIVA DE SALVAR COM IMAGEM
     public void saveProduto(String name, int qtd, double preco, StatusUsuario status, String descricao, AvaliacaoProduto avaliacao, MultipartFile foto) {
         Produto produto = new Produto();
@@ -107,7 +135,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         
         this.produtoRepository.save(produto);
     }*/
-
     @Override //alterar produto. Dá pra usar no verProduto também????
     public Produto getProdutoID(long id) {
         Optional<Produto> optional = produtoRepository.findById(id);

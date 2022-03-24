@@ -76,7 +76,7 @@ public class ProdutoController {
         return "novoProduto";
     }
     
-    /* TENTATIVA DE SALVAR COM UPLOAD DE IMAGEM
+    /* //TENTATIVA DE SALVAR COM UPLOAD DE IMAGEM
     @GetMapping("/showNewProdutoForm")
     public String showNewProdutoForm(Model model, @RequestParam("nome") String nome, @RequestParam("qtd") int qtd,
             @RequestParam("preco") double preco, @RequestParam("status") StatusUsuario status, @RequestParam("descricao") String descricao,
@@ -94,10 +94,18 @@ public class ProdutoController {
         
     }*/
     
+    
+    /*@GetMapping("/showNewProdutoForm")
+    public String showNewProdutoForm(){
+        
+        return "novoProduto.html";
+    }*/
+    
+    
 
     @PostMapping("/saveProduto") //salvar produto funcionando sem imagem
-    public String saveProduto(@ModelAttribute("produto") Produto produto){
-        produtoService.saveProduto(produto);
+    public String saveProduto(@ModelAttribute("produto") Produto produto, @RequestParam("file") MultipartFile foto){
+        produtoService.saveProduto(produto, foto);
         return "redirect:/produto";
     }
     
