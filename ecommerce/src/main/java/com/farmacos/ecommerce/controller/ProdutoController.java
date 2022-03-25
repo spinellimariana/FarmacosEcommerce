@@ -10,6 +10,7 @@ import com.farmacos.ecommerce.enums.AvaliacaoProduto;
 import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.repository.ProdutoRepository;
 import com.farmacos.ecommerce.service.ProdutoService;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -33,10 +34,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/produto") //o que esta no get maping
 public class ProdutoController {
 
-    //private static String caminhoImagens = "C:\Users\maris\Documents\NetBeansProjects\FarmacosEcommerce\imagens";
+    
     @Autowired
     private ProdutoService produtoService;
-    //private ProdutoRepository produtoRepository;
+   
 
     //listar todos usuários
     @GetMapping()
@@ -75,78 +76,13 @@ public class ProdutoController {
         model.addAttribute("produto", produto);
         return "novoProduto";
     }
-    
-    /* //TENTATIVA DE SALVAR COM UPLOAD DE IMAGEM
-    @GetMapping("/showNewProdutoForm")
-    public String showNewProdutoForm(Model model, @RequestParam("nome") String nome, @RequestParam("qtd") int qtd,
-            @RequestParam("preco") double preco, @RequestParam("status") StatusUsuario status, @RequestParam("descricao") String descricao,
-            @RequestParam("avaliacao") AvaliacaoProduto avaliacao, @RequestParam("file") MultipartFile foto){
-        
-        model.addAttribute("nome", nome);
-        model.addAttribute("qtdEstoque", qtd);
-        model.addAttribute("valorVenda", preco);
-        model.addAttribute("descricao", descricao);
-        model.addAttribute("status", status);
-        model.addAttribute("foto", foto);
-        
-        return "novoProduto";
-        
-        
-    }*/
-    
-    
-    /*@GetMapping("/showNewProdutoForm")
-    public String showNewProdutoForm(){
-        
-        return "novoProduto.html";
-    }*/
-    
-    
 
-    @PostMapping("/saveProduto") //salvar produto funcionando sem imagem
-    public String saveProduto(@ModelAttribute("produto") Produto produto, @RequestParam("file") MultipartFile foto){
+    @PostMapping("/saveProduto") //salvar produto funcionando
+    public String saveProduto(@ModelAttribute("produto") Produto produto, @RequestParam("file") MultipartFile foto) throws IOException{
         produtoService.saveProduto(produto, foto);
         return "redirect:/produto";
     }
     
-     /*//TENTATIVA DE UPLOAD DE FOTO
-    @PostMapping("/saveProduto")
-    public String saveProduto(@RequestParam("nome") String nome, @RequestParam("qtd") int qtd,
-            @RequestParam("preco") double preco, @RequestParam("status") StatusUsuario status, @RequestParam("descricao") String descricao,
-            @RequestParam("avaliacao") AvaliacaoProduto avaliacao, @RequestParam("file") MultipartFile foto) {
-        
-        produtoService.saveProduto(nome, qtd, preco, status, descricao, avaliacao, foto);
-        return "redirect:/produto";
-        
-    }*/
-
-    /*@PostMapping("/saveProduto")
-    public ModelandView saveProduto(@Valid Produto produto BindingResult 
-            result @RequestParam('file') MultipartFile arquivo){
-            
-            produtoRepository.saveAndFlush(produto);
-            
-            if(result.hasErrors()){
-                return showNewProdutoForm(produto);
-            }
-     
-            try {
-                if(!arquivo.isEmpty()){
-                    byte[] bytes = arquivo.getBytes();
-                    Path caminho = Path.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOririnalFileName());
-                    Files.write(caminho, bytes);
-                    produto.setFoto(String.valueOf(produto.getId()) + arquivo.getOririnalFileName());
-                }
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-            produtoRepository.saveAndFlush(produto);
-    
-        return showNewProdutoForm(new Produto());
-    
-}*/
     @GetMapping("/showVerProduto/{id}") //visualizar pagina do produto
     public String showVerProduto(@PathVariable(value = "id") long id, Model model) {
         //programar produto

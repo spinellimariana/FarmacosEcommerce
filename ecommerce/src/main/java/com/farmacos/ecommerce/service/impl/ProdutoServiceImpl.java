@@ -80,7 +80,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     }
 
-    @Override //SALVAR PRODUTO FUNCIONANDO SEM IMAGEM
+    @Override //SALVAR PRODUTO FUNCIONANDO
     public void saveProduto(Produto produto, MultipartFile foto) throws IOException
     {
         
@@ -111,30 +111,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         }      
     }
 
-    /*@Override //TENTATIVA DE SALVAR COM IMAGEM
-    public void saveProduto(String name, int qtd, double preco, StatusUsuario status, String descricao, AvaliacaoProduto avaliacao, MultipartFile foto) {
-        Produto produto = new Produto();
-        String fileName = StringUtils.cleanPath(foto.getOriginalFilename());
-        
-        if (fileName.contains("..")) {
-            System.out.println("arquivo inválido");
-        }
-        
-        try {
-            produto.setFoto(Base64.getEncoder().encodeToString(foto.getBytes()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        produto.setDescricao(descricao);
-        produto.setNome(name);
-        produto.setValorVenda(preco);
-        produto.setQtdEstoque(qtd);
-        produto.setStatus(status);
-        produto.setAvaliacao(avaliacao);
-        
-        this.produtoRepository.save(produto);
-    }*/
     @Override //alterar produto. Dá pra usar no verProduto também????
     public Produto getProdutoID(long id) {
         Optional<Produto> optional = produtoRepository.findById(id);

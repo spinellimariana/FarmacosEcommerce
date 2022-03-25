@@ -30,12 +30,8 @@ public interface ProdutoService {
     
     public void status(Long id); //status ativo inativo
     
-    void saveProduto(Produto produto, MultipartFile foto) throws IOException; //salvar FUNCIONANDO SEM IMAGEM
-        
-    /*//TENTATIVA DE SALVAR COM IMAGEM
-    void saveProduto(String name, int qtd, double preco, 
-            StatusUsuario status, String descricao, AvaliacaoProduto avaliacao, MultipartFile foto);*/
-    
+    void saveProduto(Produto produto, MultipartFile foto) throws IOException; //salvar funcionando com imagem
+            
     Produto getProdutoID(long id); //pegar o produto por id para alterar, mostrar etc.
 
    
