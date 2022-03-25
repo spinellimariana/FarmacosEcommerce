@@ -66,5 +66,7 @@ public class Produto {
     //@Column(name = "FOTO", columnDefinition = "MEDIUMLOB", length = 2000)
     @Column(name = "FOTO", length = 2000)
     private String foto;
+    
+    
 
 }
