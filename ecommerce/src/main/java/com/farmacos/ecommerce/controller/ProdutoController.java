@@ -90,5 +90,12 @@ public class ProdutoController {
         model.addAttribute("produto", produto);
         return "verProduto";
     }
+    
+    @GetMapping("/showFormForUptade/{id}") //atualizar produto no BD
+    public String showFormForUptade(@PathVariable(value = "id") long id, Model model) {
+        Produto produto = produtoService.getProdutoID(id);
+        model.addAttribute("produto", produto);
+        return "atualizarProduto";
+    }
 
 }

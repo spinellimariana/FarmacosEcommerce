@@ -66,7 +66,13 @@ public class Produto {
     //@Column(name = "FOTO", columnDefinition = "MEDIUMLOB", length = 2000)
     @Column(name = "FOTO", length = 2000)
     private String foto;
-    
-    
 
+    public String getPhotosImagePath() {
+        if (foto == null || id == null) {
+            return null;
+        }
+        return "C:/Users/009432631/Documents/" + id + "/" + foto;
+    }
 }
+
+
