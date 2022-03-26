@@ -12,7 +12,16 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <h1>PROGRAMAR PÃGINA DO PRODUTO</h1>    
+            <h1>PROGRAMAR PÃGINA DO PRODUTO</h1> 
+            <!--<img th:src="/@{${produto.photosImagePath}}" />-->
+            
+            <p>Nome: <span th:text="${produto.nome}"></span></p>
+            <p>QTD: <span th:text="${produto.qtdEstoque}"></span></p>
+            <p>Preço: <span th:text="${produto.valorVenda}"></span></p>
+            <p>Status: <span th:text="${produto.status}"></span></p>
+            <p>Descrição: <span th:text="${produto.descricao}"></span></p>
+            <p>Avaliação: <span th:text="${produto.avaliacao}"></span></p>   
+            
         </div>
     </body>
 </html>
