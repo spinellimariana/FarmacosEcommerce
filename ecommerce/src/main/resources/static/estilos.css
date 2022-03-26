@@ -1,0 +1,48 @@
+
+
+*{
+    margin: 0;
+    padding: 0; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+header{
+    background-color: red;
+}
+body{
+    background-color: lightgrey;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: red;
+    padding: 10px 5%;
+    height: 100px;
+
+}
+
+.logo img{
+    width: 100px;
+}
+
+.menu-items a img{
+    width: 30px;  
+}
+
+.menu-items a{
+    margin-left: 30px;
+}
+
+/*//padding aqui nao está funcionando*/
+.content{
+    height: calc(100vh-100px);
+    width: 100%;
+    padding: 0, 5%; 
+}
+
+/*tamanho da fonte nao tá pegando*/
+.left-size h1{
+    font-size: 50px; 
+}
