@@ -97,7 +97,8 @@ public class ProdutoServiceImpl implements ProdutoService {
     public static void saveFile(String uploadDir, String fileName,
             MultipartFile multipartFile) throws IOException {
         //Colocar o caminho do seu computador!!!
-        Path uploadPath = Path.of(("C:/Users/009432631/Documents/" + uploadDir));
+        Path uploadPath = Path.of(("C:/Users/Vinicius Reis/Documents/" + uploadDir));
+//    	Path uploadPath = Paths.get(uploadDir);
          
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);

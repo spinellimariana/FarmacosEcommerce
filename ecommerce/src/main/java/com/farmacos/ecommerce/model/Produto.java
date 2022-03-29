@@ -18,6 +18,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +32,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "PRODUTO")
 @Entity
-@Getter
 @Setter
 public class Produto {
 
@@ -46,6 +46,7 @@ public class Produto {
     private String nome;
 
     @Column(name = "QTD", nullable = false)
+    @Default
     private int qtdEstoque = 0;
 
     @Column(name = "VALOR", nullable = false)
@@ -67,12 +68,48 @@ public class Produto {
     @Column(name = "FOTO", length = 2000)
     private String foto;
 
-    public String getPhotosImagePath() {
+    public String getFoto() {
         if (foto == null || id == null) {
             return null;
         }
-        return "C:/Users/009432631/Documents/" + id + "/" + foto;
+        return "C:/Users/Vinicius Reis/Documents/produtos/" + id + "/" + foto;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public int getQtdEstoque() {
+		return qtdEstoque;
+	}
+
+	public double getValorVenda() {
+		return valorVenda;
+	}
+
+	public StatusUsuario getStatus() {
+		return status;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public AvaliacaoProduto getAvaliacao() {
+		return avaliacao;
+	}
+
+
+    
+    
+    
+    
+    
+    
 }
 
 

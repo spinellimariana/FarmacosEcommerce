@@ -1,6 +1,9 @@
   
 package com.farmacos.ecommerce.config;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +17,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.farmacos.ecommerce.service.UsuarioService;
 
 
 @Configuration
 @EnableWebSecurity
-public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
+public class WebConfigSecurity extends WebSecurityConfigurerAdapter   {
 
 	
 	@Autowired
@@ -61,6 +66,19 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/login?logout")
 		.permitAll();
 	}
+	
+	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	        exposeDirectory("produtos", registry);
+	    }
+	     
+	    private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
+	        Path uploadDir = Paths.get(dirName);
+	        String uploadPath = uploadDir.toFile().getAbsolutePath();
+	         
+	        if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
+	         
+	        registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
+	    }
 
 
 }

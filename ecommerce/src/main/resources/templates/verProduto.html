@@ -43,8 +43,8 @@ and open the template in the editor.
                 <div class="lado-esquedo">
 
                     <h1><span th:text="${produto.nome}"></span></h1> 
-                    <!-- Não está funcionando
-                    <img th:src="/@{${produto.photosImagePath}}" />-->
+                    <!-- Não está funcionando-->
+                    <img th:src="${produto.getFoto}" />
                     
                     <p><span th:text="${produto.descricao}"></span></p>
                     <p>R$ <span th:text="${produto.valorVenda}"></span></p>

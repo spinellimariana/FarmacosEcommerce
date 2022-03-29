@@ -36,6 +36,8 @@ and open the template in the editor.
             <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
             <form action="#" enctype="multipart/form-data" th:action="@{/produto/saveProduto}" th:object="${produto}" method="POST">
                 <div class="form-group"> <!--<!-- descricao -->
+                
+                	<input type="hidden" th:field="*{id}" />
 
                     <input id="nome" name="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Produto*" 
                            class="form-control mb-4 col-4">
