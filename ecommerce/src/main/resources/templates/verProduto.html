@@ -40,7 +40,7 @@ and open the template in the editor.
         <main>
             <div class="content">
 
-                <div class="lado-esquerdo">
+                <div> class="lado-esquerdo">
 
                     <h1><span th:text="${produto.nome}"></span></h1> 
                     <!-- Não está funcionando-->
@@ -59,14 +59,6 @@ NÃO ESTÁ USANDO POR ENQUANTO
 <p>Avaliação: <span th:text="${produto.avaliacao}"></span></p> -->
 
                 </div>
-
-                <div class="lado-direito">
-                    
-                    <img th:src="@{/remedio.jpg}">
-
-                </div>  
-
-
 
         </main>
 
