@@ -40,11 +40,11 @@ and open the template in the editor.
         <main>
             <div class="content">
 
-                <div class="lado-esquedo">
+                <div class="lado-esquerdo">
 
                     <h1><span th:text="${produto.nome}"></span></h1> 
                     <!-- Não está funcionando-->
-                    <img th:src="${produto.getFoto}" />
+                    <img th:src="@{${produto.getFoto}}" />
                     
                     <p><span th:text="${produto.descricao}"></span></p>
                     <p>R$ <span th:text="${produto.valorVenda}"></span></p>

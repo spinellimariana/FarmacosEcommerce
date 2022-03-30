@@ -72,7 +72,7 @@ public class Produto {
         if (foto == null || id == null) {
             return null;
         }
-        return "C:/Users/Vinicius Reis/Documents/produtos/" + id + "/" + foto;
+        return "/produtos/" + id + "/" + foto;
     }
 
 	public Long getId() {

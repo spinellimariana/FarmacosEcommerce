@@ -5,16 +5,13 @@
  */
 package com.farmacos.ecommerce.service;
 
-import com.farmacos.ecommerce.enums.AvaliacaoProduto;
-import com.farmacos.ecommerce.enums.StatusUsuario;
-import com.farmacos.ecommerce.model.Produto;
-import com.farmacos.ecommerce.model.Usuario;
-import com.farmacos.ecommerce.repository.ProdutoRepository;
 import java.io.IOException;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.farmacos.ecommerce.model.Produto;
 
 /**
  *

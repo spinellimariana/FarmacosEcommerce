@@ -83,7 +83,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override //SALVAR PRODUTO FUNCIONANDO
     public void saveProduto(Produto produto, MultipartFile foto) throws IOException
     {
-        
+        	
         String fileName = StringUtils.cleanPath(foto.getOriginalFilename());
         produto.setFoto(fileName);
         
@@ -96,10 +96,8 @@ public class ProdutoServiceImpl implements ProdutoService {
     
     public static void saveFile(String uploadDir, String fileName,
             MultipartFile multipartFile) throws IOException {
-        //Colocar o caminho do seu computador!!!
-        Path uploadPath = Path.of(("C:/Users/Vinicius Reis/Documents/" + uploadDir));
-//    	Path uploadPath = Paths.get(uploadDir);
-         
+        Path uploadPath = Paths.get(uploadDir);
+        
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
@@ -109,7 +107,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ioe) {        
             throw new IOException("Could not save image file: " + fileName, ioe);
-        }      
+        }   
     }
 
     @Override //alterar produto. Dá pra usar no verProduto também????
