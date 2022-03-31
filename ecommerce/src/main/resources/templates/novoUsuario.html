@@ -58,8 +58,10 @@ and open the template in the editor.
                     <option th:field="*{status}">Inativo</option>
                 </select>-->
 
-                <input id="status" type="text" required cargo="status" th:field="*{status}" placeholder="Status*" 
-                       class="form-control mb-4 col-4">
+				<select th:field="*{status}">
+					<option th:value="'ativo'" th:text="Ativo"></option>
+					<option th:value="'inativo'" th:text="Inativo"></option>
+				</select><br>
 
                 <button type="submit" class="btn btn-info col-2">Salvar</button>
 

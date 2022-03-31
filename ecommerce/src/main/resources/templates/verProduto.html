@@ -27,7 +27,7 @@ and open the template in the editor.
         <header>
             <div class="menu">
                 <div class="logo">
-                    <img th:src="@{/logo.png}">
+                    <a th:href="@{/}"> <img th:src="@{/logo.png}">
                 </div>
                 <nav class="menu-items">
                     <a th:href="@{/}"> <img th:src="@{/search.png}"> </a>
@@ -40,16 +40,18 @@ and open the template in the editor.
         <main>
             <div class="content">
 
-                <div> class="lado-esquerdo">
+                <div class="lado-esquerdo">
 
                     <h1><span th:text="${produto.nome}"></span></h1> 
                     <!-- Não está funcionando-->
-                    <img th:src="@{${produto.getFoto}}" />
+                    <img class="imgProduto"  th:src="@{${produto.getFoto}}" />
                     
+                    <div class="descricaoContent">
                     <p><span th:text="${produto.descricao}"></span></p>
                     <p>R$ <span th:text="${produto.valorVenda}"></span></p>
+                    </div>
                     
-                    <a href="">ADCIONAR AO CARRINHO</a>
+                    <a href="" >ADCIONAR AO CARRINHO</a>
                     
                     <p>Quantidade em estoque: <span th:text="${produto.qtdEstoque}"></span></p>
                     

@@ -23,6 +23,19 @@ body{
 
 }
 
+.imgProduto{
+	display: flex;
+	position: relative;
+	height: 250px;
+	width: 400px;
+	
+	left:30%;
+}
+
+.descricaoContent{
+	border: 10px;
+}
+
 .logo img{
     width: 100px;
 }
