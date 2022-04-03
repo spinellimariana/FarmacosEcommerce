@@ -43,17 +43,18 @@ and open the template in the editor.
                 <div class="lado-esquerdo">
 
                     <h1><span th:text="${produto.nome}"></span></h1> 
-                    <!-- Não está funcionando-->
+                    
                     <img class="imgProduto"  th:src="@{${produto.getFoto}}" />
                     
                     <div class="descricaoContent">
                     <p><span th:text="${produto.descricao}"></span></p>
                     <p>R$ <span th:text="${produto.valorVenda}"></span></p>
+                    <p>Quantidade em estoque: <span th:text="${produto.qtdEstoque}"></span></p>
                     </div>
                     
                     <a href="" >ADCIONAR AO CARRINHO</a>
                     
-                    <p>Quantidade em estoque: <span th:text="${produto.qtdEstoque}"></span></p>
+                   
                     
 <!--                    
 NÃO ESTÁ USANDO POR ENQUANTO
