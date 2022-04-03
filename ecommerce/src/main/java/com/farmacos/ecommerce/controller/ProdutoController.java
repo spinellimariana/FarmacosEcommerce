@@ -39,7 +39,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
    
 
-    //listar todos usuários
+    //listar todos produtos
     @GetMapping()
     public String viewHomePage(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         return findPaginated(1, model, keyword);
@@ -47,7 +47,7 @@ public class ProdutoController {
 
     }
 
-    @GetMapping("/page/{pageNo}") //listar todos os usuários com paginação
+    @GetMapping("/page/{pageNo}") //listar todos os produtos com paginação
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         int pageSize = 10;
 
@@ -70,7 +70,7 @@ public class ProdutoController {
         return "redirect:/produto";
     }
 
-    @GetMapping("/showNewProdutoForm") //SALVANDO FUNCIONANDO SEM IMAGEM
+    @GetMapping("/showNewProdutoForm") 
     public String showNewProdutoForm(Model model) {
         Produto produto = new Produto();
         model.addAttribute("produto", produto);
@@ -85,7 +85,6 @@ public class ProdutoController {
     
     @GetMapping("/showVerProduto/{id}") //visualizar pagina do produto
     public String showVerProduto(@PathVariable(value = "id") long id, Model model) {
-        //programar produto
         Produto produto = produtoService.getProdutoID(id);
         model.addAttribute("produto", produto);
         return "verProduto";

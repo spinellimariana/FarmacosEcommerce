@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Loja Farmacos - Home Page</title>
+        <!-- BOOTSTRAP -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        
+        <div class="container my-2">
+            <h1>Bem-vindo à Farmacos!</h1>
+
+            <form th:action="@{/produto}" method="GET">
+                <input type="text" name="keyword" placeholder="Pesquisa por nome*">
+                <input type="submit" value="Search" class="btn btn-primary">
+            </form>
+
+
+            <!--TENTANDO FAZER O GRID -->
+
+            <div class="col-sm-9">
+
+                <div class="card" style="..." th:each="produto : ${listaProdutos}">
+
+                    <div class="row no-gutters">
+
+                        <div class="col-sm-5 d-flex justify-content-center">
+                            <img class="imgProduto" height="150px" width="150px"  th:src="@{${produto.getFoto}}"/>
+                        </div>
+
+                        <div class="col-sm-7 d-flex justify-content-center">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title" th:text="${produto.nome}"></h5>
+                                <h4>R$ <span th:text="${produto.valorVenda}"></span></h4>
+                                <p th:text="${produto.descricao}"></p>
+                                <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
+                                   class="btn btn-primary">Detalhes</a>
+
+
+                            </div><!-- fim do card body -->
+
+                        </div><!-- fim do col-sm-7 -->
+
+                    </div><!-- fim do row no gutters -->
+
+
+                </div><!-- final da div do for each card -->
+
+            </div><!-- fim da col-sm-9 -->
+
+
+
+            <!-- PAGINAÇÃO COM GRID -->
+            <div th:if="${totalPages > 1}">
+
+                <div class="row-col-sm-10">
+                    <div class="col-sm-2">
+                        Total: [[${totalItems}]]
+                    </div>
+                    <div class="col-sm-1">
+                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/loja/page/' + ${i}}">[[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                        </span>
+                    </div>
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}"
+                           th:href="@{'/loja/page/' + ${currentPage + 1}}">Próximo</a>
+                        <span th:unless="${currentPage < totalPages}">Próximo</span>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/loja/page/' + ${totalPages}}">Último</a>
+                        <span th:unless="${currentPage < totalPages}">Último</span>
+                    </div>
+                </div>
+
+            </div><!-- fim da paginacao -->
+
+
+        </div> <!-- fim do containtermy-2 -->
+    </body>
+</html>
