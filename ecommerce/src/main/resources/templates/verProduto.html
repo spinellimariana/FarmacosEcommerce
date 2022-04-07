@@ -7,34 +7,79 @@ and open the template in the editor.
 <html>
     <head>
         <title>Visualizar Produto</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- BOOTSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        
-        <!-- nossa folha de estilos -->
-        <link th:href="@{/estilos.css}" rel="stylesheet">
-        
-        
-        <!--<!-- fontes do google -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-    </head>
-    
-    <body>
-        <header>
-            <div class="menu">
-                <div class="logo">
-                    <a th:href="@{/}"> <img th:src="@{/logo.png}">
-                </div>
-                <nav class="menu-items">
-                    <a th:href="@{/}"> <img th:src="@{/search.png}"> </a>
-                    <a th:href="@{/}"> <img th:src="@{/cart.png}"> </a>
 
-                </nav>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- BOOTSTRAP ICONS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body style="min-width: 372px;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
+            <!-- barra de navegação -->
+            <!-- ATENÇÀO DEPOIS TROCAR TODOS OS HREF PELO MODELO DO THYMELEAF -->
+
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
+                    </svg>
+                    <strong>Farmacos Online</strong>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toogle="collapse" 
+                        data-target="navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-white">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/produto}" class="nav-link text-white">Produtos</a>
+                        </li>
+                    </ul>
+
+
+                    <div class="align-self-end">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link text-white">Cadastre-se</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link text-white">Entrar</a>
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- icone do carrinho de compras -->
+                                <a th:href="@{/}" class="nav-link text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
+        </nav>
+
+        <header>
+
         </header>
 
         <main>
@@ -43,23 +88,23 @@ and open the template in the editor.
                 <div class="lado-esquerdo">
 
                     <h1><span th:text="${produto.nome}"></span></h1> 
-                    
+
                     <img class="imgProduto"  th:src="@{${produto.getFoto}}" />
-                    
+
                     <div class="descricaoContent">
-                    <p><span th:text="${produto.descricao}"></span></p>
-                    <p>R$ <span th:text="${produto.valorVenda}"></span></p>
-                    <p>Quantidade em estoque: <span th:text="${produto.qtdEstoque}"></span></p>
+                        <p><span th:text="${produto.descricao}"></span></p>
+                        <p>R$ <span th:text="${produto.valorVenda}"></span></p>
+                        <p>Quantidade em estoque: <span th:text="${produto.qtdEstoque}"></span></p>
                     </div>
-                    
+
                     <a href="" >ADCIONAR AO CARRINHO</a>
-                    
-                   
-                    
-<!--                    
-NÃO ESTÁ USANDO POR ENQUANTO
-<p>Status: <span th:text="${produto.status}"></span></p>
-<p>Avaliação: <span th:text="${produto.avaliacao}"></span></p> -->
+
+
+
+                    <!--                    
+                    NÃO ESTÁ USANDO POR ENQUANTO
+                    <p>Status: <span th:text="${produto.status}"></span></p>
+                    <p>Avaliação: <span th:text="${produto.avaliacao}"></span></p> -->
 
                 </div>
 
