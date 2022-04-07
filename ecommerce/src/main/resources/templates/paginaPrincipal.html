@@ -145,11 +145,9 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-12 col-md-5"> <!-- FORMULARIO DE PESQUISA -->
                         <form th:action="@{/loja}" method="GET" class="justify-content-center justify-content-md-start mb-3 mb-md-0">
-                            <div class="input-gruop input-gruop-sm">
+                            <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="keyword" placeholder="Pesquisa por nome*">
-                                <br>
-                                <input type="submit"  value="Search" class="btn btn-primary ">
-                                <!-- BOTÀO NAO FICA DO LADO -->
+                                <button class="btn btn-primary" type="submit" id="button-addon2">Pesquisar</button>
                             </div>
                         </form>
                     </div>
@@ -181,10 +179,12 @@ and open the template in the editor.
                             </div>
                             <div class="card-footer">
                                 <!--TENTANDO INATIVAR UM PRODUTO NA TELA-->
-                                <!--                                <div th:if="${produto.status.equalsIgnoreCase(inativo)}">
-                                                                    <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
-                                                                       class="btn btn-primary">Detalhes</a>  
-                                                                </div>-->
+                                <!--<div th:if="${produto.status.equalsIgnoreCase('inativo')}">
+                                    <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
+                                       class="btn btn-primary">Detalhes</a> 
+                                       <p>produto sem estoque</p>
+
+                                </div>-->
                                 <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
                                    class="btn btn-primary">Detalhes</a>   
                             </div>
