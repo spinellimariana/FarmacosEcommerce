@@ -14,19 +14,34 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body>
+    <body style="min-width: 372px;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
+            <!-- barra de navegação -->
+            <!-- ATENÇÀO DEPOIS TROCAR TODOS OS HREF PELO MODELO DO THYMELEAF -->
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/}">Farmacos</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav" style="justify-content: space-between">
-                        <li>Bem-Vindo, <span sec:authentication="principal.username">User </span><li>
-                        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> Logout</a></li>
+                <a class="navbar-brand" th:href="@{/}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
+                    </svg>
+                    <strong>Farmacos Online</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-toogle="collapse" 
+                        data-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <span sec:authentication="principal.username" class="nav-link text-white"></span>
+                        </li>
+                        <li sec:authorize="isAuthenticated()" class="nav-item">
+                            <a th:href="@{/logout}" class="nav-link text-white"> Logout</a></li>
+                        </li>
                     </ul>
                 </div>
+
             </div>
         </nav>
 
@@ -83,36 +98,32 @@ and open the template in the editor.
                     </tr>
                 </tbody>
             </table>
-
-            <!-- PAGINAÇÃO COM GRID -->
-            <div th:if="${totalPages > 1}">
-
-                <div class="row-col-sm-10">
-                    <div class="col-sm-2">
-                        Total: [[${totalItems}]]
-                    </div>
-                    <div class="col-sm-1">
+            <!-- paginacao -->
+            <nav class="d-inline-block" th:if="${totalPages > 1}">
+                <ul class="pagination pagination-sm my-0">
+                    <li class="page-item"></li>
+                    <button class="page-link">
                         <span th:each="i: ${#numbers.sequence(1, totalPages)}">
                             <a th:if="${currentPage != i}" th:href="@{'/produto/page/' + ${i}}">[[${i}]]</a>
                             <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
                         </span>
-                    </div>
-                    <div class="col-sm-1">
+                    </button>
+                    <button class="page-link">
                         <a th:if="${currentPage < totalPages}"
                            th:href="@{'/produto/page/' + ${currentPage + 1}}">Próximo</a>
                         <span th:unless="${currentPage < totalPages}">Próximo</span>
-                    </div>
-
-                    <div class="col-sm-1">
+                    </button>
+                    <button class="page-link">
                         <a th:if="${currentPage < totalPages}" th:href="@{'/produto/page/' + ${totalPages}}">Último</a>
                         <span th:unless="${currentPage < totalPages}">Último</span>
-                    </div>
-                </div>
-
-            </div>
-
+                    </button>
+                </ul>
+            </nav>
 
         </div>
+        <div style="height: 273px;" class="d-block d-md-none"></div>
+        <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
+        <div style="height: 129px;" class="d-none d-lg-block"></div>
         <footer class="border-top fixed-bottom text-muted bg-light">
 
             <div class="container">
