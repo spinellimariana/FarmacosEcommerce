@@ -110,19 +110,19 @@ and open the template in the editor.
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active text-center" data-interval="3000">
-                        <!--                         procurar uma imagem para telas grandes (a 1a) e outra para telas pequenas (2a) -->
+
                         <img th:src="@{/banner.jpg}" alt="" class="img-fluid d-none d-md-block">
                         <img th:src="@{/bannerMobile.jpg}" alt="" class="img-fluid d-block d-md-none">
 
                     </div>
                     <div class="carousel-item text-center" data-interval="3000">
-                        <!--                         procurar uma imagem para telas grandes (a 1a) e outra para telas pequenas (2a) -->
+
                         <img th:src="@{/banner.jpg}" alt="" class="img-fluid d-none d-md-block">
                         <img th:src="@{/bannerMobile.jpg}" alt="" class="img-fluid d-block d-md-none">
 
                     </div>
                     <div class="carousel-item text-center" data-interval="3000">
-                        <!--                         procurar uma imagem para telas grandes (a 1a) e outra para telas pequenas (2a) -->
+
                         <img th:src="@{/banner.jpg}" alt="" class="img-fluid d-none d-md-block">
                         <img th:src="@{/bannerMobile.jpg}" alt="" class="img-fluid d-block d-md-none">
                     </div>
@@ -148,43 +148,27 @@ and open the template in the editor.
                             <div class="input-gruop input-gruop-sm">
                                 <input type="text" class="form-control" name="keyword" placeholder="Pesquisa por nome*">
                                 <br>
-                                <input type="submit" value="Search" class="btn btn-primary ">
+                                <input type="submit"  value="Search" class="btn btn-primary ">
                                 <!-- BOTÀO NAO FICA DO LADO -->
                             </div>
                         </form>
                     </div>
                     <div class="col-12 col-md-7">
-                        <!-- LOCAL DA PAGINAÇÀO -->
-                        <div th:if="${totalPages > 1}">
+                        <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start">
+                            <form class="ml-3 d-inline-block">
+                                <select class="form-select form-select-sm">
+                                    <option>Preço Maior</option>
+                                    <option>Preço Menor</option>
+                                </select>
+                            </form>
 
-                            <div class="row-col-sm-10">
-                                <div class="col-sm-2">
-                                    Total: [[${totalItems}]]
-                                </div>
-                                <div class="col-sm-1">
-                                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                                        <a th:if="${currentPage != i}" th:href="@{'/loja/page/' + ${i}}">[[${i}]]</a>
-                                        <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
-                                    </span>
-                                </div>
-                                <div class="col-sm-1">
-                                    <a th:if="${currentPage < totalPages}"
-                                       th:href="@{'/loja/page/' + ${currentPage + 1}}">Próximo</a>
-                                    <span th:unless="${currentPage < totalPages}">Próximo</span>
-                                </div>
+                        </div>
 
-                                <div class="col-sm-1">
-                                    <a th:if="${currentPage < totalPages}" th:href="@{'/loja/page/' + ${totalPages}}">Último</a>
-                                    <span th:unless="${currentPage < totalPages}">Último</span>
-                                </div>
-                            </div>
-
-                        </div> <!--fim da paginacao -->
                     </div>
                 </div>
                 <hr class="mt-3">
 
-                <div class="row">
+                <div class="row g-3">
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch" th:each="produto : ${listaProdutos}"> <!--<!-- responsividade -->
                         <div class="card text-center bg-light">
                             <img class="card-img-top" height="150px" width="150px"  th:src="@{${produto.getFoto}}"/>
@@ -196,6 +180,11 @@ and open the template in the editor.
                                 <p class= "card-text truncate-3l" th:text="${produto.descricao}"></p>
                             </div>
                             <div class="card-footer">
+                                <!--TENTANDO INATIVAR UM PRODUTO NA TELA-->
+                                <!--                                <div th:if="${produto.status.equalsIgnoreCase(inativo)}">
+                                                                    <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
+                                                                       class="btn btn-primary">Detalhes</a>  
+                                                                </div>-->
                                 <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
                                    class="btn btn-primary">Detalhes</a>   
                             </div>
@@ -210,13 +199,37 @@ and open the template in the editor.
                     </div>
 
                 </div>
+                <!-- paginaçao -->
+                <nav class="d-inline-block" th:if="${totalPages > 1}">
+                    <ul class="pagination pagination-sm my-0">
+                        <li class="page-item"></li>
+                        <button class="page-link">
+                            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                <a th:if="${currentPage != i}" th:href="@{'/loja/page/' + ${i}}">[[${i}]]</a>
+                                <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                            </span>
+                        </button>
+                        <button class="page-link">
+                            <a th:if="${currentPage < totalPages}"
+                               th:href="@{'/loja/page/' + ${currentPage + 1}}">Próximo</a>
+                            <span th:unless="${currentPage < totalPages}">Próximo</span>
+                        </button>
+                        <button class="page-link">
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/loja/page/' + ${totalPages}}">Último</a>
+                            <span th:unless="${currentPage < totalPages}">Último</span>
+                        </button>
+
+                    </ul>
+                </nav>
             </div><!-- FIM DIV CONTAINER -->
         </main>
 
-        <br>
-        <br>
-        <br>
 
+
+
+        <div style="height: 273px;" class="d-block d-md-none"></div>
+        <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
+        <div style="height: 129px;" class="d-none d-lg-block"></div>
         <footer class="border-top fixed-bottom text-muted bg-light">
 
             <div class="container">
@@ -239,39 +252,3 @@ and open the template in the editor.
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </body>
 </html>
-
-
-
-
-
-<!--                <div class="col-sm-9">
-
-                    <div class="card" style="..." th:each="produto : ${listaProdutos}">
-
-                        <div class="row no-gutters">
-
-                            <div class="col-sm-5 d-flex justify-content-center">
-                                <img class="imgProduto" height="150px" width="150px"  th:src="@{${produto.getFoto}}"/>
-                            </div>
-
-                            <div class="col-sm-7 d-flex justify-content-center">
-
-                                <div class="card-body">
-
-                                    <h5 class="card-title" th:text="${produto.nome}"></h5>
-                                    <h4>R$ <span th:text="${produto.valorVenda}"></span></h4>
-                                    <p th:text="${produto.descricao}"></p>
-                                    <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
-                                       class="btn btn-primary">Detalhes</a>
-
-
-                                </div> 
-
-                            </div> 
-
-                        </div> 
-
-
-                    </div> 
-
-                </div> -->
