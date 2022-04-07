@@ -36,7 +36,7 @@ public class LojaController {
 
     @GetMapping("/page/{pageNo}") //listar todos os produtos com paginação
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model, @RequestParam(value = "keyword", required = false) String keyword) {
-        int pageSize = 10;
+        int pageSize = 12;
 
         Page<Produto> page = produtoService.findPaginated(pageNo, pageSize, keyword);
         List<Produto> listProdutos = page.getContent();
