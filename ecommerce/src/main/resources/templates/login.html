@@ -6,73 +6,105 @@ and open the template in the editor.
 -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<title>Login</title>
-	<!-- BOOTSTRAP -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <head>
+        <title>Login</title>
+        <!-- BOOTSTRAP -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<body>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+        <!-- BOOTSTRAP ICONS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
 
+    <body style="min-width: 372px;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
+            <!-- barra de navegação -->
+            <!-- ATENÇÀO DEPOIS TROCAR TODOS OS HREF PELO MODELO DO THYMELEAF -->
 
-	<!-- create navigation bar ( header) -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#" th:href="@{/}">Farmacos</a>
-			</div>
-		</div>
-	</nav>
+            <div class="container">
 
-	<br>
-	<br>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+                <a class="navbar-brand" th:href="@{/}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
+                    </svg>
+                    <strong>Farmacos Online</strong>
+                </a>
 
-				<h1> User Login Page </h1>
-				<form th:action="@{/login}" method="post">
+        </nav>
+        <br>
+        <br>
 
-					<!-- error message -->
-					<div th:if="${param.error}">
-						<div class="alert alert-danger">Invalid username or
-							password.</div>
-					</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
 
-					<!-- logout message -->
-					<div th:if="${param.logout}">
-						<div class="alert alert-info">You have been logged out.</div>
-					</div>
+                    <h2> User Login </h2>
+                    <form th:action="@{/login}" method="post">
 
-					<div class="form-group">
-						<label for="username"> Username </label> :
-						<input type="text" class="form-control" id="username" name="username"
-							placeholder="Email" autofocus="autofocus">
-					</div>
+                        <!-- error message -->
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">Invalid username or
+                                password.</div>
+                        </div>
 
-					<div class="form-group">
-						<label for="password">Password</label>: <input type="password" id="password" name="password"
-							class="form-control" placeholder="Senha" />
-					</div>
+                        <!-- logout message -->
+                        <div th:if="${param.logout}">
+                            <div class="alert alert-info">You have been logged out.</div>
+                        </div>
 
-					<div class="form-group">
-						<div class="row">
-							<div class="col-sm-6 col-sm-offset-3">
-								<input type="submit" name="login-submit" id="login-submit"
-									class="form-control btn btn-primary" value="Log In" />
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</body>
+                        <div class="form-group">
+                            <label for="username"> Username </label>:
+                            <input type="text" class="form-control" id="username" name="username"
+                                   placeholder="E-mail" autofocus="autofocus">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>: <input type="password" id="password" name="password"
+                                                                           class="form-control" placeholder="Senha" />
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <br>
+                                    <input type="submit" name="login-submit" id="login-submit"
+                                           class="form-control btn btn-primary" value="Log In" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+                <footer class="border-top fixed-bottom text-muted bg-light">
+
+            <div class="container">
+                <div class="row py-3">
+                    <div class="col-12 col-md-4 text-center text-md-left">
+                        &copy; 2022 - Farmacos Online
+                    </div>
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="#" class="text-decoration-none text-dark">Trocas e Devoluções</a>
+                    </div>
+                    <div class="col-12 col-md-4 text-center text-md-right">
+                        <a href="#" th:href="@{/login}" class="text-decoration-none text-dark">Administrar</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </footer>
+
+    </body>
 
 </html>
