@@ -10,12 +10,15 @@ and open the template in the editor.
         <!-- BOOTSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP ICONS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <!-- LIMITAR TAMANHO DA DESCRIÇÃO -->
         <style> 
@@ -27,43 +30,35 @@ and open the template in the editor.
                 text-overflow: ellipsis;
             }
         </style>
-        <!--         Latest compiled and minified JavaScript 
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body style="min-width: 372px;">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
-            <!-- barra de navegação -->
-            <!-- ATENÇÀO DEPOIS TROCAR TODOS OS HREF PELO MODELO DO THYMELEAF -->
 
+        <!-- início barra de navegação -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/}">
+                <a class="navbar-brand" th:href="@{/loja}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
                     </svg>
-                    <strong>Farmacos Online</strong>
-                </a>
-
-                <button class="navbar-toggler" type="button" data-toogle="collapse" 
-                        data-target="navbar-collapse">
+                    <strong>Farmacos Online</strong></a>
+                <button  class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link text-white">Clientes</a>
+                <div class="navbar-collapse collapse justify-content-end" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li>
+                            <a href="#" class="nav-link text-white">Item 1</a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{/produto}" class="nav-link text-white">Produtos</a>
+                            <a href="#" class="nav-link text-white">Item 2</a>
                         </li>
                     </ul>
-                    <div class="align-self-end">
-                        <ul class="navbar-nav flex-grow-1">
 
+                    <div class="align-self-end">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a href="#" class="nav-link text-white">Cadastre-se</a>
                             </li>
@@ -71,9 +66,7 @@ and open the template in the editor.
                                 <a href="#" class="nav-link text-white">Entrar</a>
                             </li>
                             <li class="nav-item">
-
-                                <!-- icone do carrinho de compras -->
-                                <a th:href="@{/}" class="nav-link text-white">
+                                <a th:href="@{/carrinho}" class="nav-link text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
@@ -82,26 +75,11 @@ and open the template in the editor.
                         </ul>
                     </div>
                 </div>
-            </div>
         </nav>
-        <!-- script para o banner -->
-        <!--        <script>
-                    var banners =["static/banner.jpg", "static/bannerMobile.jpg"]
-                    var bannerAtual = 0;
-                    function trocaBanner(){
-                        bannerAtual = (bannerAtual + 1) % 2;
-                        documento.querySelector('.banner-destaque img').src=banners[bannerAtual];
-                    }
-                    setInterval(trocaBanner, 3000);
-                </script>-->
+        <!-- fim barra de navegação -->
 
+        <!-- inicio do carrosel do banner -->
         <header class="container">
-            <!--            <section class="banner-destaque">
-                            <figure>
-                                <img th:src="@{/banner.jpg}" alt=""/>
-                            </figure>
-                        </section>-->
-
             <div id="carouselMain" class="carousel carousel-dark slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselMain" data-slide-to="0" class="active"></li>
@@ -138,6 +116,7 @@ and open the template in the editor.
             </div>
             <hr class="mt-3">
         </header>
+        <!-- fim do carrosel do banner -->
 
         <main class="mb-5 pb-5 mb-md-0">
             <!-- regiao de conteúdo -->
@@ -159,13 +138,13 @@ and open the template in the editor.
                                     <option>Preço Menor</option>
                                 </select>
                             </form>
-
                         </div>
 
                     </div>
                 </div>
                 <hr class="mt-3">
 
+                <!-- início dos grids de produto -->
                 <div class="row g-3">
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch" th:each="produto : ${listaProdutos}"> <!--<!-- responsividade -->
                         <div class="card text-center bg-light">
@@ -178,60 +157,62 @@ and open the template in the editor.
                                 <p class= "card-text truncate-3l" th:text="${produto.descricao}"></p>
                             </div>
                             <div class="card-footer">
+                                <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
+                                   class="btn btn-primary">Detalhes</a>
+                                   
+
                                 <!--TENTANDO INATIVAR UM PRODUTO NA TELA-->
-                                <!--<div th:if="${produto.status.equalsIgnoreCase('inativo')}">
+<!--                                <div th:if="${produto.isAtivo(produto.status}?#{true}">
                                     <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
                                        class="btn btn-primary">Detalhes</a> 
-                                       <p>produto sem estoque</p>
-
+                                    <div th:if="${produto.isAtivo(produto.status}?#{false}">
+                                        <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
+                                           class="btn btn-primary">Detalhes</a> 
+                                        <p>produto sem estoque</p>
+                                    </div>
                                 </div>-->
-                                <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
-                                   class="btn btn-primary">Detalhes</a>   
+                                <br>
                             </div>
-                            <br>
                         </div>
                     </div>
-                </div>
-                <hr class="mt-3">
-                <div class="row-pb-4">
-                    <div class="col-12">
+                    <!-- final dos grids de produto -->
+                    <hr class="mt-3">
 
+                    <!-- paginação -->
+                    <div class="row-pb-4">
+                        <div class="col-12">
+                            <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start">
+                                <nav class="d-inline-block" th:if="${totalPages > 1}">
+                                    <ul class="pagination pagination-sm my-0">
+                                        <li class="page-item"></li>
+                                        <button class="page-link">
+                                            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                                <a th:if="${currentPage != i}" th:href="@{'/loja/page/' + ${i}}">[[${i}]]</a>
+                                                <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                                            </span>
+                                        </button>
+                                        <button class="page-link">
+                                            <a th:if="${currentPage < totalPages}"
+                                               th:href="@{'/loja/page/' + ${currentPage + 1}}">Próximo</a>
+                                            <span th:unless="${currentPage < totalPages}">Próximo</span>
+                                        </button>
+                                        <button class="page-link">
+                                            <a th:if="${currentPage < totalPages}" th:href="@{'/loja/page/' + ${totalPages}}">Último</a>
+                                            <span th:unless="${currentPage < totalPages}">Último</span>
+                                        </button>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
-
-                </div>
-                <!-- paginaçao -->
-                <nav class="d-inline-block" th:if="${totalPages > 1}">
-                    <ul class="pagination pagination-sm my-0">
-                        <li class="page-item"></li>
-                        <button class="page-link">
-                            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                                <a th:if="${currentPage != i}" th:href="@{'/loja/page/' + ${i}}">[[${i}]]</a>
-                                <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
-                            </span>
-                        </button>
-                        <button class="page-link">
-                            <a th:if="${currentPage < totalPages}"
-                               th:href="@{'/loja/page/' + ${currentPage + 1}}">Próximo</a>
-                            <span th:unless="${currentPage < totalPages}">Próximo</span>
-                        </button>
-                        <button class="page-link">
-                            <a th:if="${currentPage < totalPages}" th:href="@{'/loja/page/' + ${totalPages}}">Último</a>
-                            <span th:unless="${currentPage < totalPages}">Último</span>
-                        </button>
-
-                    </ul>
-                </nav>
-            </div><!-- FIM DIV CONTAINER -->
+                    <!-- fim da paginação -->
+                </div><!-- FIM DIV CONTAINER -->
         </main>
-
-
-
 
         <div style="height: 273px;" class="d-block d-md-none"></div>
         <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
         <div style="height: 129px;" class="d-none d-lg-block"></div>
         <footer class="border-top fixed-bottom text-muted bg-light">
-
             <div class="container">
                 <div class="row py-3">
                     <div class="col-12 col-md-4 text-center text-md-left">
@@ -243,12 +224,10 @@ and open the template in the editor.
                     <div class="col-12 col-md-4 text-center text-md-right">
                         <a href="#" th:href="@{/login}" class="text-decoration-none text-dark">Administrar</a>
                     </div>
-
                 </div>
             </div>
-
         </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

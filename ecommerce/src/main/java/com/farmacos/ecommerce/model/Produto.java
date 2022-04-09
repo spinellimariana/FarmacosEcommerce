@@ -75,41 +75,39 @@ public class Produto {
         return "/produtos/" + id + "/" + foto;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public boolean isAtivo(StatusUsuario sts) {
+        if(sts.equals("inativo")){
+            return false;
+        }
+        return true;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public int getQtdEstoque() {
-		return qtdEstoque;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public double getValorVenda() {
-		return valorVenda;
-	}
+    public int getQtdEstoque() {
+        return qtdEstoque;
+    }
 
-	public StatusUsuario getStatus() {
-		return status;
-	}
+    public double getValorVenda() {
+        return valorVenda;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public StatusUsuario getStatus() {
+        return status;
+    }
 
-	public AvaliacaoProduto getAvaliacao() {
-		return avaliacao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
+    public AvaliacaoProduto getAvaliacao() {
+        return avaliacao;
+    }
 
-    
-    
-    
-    
-    
-    
 }
-
-
