@@ -6,64 +6,136 @@ and open the template in the editor.
 -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<title>Gerenciamento de Produtos</title>
-	<!-- BOOTSTRAP -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <head>
+        <title>Gerenciamento de Produtos</title>
+        <!-- BOOTSTRAP -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- BOOTSTRAP ICONS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
 
-<body>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- LIMITAR TAMANHO DA DESCRIÇÃO -->
+        <style> 
+            p.truncate-3l{
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body style="min-width: 372px;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
+            <!-- barra de navegação -->
+            <!-- ATENÇÀO DEPOIS TROCAR TODOS OS HREF PELO MODELO DO THYMELEAF -->
+
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/}">Farmacos</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav" style="justify-content: space-between">
-                        <li>Bem-Vindo, <span sec:authentication="principal.username">User </span><li>
-                        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> Logout</a></li>
+                <a class="navbar-brand" th:href="@{/}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
+                    </svg>
+                    <strong>Farmacos Online</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-toogle="collapse" 
+                        data-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <span sec:authentication="principal.username" class="nav-link text-white"></span>
+                        </li>
+                        <li sec:authorize="isAuthenticated()" class="nav-item">
+                            <a th:href="@{/logout}" class="nav-link text-white"> Logout</a></li>
+                        </li>
                     </ul>
                 </div>
+
             </div>
         </nav>
+        <!-- fim da barra de navegacao -->
 
-	<div class="container my2">
-		<h1>Gerenciamento de Produtos</h1>
-		<hr>
-		<h2>Salvar Produto</h2>
-		<!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
-		<form action="#" enctype="multipart/form-data" th:action="@{/produto/saveProduto}" th:object="${produto}"
-			method="POST">
-			<div class="form-group">
-				<!--<!-- descricao -->
+        <main class="flex-fill">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <form class="col-sm-12 col-md-6 col-lg-8" action="#" enctype="multipart/form-data" th:action="@{/produto/saveProduto}" th:object="${produto}"
+                          method="POST">
+                        <h2 class="text-primary">Novo Produto</h2>
+                        <div class="form-floating mb-3">
+                            <input id="nome" name="nome" type="text" required nome="nome" th:field="*{nome}"
+                                   placeholder="Nome do Produto*" class="form-control" autofocus>
+                            <label for="txtNomeCompleto">Produto</label>
 
-				<input id="nome" name="nome" type="text" required nome="nome" th:field="*{nome}"
-					placeholder="Nome do Produto*" class="form-control mb-4 col-4">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input id="qtd" name="qtd" type="number" required nome="qtd" th:field="*{qtdEstoque}" 
+                                   placeholder="QTD*"
+                                   class="form-control">
+                            <label for="txtQtd">Quantidade em Estoque</label>
 
-				<input id="qtd" name="qtd" type="number" required nome="qtd" th:field="*{qtdEstoque}" placeholder="QTD*"
-					class="form-control mb-4 col-4">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input id="preco" name="preco" type="number" required nome="preco" th:field="*{valorVenda}"
+                                   placeholder="Preço*" step="0.01" min="0" max="10000" class="form-control">
+                            <label for="txtPreco">Preço R$</label>
 
-				<input id="preco" name="preco" type="number" required nome="preco" th:field="*{valorVenda}"
-					placeholder="Preço*" step="0.01" min="0" max="10000" class="form-control mb-4 col-4">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" height="50" id="descricao" name="descricao" rows='10'
+                                      placeholder="Descrição" th:field="*{descricao}"></textarea>
+                            <label for="txtDescricao">Descrição</label>
 
-				<textarea class="form-control mb-4 col-4" id="descricao" name="descricao" rows='5'
-					placeholder="Descrição" th:field="*{descricao}"></textarea>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" th:field="*{status}">
+                                <option th:value="'ativo'" th:text="Ativo"></option>
+                                <option th:value="'inativo'" th:text="Inativo"></option>
+                            </select><br>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input id="imagem" type="file" name="file" class="form-control-file">
+                        </div>                        
+                        <div class="form-floating mb-3">
+                            `<button type="submit" class="btn btn-primary btn-lg col-3">Salvar</button>
+                        </div>
+                    </form>`
 
-				<select th:field="*{status}">
-					<option th:value="'ativo'" th:text="Ativo"></option>
-					<option th:value="'inativo'" th:text="Inativo"></option>
-				</select>
-				<input id="imagem" type="file" name="file" class="form-control-file mb-4 col-4">
-				<!--nao pode usar o th field-->
-				<br>
-				<button type="submit" class="btn btn-info col-2">Salvar</button>
-			</div>
-		</form>
-	</div>
-</body>
+                </div>
 
+            </div>
+
+        </main>
+
+        <div style="height: 273px;" class="d-block d-md-none"></div>
+        <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
+        <div style="height: 129px;" class="d-none d-lg-block"></div>
+        <footer class="border-top fixed-bottom text-muted bg-light">
+            <div class="container">
+                <div class="row py-3">
+                    <div class="col-12 col-md-4 text-center text-md-left">
+                        &copy; 2022 - Farmacos Online
+                    </div>
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="#" class="text-decoration-none text-dark">Trocas e Devoluções</a>
+                    </div>
+                    <div class="col-12 col-md-4 text-center text-md-right">
+                        <a href="#" th:href="@{/login}" class="text-decoration-none text-dark">Administrar</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
 </html>

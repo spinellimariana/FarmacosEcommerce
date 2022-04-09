@@ -46,20 +46,27 @@ and open the template in the editor.
         </nav>
 
         <div class="container my-2">
-            <h1>Lista de Produtos:</h1>
+            <h1 class="text-primary">Lista de Produtos:</h1>
             <br>
+            <div class="row">
+                <div class="col-12 col-md-5"> <!-- FORMULARIO DE PESQUISA -->
+                    <form th:action="@{/produto}" method="GET" class="justify-content-center justify-content-md-start mb-3 mb-md-0">
+                        <div class="input-group mb-3">
+                            <input class=form-control type="text" name="keyword" placeholder="Pesquisa por nome*">
+                            <input type="submit" value="Search" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-md-7">
+                    <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start">
+                        <form class="ml-3 d-inline-block">
+                            <a th:href="@{/produto/showNewProdutoForm}" class="btn btn-primary btn-lg mb-3">+</a>
+                        </form>
+                    </div>
 
-            <form th:action="@{/produto}" method="GET">
-                <input type="text" name="keyword" placeholder="Pesquisa por nome*">
-                <input type="submit" value="Search" class="btn btn-primary">
-            </form>
-
-
-
-            <div align="right">
-                <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
-                <a th:href="@{/produto/showNewProdutoForm}" class="btn btn-primary btn-sm mb-3">+</a>
+                </div>
             </div>
+            <hr class="mt-3">
 
             <table border="1" class="table table-striped table-reponsive-md">
                 <thead>
@@ -98,29 +105,38 @@ and open the template in the editor.
                     </tr>
                 </tbody>
             </table>
+            <hr class="mt-3">
             <!-- paginacao -->
-            <nav class="d-inline-block" th:if="${totalPages > 1}">
-                <ul class="pagination pagination-sm my-0">
-                    <li class="page-item"></li>
-                    <button class="page-link">
-                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                            <a th:if="${currentPage != i}" th:href="@{'/produto/page/' + ${i}}">[[${i}]]</a>
-                            <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
-                        </span>
-                    </button>
-                    <button class="page-link">
-                        <a th:if="${currentPage < totalPages}"
-                           th:href="@{'/produto/page/' + ${currentPage + 1}}">Próximo</a>
-                        <span th:unless="${currentPage < totalPages}">Próximo</span>
-                    </button>
-                    <button class="page-link">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/produto/page/' + ${totalPages}}">Último</a>
-                        <span th:unless="${currentPage < totalPages}">Último</span>
-                    </button>
-                </ul>
-            </nav>
+                <div class="row-pb-4">
+                    <div class="col-12">
+                        <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start">
+                            <nav class="d-inline-block" th:if="${totalPages > 1}">
+                                <ul class="pagination pagination-sm my-0">
+                                    <li class="page-item"></li>
+                                    <button class="page-link">
+                                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                            <a th:if="${currentPage != i}" th:href="@{'/produto/page/' + ${i}}">[[${i}]]</a>
+                                            <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                                        </span>
+                                    </button>
+                                    <button class="page-link">
+                                        <a th:if="${currentPage < totalPages}"
+                                           th:href="@{'/produto/page/' + ${currentPage + 1}}">Próximo</a>
+                                        <span th:unless="${currentPage < totalPages}">Próximo</span>
+                                    </button>
+                                    <button class="page-link">
+                                        <a th:if="${currentPage < totalPages}" th:href="@{'/produto/page/' + ${totalPages}}">Último</a>
+                                        <span th:unless="${currentPage < totalPages}">Último</span>
+                                    </button>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
 
         </div>
+
+
         <div style="height: 273px;" class="d-block d-md-none"></div>
         <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
         <div style="height: 129px;" class="d-none d-lg-block"></div>

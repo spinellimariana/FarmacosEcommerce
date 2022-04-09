@@ -40,53 +40,48 @@ and open the template in the editor.
                 </a>
 
         </nav>
-        <br>
-        <br>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+        <main class="flex-fill">
+            <div class="container">
+                <div class="row justify-content-center">
 
-                    <h2> User Login </h2>
-                    <form th:action="@{/login}" method="post">
-
+                    <form class="col-sm-12 col-md-6 col-lg-4" th:action="@{/login}" method="post">
+                        <div class="form-floating mb-3">
+                            <h2 class="text-primary"> User Login </h2>
+                        </div>
                         <!-- error message -->
-                        <div th:if="${param.error}">
+                        <div class="form-floating mb-3" th:if="${param.error}">
                             <div class="alert alert-danger">Invalid username or
                                 password.</div>
                         </div>
-
                         <!-- logout message -->
-                        <div th:if="${param.logout}">
+                        <div class="form-floating mb-3" th:if="${param.logout}">
                             <div class="alert alert-info">You have been logged out.</div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="username"> Username </label>:
+                        <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="username" name="username"
                                    placeholder="E-mail" autofocus="autofocus">
+                            <label for="txtUsuario">E-mail</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Senha"/>
+                            <label for="txtSenha">Senha</label>
+                        </div>
+                        <div class="form-floating mb-3">
+
+                            <input type="submit" name="login-submit" id="login-submit"
+                                   class="form-control btn btn-primary" value="Log In" />
                         </div>
 
-                        <div class="form-group">
-                            <label for="password">Password</label>: <input type="password" id="password" name="password"
-                                                                           class="form-control" placeholder="Senha" />
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <br>
-                                    <input type="submit" name="login-submit" id="login-submit"
-                                           class="form-control btn btn-primary" value="Log In" />
-                                </div>
-                            </div>
-                        </div>
                     </form>
-                </div>
+                </div> 
             </div>
-        </div>
-        
-                <footer class="border-top fixed-bottom text-muted bg-light">
+        </main>
+
+        <div style="height: 273px;" class="d-block d-md-none"></div>
+        <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
+        <div style="height: 129px;" class="d-none d-lg-block"></div>
+        <footer class="border-top fixed-bottom text-muted bg-light">
 
             <div class="container">
                 <div class="row py-3">

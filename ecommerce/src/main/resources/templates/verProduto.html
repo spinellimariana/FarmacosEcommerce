@@ -6,52 +6,58 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Visualizar Produto</title>
+        <title>Loja Farmacos - Produto</title>
         <!-- BOOTSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP ICONS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+        <!-- LIMITAR TAMANHO DA DESCRIÇÃO -->
+        <style> 
+            p.truncate-3l{
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body style="min-width: 372px;">
+    <body style="min-width: 372px;">  
+        <!-- início barra de navegação -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
-            <!-- barra de navegação -->
-            <!-- ATENÇÀO DEPOIS TROCAR TODOS OS HREF PELO MODELO DO THYMELEAF -->
-
             <div class="container">
-                <a class="navbar-brand" th:href="@{/}">
+                <a class="navbar-brand" th:href="@{/loja}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
                     </svg>
-                    <strong>Farmacos Online</strong>
-                </a>
-                <button class="navbar-toggler" type="button" data-toogle="collapse" 
-                        data-target="navbar-collapse">
+                    <strong>Farmacos Online</strong></a>
+                <button  class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link text-white">Clientes</a>
+                <div class="navbar-collapse collapse justify-content-end" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li>
+                            <a href="#" class="nav-link text-white">Item 1</a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{/produto}" class="nav-link text-white">Produtos</a>
+                            <a href="#" class="nav-link text-white">Item 2</a>
                         </li>
                     </ul>
-                    <div class="align-self-end">
-                        <ul class="navbar-nav flex-grow-1">
 
+                    <div class="align-self-end">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a href="#" class="nav-link text-white">Cadastre-se</a>
                             </li>
@@ -59,64 +65,112 @@ and open the template in the editor.
                                 <a href="#" class="nav-link text-white">Entrar</a>
                             </li>
                             <li class="nav-item">
-                                <!-- icone do carrinho de compras -->
-                                <a th:href="@{/}" class="nav-link text-white">
+                                <a th:href="@{/carrinho}" class="nav-link text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
-            </div>
         </nav>
-
+        <!-- fim barra de navegação -->
         <main>
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <img class="d-flex" height="400px" width="400px" th:src="@{${produto.getFoto}}" />
+                <div class="container marketing">
+                    <hr class="featurette-divider">
+                    <div class="row g-2">
+                        <div class="col-md-5">
+                            <!-- fazer carrosel aqui -->
+                            <div id="carouselMain" class="carousel carousel-dark slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselMain" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselMain" data-slide-to="1" class="active"></li>
+                                    <li data-target="#carouselMain" data-slide-to="2" class="active"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active text-center" data-interval="3000">
+                                        <!--<img th:src="@{${produto.getFoto}}" class="img-fluid" width="400" height="400">-->
+                                        <img th:src="@{${produto.getFoto}}" alt="" class="img-fluid d-none d-md-block">
+                                        <img th:src="@{${produto.getFoto}}" alt="" class="img-fluid d-block d-md-none">
+                                    </div>
+                                    <div class="carousel-item text-center" data-interval="3000">
+                                        <!--<img th:src="@{${produto.getFoto}}" class="img-fluid" width="400" height="400">-->
+                                        <img th:src="@{${produto.getFoto}}" alt="" class="img-fluid d-none d-md-block">
+                                        <img th:src="@{${produto.getFoto}}" alt="" class="img-fluid d-block d-md-none">
+                                    </div>
+                                    <div class="carousel-item text-center" data-interval="3000">
+                                        <!--<img th:src="@{${produto.getFoto}}" class="img-fluid" width="400" height="400">-->
+                                        <img th:src="@{${produto.getFoto}}" alt="" class="img-fluid d-none d-md-block">
+                                        <img th:src="@{${produto.getFoto}}" alt="" class="img-fluid d-block d-md-none">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselMain" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                    <span class="visually-hidden">Anterior</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselMain" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                    <span class="visually-hidden">Próximo</span>
+                                </a>
+                            </div>
+                        </div>
 
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <h1><span th:text="${produto.nome}"></span></h1>
-                        <p><span th:text="${produto.descricao}"></span></p>
-                        <p><strong>R$ <span th:text="${produto.valorVenda}"></span></strong></p>
-                        <p>Estoque: <span th:text="${produto.qtdEstoque}"></span> unidades</p>
-                        <button type="submit" class="btn btn-success btn-block">Comprar</button>
+                        <div class="col-md-7">
+                            <h2 class="featurette-heading text-primary" th:text="${produto.nome}"></h2>
+                            <p class="text-muted">Estoque: <span class="text-muted" th:text="${produto.qtdEstoque}"></span> unidades</p>
+                            <p class="lead" th:text="${produto.descricao}"></p>
+                            <p><h3><strong>R$ <span th:text="${produto.valorVenda}"></span> un.</strong><h3></p>
+                                    <div class="d-grid gap-2 col-6 mx-auto">
+                                        <hr>
+                                        <div class= "d-grid gap-2 col-7 mx-auto">
+                                            <div class="input-group">
+                                                <button type="button" class="btn btn-outline-dark btn-sm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                                    <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" class="form-control text-center border-dark" value="4">
+                                                <button type="button" class="btn btn-outline-dark btn-sm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
+                                                    <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-success btn-lg" >Comprar</button>
+                                    </div>
+                                    </div>
+                                    <hr class="featurette-divider">
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </main>
 
-                    </div>
+                                    <!--                    
+                            NÃO ESTÁ USANDO POR ENQUANTO
+                            <p>Status: <span th:text="${produto.status}"></span></p>
+                            <p>Avaliação: <span th:text="${produto.avaliacao}"></span></p> -->
 
-                </div>
-
-                    <!--                    
-                    NÃO ESTÁ USANDO POR ENQUANTO
-                    <p>Status: <span th:text="${produto.status}"></span></p>
-                    <p>Avaliação: <span th:text="${produto.avaliacao}"></span></p> -->
-
-
-        </main>
-
-        <div style="height: 273px;" class="d-block d-md-none"></div>
-        <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
-        <div style="height: 129px;" class="d-none d-lg-block"></div>
-        <footer class="border-top fixed-bottom text-muted bg-light">
-            <div class="container">
-                <div class="row py-3">
-                    <div class="col-12 col-md-4 text-center text-md-left">
-                        &copy; 2022 - Farmacos Online
-                    </div>
-                    <div class="col-12 col-md-4 text-center">
-                        <a href="#" class="text-decoration-none text-dark">Trocas e Devoluções</a>
-                    </div>
-                    <div class="col-12 col-md-4 text-center text-md-right">
-                        <a href="#" th:href="@{/login}" class="text-decoration-none text-dark">Administrar</a>
-                    </div>
-                </div>
-            </div>
-        </footer>   
-
-    </body>
-</html>
+                                    <div style="height: 273px;" class="d-block d-md-none"></div>
+                                    <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
+                                    <div style="height: 129px;" class="d-none d-lg-block"></div>
+                                    <footer class="border-top fixed-bottom text-muted bg-light">
+                                        <div class="container">
+                                            <div class="row py-3">
+                                                <div class="col-12 col-md-4 text-center text-md-left">
+                                                    &copy; 2022 - Farmacos Online
+                                                </div>
+                                                <div class="col-12 col-md-4 text-center">
+                                                    <a href="#" class="text-decoration-none text-dark">Trocas e Devoluções</a>
+                                                </div>
+                                                <div class="col-12 col-md-4 text-center text-md-right">
+                                                    <a href="#" th:href="@{/login}" class="text-decoration-none text-dark">Administrar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </footer>   
+                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                                    </body>
+                                    </html>
