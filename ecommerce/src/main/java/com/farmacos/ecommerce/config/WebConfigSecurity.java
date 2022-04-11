@@ -1,4 +1,3 @@
-  
 package com.farmacos.ecommerce.config;
 
 import java.nio.file.Path;
@@ -22,77 +21,78 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.farmacos.ecommerce.service.UsuarioService;
 
-
 @Configuration
 @EnableWebSecurity
-public class WebConfigSecurity extends WebSecurityConfigurerAdapter   {
-	
-	private static final String[] PUBLIC_ENDPOINT = {
-			"/js/**",
-            "/css/**",
-            "/img/**",
-            "/produtos/**"
-			
-			
-            
-	};
+public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 
-	private static final String[] PUBLIC_ENDPOINT_POST = {
-			"/autenticacao"	, "/usuarios", "/produto/**", "/index","/"
-	};
+    private static final String[] PUBLIC_ENDPOINT = {
+        "/js/**",
+        "/css/**",
+        "/img/**",
+        "/produtos/**",
+        "/banner.jpg",
+        "/bannerMobile.jpg",
+        "/slide01.jpg",
+        "/slide01small.jpg"
 
-	
-	@Autowired
-	private UsuarioService userService;
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
-	@Bean
+    };
+
+    private static final String[] PUBLIC_ENDPOINT_POST = {
+        "/autenticacao", "/usuarios", "/produto/**", "/index", "/"
+    };
+
+    @Autowired
+    private UsuarioService userService;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
         auth.setUserDetailsService(userService);
         auth.setPasswordEncoder(passwordEncoder);
         return auth;
     }
-	
-	@Override
+
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(PUBLIC_ENDPOINT).permitAll()
-		.antMatchers("/login*").permitAll()
-		.antMatchers(PUBLIC_ENDPOINT_POST).permitAll()
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-        .defaultSuccessUrl("/index", true)
-		.permitAll()
-		.and()
-		.logout()
-		.invalidateHttpSession(true)
-		.clearAuthentication(true)
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login?logout")
-		.permitAll();
-	}
-	
-	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	        exposeDirectory("produtos", registry);
-	    }
-	     
-	    private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
-	        Path uploadDir = Paths.get(dirName);
-	        String uploadPath = uploadDir.toFile().getAbsolutePath();
-	         
-	        if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
-	         
-	        registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
-	    }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers(PUBLIC_ENDPOINT).permitAll()
+                .antMatchers("/login*").permitAll()
+                .antMatchers(PUBLIC_ENDPOINT_POST).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/index", true)
+                .permitAll()
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll();
+    }
+
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        exposeDirectory("produtos", registry);
+    }
+
+    private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
+        Path uploadDir = Paths.get(dirName);
+        String uploadPath = uploadDir.toFile().getAbsolutePath();
+
+        if (dirName.startsWith("../")) {
+            dirName = dirName.replace("../", "");
+        }
+
+        registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + uploadPath + "/");
+    }
 
 }

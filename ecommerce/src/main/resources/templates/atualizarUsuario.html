@@ -54,8 +54,8 @@ and open the template in the editor.
 			<input id="cargo" type="text" required cargo="cargo" th:field="*{cargo}" placeholder="Cargo*"
 				class="form-control mb-4 col-4">
 			<select th:field="*{status}">
-				<option th:value="'ativo'" th:text="Ativo"></option>
-				<option th:value="'inativo'" th:text="Inativo"></option>
+                                <option th:value="'ATIVO'" th:text="Ativo"></option>
+                                <option th:value="'INATIVO'" th:text="Inativo"></option>
 			</select><br>
 
 			<button type="submit" class="btn btn-info col-2">Atualizar</button>
