@@ -76,7 +76,7 @@ public class Produto {
     }
 
     public boolean isAtivo(StatusUsuario sts) {
-        if(sts.equals("inativo")){
+        if(sts.equals(StatusUsuario.INATIVO)){
             return false;
         }
         return true;

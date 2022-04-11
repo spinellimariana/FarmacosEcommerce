@@ -26,6 +26,20 @@ import com.farmacos.ecommerce.service.UsuarioService;
 @Configuration
 @EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter   {
+	
+	private static final String[] PUBLIC_ENDPOINT = {
+			"/js/**",
+            "/css/**",
+            "/img/**",
+            "/produtos/**"
+			
+			
+            
+	};
+
+	private static final String[] PUBLIC_ENDPOINT_POST = {
+			"/autenticacao"	, "/usuarios", "/produto/**", "/index","/"
+	};
 
 	
 	@Autowired
@@ -49,15 +63,14 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter   {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(
-	                "/js/**",
-	                "/css/**",
-	                "/img/**",
-	                "**/produtos/**").permitAll()
+		http.authorizeRequests().antMatchers(PUBLIC_ENDPOINT).permitAll()
+		.antMatchers("/login*").permitAll()
+		.antMatchers(PUBLIC_ENDPOINT_POST).permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
 		.loginPage("/login")
+        .defaultSuccessUrl("/index", true)
 		.permitAll()
 		.and()
 		.logout()

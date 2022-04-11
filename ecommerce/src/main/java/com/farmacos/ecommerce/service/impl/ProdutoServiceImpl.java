@@ -67,10 +67,10 @@ public class ProdutoServiceImpl implements ProdutoService {
                 .orElseThrow(() -> new ObjectNotFoundException("Produto não existente"));
         try {
 
-            if (prod.getStatus() == StatusUsuario.ativo) {
-                prod.setStatus(StatusUsuario.inativo);
-            } else if (prod.getStatus() == StatusUsuario.inativo) {
-                prod.setStatus(StatusUsuario.ativo);
+            if (prod.getStatus() == StatusUsuario.ATIVO) {
+                prod.setStatus(StatusUsuario.INATIVO);
+            } else if (prod.getStatus() == StatusUsuario.INATIVO) {
+                prod.setStatus(StatusUsuario.ATIVO);
             }
             this.produtoRepository.save(prod);
 

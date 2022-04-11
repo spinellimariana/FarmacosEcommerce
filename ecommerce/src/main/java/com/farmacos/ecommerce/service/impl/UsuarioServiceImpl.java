@@ -68,10 +68,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 				.orElseThrow(() -> new ObjectNotFoundException("Usuario não existente"));
 		try {
 			
-			if(usu.getStatus() == StatusUsuario.ativo) {
-				usu.setStatus(StatusUsuario.inativo);
-			}else if(usu.getStatus() == StatusUsuario.inativo){
-				usu.setStatus(StatusUsuario.ativo);
+			if(usu.getStatus() == StatusUsuario.ATIVO) {
+				usu.setStatus(StatusUsuario.INATIVO);
+			}else if(usu.getStatus() == StatusUsuario.INATIVO){
+				usu.setStatus(StatusUsuario.ATIVO);
 			}
 			this.usuarioRepository.save(usu);
 
@@ -134,7 +134,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if (user == null) {
 			throw new UsernameNotFoundException("Usuario inválido");
 		}
-		else if(user.getStatus() == StatusUsuario.inativo) {
+		else if(user.getStatus() == StatusUsuario.INATIVO) {
 			throw new UsernameNotFoundException("Usuario Inativo");
 		}
 		return new User(user.getEmail(), user.getSenha(), mapRoleAuthorities(user.getRole()));

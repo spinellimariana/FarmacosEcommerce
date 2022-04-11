@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author 009432631
  */
 @Controller
-@RequestMapping(value = "/loja") //o que esta no get maping
+@RequestMapping(value = "/") //o que esta no get maping
 public class LojaController {
 
     @Autowired
