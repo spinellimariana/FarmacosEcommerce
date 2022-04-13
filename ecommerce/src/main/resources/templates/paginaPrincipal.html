@@ -63,10 +63,10 @@ and open the template in the editor.
                 <div class="navbar-collapse collapse justify-content-end" id="navbar">
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a href="/index" class="nav-link text-white">Item 1</a>
+                            <a href="#" class="nav-link text-white">Item 1</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/index" class="nav-link text-white">Item 2</a>
+                            <a href="#" class="nav-link text-white">Item 2</a>
                         </li>
                     </ul>
 
@@ -139,7 +139,7 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-12 col-md-5">
                         <!-- FORMULARIO DE PESQUISA -->
-                        <form th:action="@{/loja}" method="GET"
+                        <form th:action="@{/}" method="GET"
                               class="justify-content-center justify-content-md-start mb-3 mb-md-0">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="keyword" placeholder="Pesquisa por nome*">
@@ -176,23 +176,16 @@ and open the template in the editor.
                                 <p class="card-text truncate-3l" th:text="${produto.descricao}"></p>
                             </div>
                             <div class="card-footer">
-                                <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}" class="btn btn-primary"
-                                   th:if="${produto.status == T(com.farmacos.ecommerce.enums.StatusUsuario).ATIVO}">Detalhes</a>
-
+                                <form class="d-block" th:if="${produto.status == T(com.farmacos.ecommerce.enums.StatusUsuario).ATIVO}">
+                                <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}" class="btn btn-primary">Detalhes</a>
+                                <p style="color:green;"><small>Estoque: <span th:text="${produto.qtdEstoque}"></span></small></p>
+                                </form>
+                                
+                                <form class="d-block" th:if="${produto.status == T(com.farmacos.ecommerce.enums.StatusUsuario).INATIVO}">
                                 <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}" class="btn btn-primary disabled"
-                                   th:if="${produto.status == T(com.farmacos.ecommerce.enums.StatusUsuario).INATIVO}" aria-disabled="true">Indisponivel</a>
-
-                                <!--TENTANDO INATIVAR UM PRODUTO NA TELA-->
-                                <!--                                <div th:if="${produto.isAtivo(produto.status}?#{true}">
-            <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
-               class="btn btn-primary">Detalhes</a> 
-            <div th:if="${produto.isAtivo(produto.status}?#{false}">
-                <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"
-                   class="btn btn-primary">Detalhes</a> 
-                <p>produto sem estoque</p>
-            </div>
-        </div>-->
-                                <br>
+                                   aria-disabled="true">Detalhes</a>
+                                    <p style="color:red;"><small><strong>Esgotado!</strong></small></p>
+                                </form>
                             </div>
                         </div>
                     </div>
