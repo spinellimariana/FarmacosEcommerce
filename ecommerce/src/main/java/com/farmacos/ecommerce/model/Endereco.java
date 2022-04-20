@@ -23,7 +23,7 @@ import lombok.Setter;
  * @author 009432631
  */
 @Entity
-@Table(name = "role")
+@Table(name = "ENDERECO")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -77,5 +77,26 @@ public class Endereco {
 
     @Column(name = "CIDADE_E", nullable = false)
     private String cidadeE;
+
+    
+    //construtor com carga sem o ID (igual a classe role)
+    public Endereco(String cepF, String cepE, String logradouroF, String logradouroE, String numeroF, String numeroE, String complementoF, String complementoE, String bairroF, String bairroE, String ufF, String ufE, String cidadeF, String cidadeE) {
+        this.cepF = cepF;
+        this.cepE = cepE;
+        this.logradouroF = logradouroF;
+        this.logradouroE = logradouroE;
+        this.numeroF = numeroF;
+        this.numeroE = numeroE;
+        this.complementoF = complementoF;
+        this.complementoE = complementoE;
+        this.bairroF = bairroF;
+        this.bairroE = bairroE;
+        this.ufF = ufF;
+        this.ufE = ufE;
+        this.cidadeF = cidadeF;
+        this.cidadeE = cidadeE;
+    }
+    
+    
 
 }

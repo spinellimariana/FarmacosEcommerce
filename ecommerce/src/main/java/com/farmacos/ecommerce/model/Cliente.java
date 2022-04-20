@@ -61,11 +61,11 @@ public class Cliente {
     @Column(name = "GENERO_C")
     private String generoC;
     
-//    //isso tá certo?
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id"), 
-//                inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
-//    @Column(name = "ENDERECO", nullable = false)
-//    private Collection<Endereco> endereco;
+    //isso tá certo?
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id"), 
+                inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
+    @Column(name = "ENDERECO", nullable = false)
+    private Collection<Endereco> endereco;
 
 }
