@@ -17,7 +17,7 @@ public class UsuarioRequest {
 	private String nome;
 	private String telefone;
 	//private Date dtNascimento;
-        private String dtNascimento;
+    private String dtNascimento;
 	private String cargo;
 	private StatusUsuario status;
 	private String senha;

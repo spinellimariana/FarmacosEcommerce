@@ -10,13 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
@@ -36,66 +38,30 @@ public class Endereco {
     @Column(name = "id", updatable = false, unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "CEP_F", nullable = false)
+    @Column(name = "CEP", nullable = false)
     private String cepF;
 
-    @Column(name = "CEP_E", nullable = false)
-    private String cepE;
-
-    @Column(name = "LOGRADOURO_F", nullable = false)
+    @Column(name = "LOGRADOURO", nullable = false)
     private String logradouroF;
 
-    @Column(name = "LOGRADOURO_E", nullable = false)
-    private String logradouroE;
-
-    @Column(name = "NUMERO_F", nullable = false)
+    @Column(name = "NUMERO", nullable = false)
     private String numeroF;
 
-    @Column(name = "NUMERO_E", nullable = false)
-    private String numeroE;
-
-    @Column(name = "COMPLEMENTO_F", nullable = false)
+    @Column(name = "COMPLEMENTO", nullable = false)
     private String complementoF;
 
-    @Column(name = "COMPLEMENTO_E", nullable = false)
-    private String complementoE;
-
-    @Column(name = "BAIRRO_F", nullable = false)
+    @Column(name = "BAIRRO", nullable = false)
     private String bairroF;
 
-    @Column(name = "BAIRRO_E", nullable = false)
-    private String bairroE;
-
-    @Column(name = "UF_F", nullable = false)
+    @Column(name = "UF", nullable = false)
     private String ufF;
 
-    @Column(name = "UF_E", nullable = false)
-    private String ufE;
-
-    @Column(name = "CIDADE_F", nullable = false)
+    @Column(name = "CIDADE", nullable = false)
     private String cidadeF;
-
-    @Column(name = "CIDADE_E", nullable = false)
-    private String cidadeE;
-
     
-    //construtor com carga sem o ID (igual a classe role)
-    public Endereco(String cepF, String cepE, String logradouroF, String logradouroE, String numeroF, String numeroE, String complementoF, String complementoE, String bairroF, String bairroE, String ufF, String ufE, String cidadeF, String cidadeE) {
-        this.cepF = cepF;
-        this.cepE = cepE;
-        this.logradouroF = logradouroF;
-        this.logradouroE = logradouroE;
-        this.numeroF = numeroF;
-        this.numeroE = numeroE;
-        this.complementoF = complementoF;
-        this.complementoE = complementoE;
-        this.bairroF = bairroF;
-        this.bairroE = bairroE;
-        this.ufF = ufF;
-        this.ufE = ufE;
-        this.cidadeF = cidadeF;
-        this.cidadeE = cidadeE;
-    }
+	@ManyToOne
+	@JsonIgnore
+	private Cliente cliente;
     
     
 

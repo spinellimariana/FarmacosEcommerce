@@ -5,18 +5,17 @@
  */
 package com.farmacos.ecommerce.model;
 
-import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,29 +42,26 @@ public class Cliente {
     @Column(name = "id", updatable = false, unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "NOME_C", nullable = false)
-    private String nomeC;
+    @Column(name = "NOME", nullable = false)
+    private String nome;
 
-    @Column(name = "CPF_C", nullable = false, unique = true)
-    private String cpfC;
+    @Column(name = "CPF", nullable = false, unique = true)
+    private String cpf;
 
-    @Column(name = "EMAIL_C", nullable = false)
-    private String emailC;
+    @Column(name = "EMAIL", nullable = false)
+    private String email;
 
-    @Column(name = "SENHA_C", nullable = false)
-    private String senhaC;
+    @Column(name = "SENHA", nullable = false)
+    private String senha;
 
-    @Column(name = "DATA_NASC_C")
-    private String dataNascC;
+    @Column(name = "DATA_NASC")
+    private String dataNasc;
 
-    @Column(name = "GENERO_C")
-    private String generoC;
+    @Column(name = "GENERO")
+    private String genero;
     
     //isso tá certo?
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id"), 
-                inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
-    @Column(name = "ENDERECO", nullable = false)
-    private Collection<Endereco> endereco;
-
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> endereco;
+    
 }

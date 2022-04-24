@@ -88,7 +88,7 @@ and open the template in the editor.
                             <label for="txtEmail">E-mail*</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="tel" id="phone" name="phone" pattern="[1-9]{2}-[0-9]{5}-[0-9]{4}" 
+                            <input type="tel" id="phone" name="phone" 
                                    th:field="*{telefone}" placeholder="Telefone" class="form-control">
                             <label for="txtTelefone">Telefone</label>
 
@@ -104,9 +104,10 @@ and open the template in the editor.
                             <label for="txtSenha">Senha*</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input id="cargo" type="text" required cargo="cargo" th:field="*{cargo}" placeholder="Cargo*" 
-                                   class="form-control">
-                            <label for="txtCargo">Cargo*</label>
+                              <select class="form-select" th:field="*{cargo}">
+                                <option th:value="'ADM'" th:text="Administrador"></option>
+                                <option th:value="'ESTOQUISTA'" th:text="Estoquista"></option>
+                            </select>
                         </div>
                         <div class="form-floating mb-3">
 

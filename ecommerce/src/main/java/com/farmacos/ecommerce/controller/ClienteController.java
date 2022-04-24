@@ -5,12 +5,9 @@
  */
 package com.farmacos.ecommerce.controller;
 
-import com.farmacos.ecommerce.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -21,22 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/cliente")
 public class ClienteController {
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String showloginClienteForm(Model model) {
         return "loginCliente";
     }
 
-    @GetMapping("cadastro")
+    @GetMapping("/cadastro")
     public String showCadastroClienteForm(Model model) {
         return "cadastroCliente";
     }
 
-    @GetMapping("conta")
+    @GetMapping("/conta")
     public String showIndexContaCliente(Model model) {
         return "minhaConta";
     }
 
-    @GetMapping("atualizar")
+    @GetMapping("/atualizar")
     public String showAtualizarClienteForm(Model model) {
         return "atualizarCliente";
     }

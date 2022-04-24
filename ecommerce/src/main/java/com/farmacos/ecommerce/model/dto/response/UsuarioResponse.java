@@ -1,7 +1,5 @@
 package com.farmacos.ecommerce.model.dto.response;
 
-import java.util.Date;
-
 import org.modelmapper.ModelMapper;
 
 import com.farmacos.ecommerce.enums.StatusUsuario;
