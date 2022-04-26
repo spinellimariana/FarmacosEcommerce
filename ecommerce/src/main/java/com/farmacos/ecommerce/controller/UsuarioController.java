@@ -73,15 +73,6 @@ public class UsuarioController {
         return "atualizarUsuario";
     }
 
-//     @GetMapping("/usuario") //pesquisar o usuario
-//     public String pesquisaUsuario(Model model, @RequestParam("keyword") String keyword){
-//         model.addAttribute("listaUsuarios", usuarioService.findUsuario(keyword));
-//         model.addAttribute("keyword", keyword);
-//         return "todosUsuarios";
-//     }
-
-
-
     @GetMapping("/ativoInativo/{id}") //metodo para ativar/inativar no BD
     public String ativoInativo(@PathVariable(value = "id") long id, Model model) {
         //chama o metodo que tá na service impl
@@ -90,20 +81,4 @@ public class UsuarioController {
         return "redirect:/usuario";
     }
 
-    //CÓDIGO DO VINI
-    /*@PatchMapping(value = "{id}")
-    public ResponseEntity<UsuarioResponse> alterarUsuario(@RequestBody UsuarioRequest usuario, @PathVariable Long id) {
-        return ResponseEntity.ok().body(this.usuarioService.alterarUsuario(id, usuario));
-    }*/
-
- /*@PostMapping
-	public ResponseEntity<Usuario> salvarUsuario(@RequestBody Usuario usuario) throws Exception {
-		Usuario user = this.usuarioService.salvarUsuario(usuario);
-		return ResponseEntity.ok().body(user);
-	}*/
-
- /*@GetMapping
-	public ResponseEntity<List<Usuario>> getAllUsuarios() {
-		return ResponseEntity.ok().body(usuarioService.getAllUsuarios());
-	}*/
 }

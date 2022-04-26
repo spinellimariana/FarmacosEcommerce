@@ -39,25 +39,29 @@ public class Endereco {
     private Long id;
 
     @Column(name = "CEP", nullable = false)
-    private String cepF;
+    private String cep;
 
     @Column(name = "LOGRADOURO", nullable = false)
-    private String logradouroF;
+    private String logradouro;
 
     @Column(name = "NUMERO", nullable = false)
-    private String numeroF;
+    private String numero;
 
     @Column(name = "COMPLEMENTO", nullable = false)
-    private String complementoF;
+    private String complemento;
 
     @Column(name = "BAIRRO", nullable = false)
-    private String bairroF;
+    private String bairro;
 
     @Column(name = "UF", nullable = false)
-    private String ufF;
+    private String uf;
 
     @Column(name = "CIDADE", nullable = false)
-    private String cidadeF;
+    private String cidade;
+    
+    @Column(name = "FATURAMENTO", nullable = false)
+    private boolean faturamento;
+    
     
 	@ManyToOne
 	@JsonIgnore

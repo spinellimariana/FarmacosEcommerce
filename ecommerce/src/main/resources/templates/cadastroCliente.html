@@ -100,45 +100,46 @@ and open the template in the editor.
 		<div class="container">
 			<div class="row justify-content-center">
 
-				<form class="col-sm-12 col-md-6 col-lg-8">
+				<form class="col-sm-12 col-md-6 col-lg-8" action="#" th:action="@{/cliente/saveCliente}" 
+                          th:object="${cliente}" method="POST">
 					<h2 class="text-primary">Cadastro de Cliente</h2>
 					<hr>
 					<h5 class="text-muted">Informe seus dados pessoais:</h5>
 					<div class="form-floating mb-3">
 						<!-- COLOCAR TH FIELD COM O NOME DA VARIÁVEL EM TODOS OS INPUTS
                             EXMEPLO : th:field="*{senha}"-->
-						<input id="nome" type="text" required nome="nomeC" placeholder="Nome do Cliente*"
+						<input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Cliente*"
 							class="form-control" autofocus>
 						<label for="txtNomeCompleto">Nome*</label>
 					</div>
 					<div class="form-floating mb-3">
-						<input id="cpf" type="text" required cpf="cpf" oninput="mascara(this)" placeholder="CPF*"
+						<input id="cpf" type="text" required cpf="cpf" th:field="*{cpf}" oninput="mascara(this)" placeholder="CPF*"
 							class="form-control">
 						<label for="txtCpf">CPF*</label>
 					</div>
 
 					<div class="form-floating mb-3">
-						<input type="date" placeholder="Data de Nascimento" class="form-control">
+						<input type="date" placeholder="Data de Nascimento" th:field="*{dataNasc}" class="form-control">
 						<label for="txtData">Data de Nascimento</label>
 					</div>
 
 					<div class="form-floating mb-3">
-						<select class="form-select">
+						<select class="form-select" th:field="*{genero}">
 							<option th:value="'FEMININO'" th:text="Feminino"></option>
 							<option th:value="'MASCULINO'" th:text="Masculino"></option>
-							<option th:value="'OUTROS'" th:text="Prefiro não declarar"></option>
+							<option th:value="'OUTROS'" th:text="Outros"></option>
 
 						</select>
 					</div>
 
 					<div class="form-floating mb-3">
-						<input id="email" type="email" required email="email" placeholder="E-mail*"
+						<input id="email" type="email" required email="email" th:field="*{email}" placeholder="E-mail*"
 							class="form-control">
 						<label for="txtEmail">E-mail*</label>
 					</div>
 
 					<div class="form-floating mb-3">
-						<input id="senha" type="password" required senha="senha" placeholder="Senha*"
+						<input id="senha" type="password" required senha="senha" th:field="*{senha}" placeholder="Senha*"
 							class="form-control">
 						<label for="txtSenha">Senha*</label>
 					</div>
