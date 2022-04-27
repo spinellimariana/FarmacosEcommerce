@@ -26,4 +26,9 @@ public class IndexController {
         return "login";
     }
     
+//    @GetMapping("/cliente/login")
+//    public String loginCliente(){
+//        return "loginCliente";
+//    }
+    
 }

@@ -95,17 +95,11 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		Usuario user = clienteRepository.findByEmail(username);
+		Cliente user = clienteRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Usuario inválido");
-		} else if (user.getStatus() == StatusUsuario.INATIVO) {
-			throw new UsernameNotFoundException("Usuario Inativo");
-		}
-		return new User(user.getEmail(), user.getSenha(), mapRoleAuthorities(user.getRole()));
-	}
-
-	private Collection<? extends GrantedAuthority> mapRoleAuthorities(Collection<Role> roles) {
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+		} 
+		return new User(user.getEmail(), user.getSenha(), null);
 	}
 
 }

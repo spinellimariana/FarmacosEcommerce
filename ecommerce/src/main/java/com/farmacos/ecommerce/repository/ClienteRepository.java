@@ -16,11 +16,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
     //essa query está certa?
     @Query("SELECT u FROM Usuario u WHERE u.nome like %?1%")
-    public List<Usuario> search(String keyword);
+    public List<Cliente> search(String keyword);
     
     @Query("SELECT u FROM Usuario u WHERE u.nome like %?1%")
     public Page<Cliente> search(String keyword, Pageable page);
     
-     Usuario findByEmail(String email);
+    Cliente findByEmail(String email);
 	
 }
