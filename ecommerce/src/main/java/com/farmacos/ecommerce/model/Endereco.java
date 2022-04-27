@@ -63,8 +63,7 @@ public class Endereco {
     private boolean faturamento;
     
     @Column(name = "PRINCIPAL", nullable = false)
-    private boolean principaç;
-    
+    private boolean principal;
     
 	@ManyToOne
 	@JsonIgnore

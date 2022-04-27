@@ -22,12 +22,12 @@ public interface ClienteService extends UserDetailsService{
 
     void saveCliente(Cliente cliente);
 
-    Usuario getClienteID(long id);
+    Cliente findEmail(String email);
 
     //void ativoInativo(long id);
     Page<Cliente> findPaginated(int pageNo, int pageSize, String keyword);
     
-    public List<Usuario> findCliente(String keyword);
+    public List<Cliente> findCliente(String keyword);
 
 	
 }

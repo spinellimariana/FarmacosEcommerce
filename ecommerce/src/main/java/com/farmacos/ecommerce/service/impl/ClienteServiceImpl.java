@@ -2,6 +2,7 @@ package com.farmacos.ecommerce.service.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.exception.ObjectNotFoundException;
 import com.farmacos.ecommerce.model.Cliente;
+import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Role;
 import com.farmacos.ecommerce.model.Usuario;
 import com.farmacos.ecommerce.model.dto.request.ClienteRequest;
@@ -37,7 +39,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public ClienteResponse alterarUsuario(long id, ClienteRequest client) {
-		
+
 		Cliente cli = this.clienteRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Usuario não existente"));
 
@@ -45,7 +47,7 @@ public class ClienteServiceImpl implements ClienteService {
 		cli.setGenero(client.getGenero());
 		cli.setNome(client.getNome());
 		cli.setSenha(passwordEncoder.encode(client.getSenha()));
-		
+
 		clienteRepository.save(cli);
 
 		ClienteResponse clienteResponse = new ClienteResponse(cli);
@@ -71,9 +73,14 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public Usuario getClienteID(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Cliente findEmail(String email) {
+		
+		Cliente cliente = clienteRepository.findByEmail(email);
+
+		if (cliente != null) {
+			return cliente;
+		}
+		throw new RuntimeException("Produto não encontrato no ID :: " + email);
 	}
 
 	@Override
@@ -87,7 +94,7 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public List<Usuario> findCliente(String keyword) {
+	public List<Cliente> findCliente(String keyword) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -98,7 +105,7 @@ public class ClienteServiceImpl implements ClienteService {
 		Cliente user = clienteRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Usuario inválido");
-		} 
+		}
 		return new User(user.getEmail(), user.getSenha(), null);
 	}
 
