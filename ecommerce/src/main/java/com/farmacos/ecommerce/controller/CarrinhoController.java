@@ -5,22 +5,115 @@
  */
 package com.farmacos.ecommerce.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.farmacos.ecommerce.model.ItensVenda;
+import com.farmacos.ecommerce.model.Produto;
+import com.farmacos.ecommerce.model.Venda;
+import com.farmacos.ecommerce.repository.ProdutoRepository;
 
 /**
  *
  * @author 009432631
  */
 @Controller
-@RequestMapping(value = "/carrinho")
 public class CarrinhoController {
 
-    @GetMapping()
-    public String showCarrinho(Model model) {
-        return "carrinho";
-    }
+	private List<ItensVenda> itensVenda = new ArrayList<ItensVenda>();
+	private Venda venda = new Venda();
+
+	@Autowired
+	private ProdutoRepository produtoRepository;
+
+	private void calcularTotal() {
+		venda.setValorTotal(0.);
+		for (ItensVenda it : itensVenda) {
+			venda.setValorTotal(venda.getValorTotal() + it.getValorTotal());
+		}
+	}
+	
+	
+	@GetMapping("/carrinho")
+	public ModelAndView chamarCarrinho() {
+		ModelAndView mv = new ModelAndView("carrinho");
+		calcularTotal();
+		mv.addObject("venda", venda);
+		mv.addObject("listaItens", itensVenda);
+		return mv;
+	}
+
+	@GetMapping("/alterarQuantidade/{id}/{acao}")
+	public String alterarQuantidade(@PathVariable Long id, @PathVariable Long acao) {
+
+		for (ItensVenda it : itensVenda) {
+			if (it.getProduto().getId().equals(id)) {
+				if (acao == 1) {
+					it.setQuantidade(it.getQuantidade() + 1);
+					it.setValorTotal(0.);
+					it.setValorTotal(it.getValorTotal() + (it.getQuantidade() * it.getValorUnidade()));
+				} else if (acao == 0) {
+					it.setQuantidade(it.getQuantidade() - 1);
+					it.setValorTotal(0.);
+					it.setValorTotal(it.getValorTotal() + (it.getQuantidade() * it.getValorUnidade()));
+					if(it.getQuantidade() == 0) {
+						itensVenda.remove(it);
+					}
+
+				}
+				break;
+			}
+		}
+
+		return "redirect:/carrinho";
+	}
+	
+	@GetMapping("/removerProduto/{id}")
+	public String removerProduto(@PathVariable Long id) {
+
+		for (ItensVenda it : itensVenda) {
+			if (it.getProduto().getId().equals(id)) {
+			itensVenda.remove(it);
+			break;
+			}
+		}
+
+		return "redirect:/carrinho";
+	}
+
+	@GetMapping("/adicionarCarrinho/{id}")
+	public String adicionarCarrinho(@PathVariable Long id) {
+		System.out.println(id);
+		Optional<Produto> prod = produtoRepository.findById(id);
+		Produto produto = prod.get();
+
+		int controle = 0;
+		for (ItensVenda it : itensVenda) {
+			if (it.getProduto().getId().equals(produto.getId())) {
+				it.setQuantidade(it.getQuantidade() + 1);
+				it.setValorTotal(0.);
+				it.setValorTotal(it.getValorTotal() + (it.getQuantidade() * it.getValorUnidade()));
+				controle = 1;
+				break;
+			}
+		}
+
+		if (controle == 0) {
+			ItensVenda item = new ItensVenda();
+			item.setProduto(produto);
+			item.setValorUnidade(produto.getValorVenda());
+			item.setQuantidade(item.getQuantidade() + 1);
+			item.setValorTotal(item.getValorTotal() + (item.getQuantidade() * item.getValorUnidade()));
+			itensVenda.add(item);
+		}
+		return "redirect:/carrinho";
+	}
 
 }

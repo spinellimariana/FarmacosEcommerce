@@ -60,7 +60,6 @@ public class Cliente {
     @Column(name = "GENERO")
     private String genero;
     
-    //isso tá certo?
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> endereco;
     
