@@ -103,7 +103,7 @@ and open the template in the editor.
 					<div class="row g-3">
 						<div class="col-4 col-md-3 col-lg-2">
 							<a href="#">
-								<img src="img/fralda.webp" class="img-thumbnail">
+								<img th:src="@{${item.produto.getFoto}}" class="img-thumbnail">
 							</a>
 						</div>
 						<div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left align-self-center">
