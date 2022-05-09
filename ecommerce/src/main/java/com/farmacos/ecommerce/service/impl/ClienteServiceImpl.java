@@ -69,7 +69,7 @@ public class ClienteServiceImpl implements ClienteService {
 	public void saveCliente(Cliente cliente) {
 		cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
 
-		this.clienteRepository.save(cliente);
+		this.clienteRepository.saveAndFlush(cliente);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class ClienteServiceImpl implements ClienteService {
 		if (cliente != null) {
 			return cliente;
 		}
-		throw new RuntimeException("Produto não encontrato no ID :: " + email);
+		throw new RuntimeException("Produto não encontrato no ID : " + email);
 	}
 
 	@Override
@@ -107,6 +107,11 @@ public class ClienteServiceImpl implements ClienteService {
 			throw new UsernameNotFoundException("Usuario inválido");
 		}
 		return new User(user.getEmail(), user.getSenha(), null);
+	}
+
+	@Override
+	public Cliente findById(Long id) {
+		return clienteRepository.findById(id).get();
 	}
 
 }

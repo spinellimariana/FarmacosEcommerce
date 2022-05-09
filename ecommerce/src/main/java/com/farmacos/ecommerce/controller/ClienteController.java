@@ -9,6 +9,9 @@ import com.farmacos.ecommerce.model.Cliente;
 import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Usuario;
 import com.farmacos.ecommerce.service.ClienteService;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -35,17 +39,16 @@ public class ClienteController {
     }
 
     @GetMapping("/cadastro")
-    public String showCadastroClienteForm(Model model) {
-        Cliente cliente = new Cliente();
-        model.addAttribute("cliente", cliente);
-        return "cadastroCliente";
+    public ModelAndView cadastrar(Cliente cliente) {
+        ModelAndView mv = new ModelAndView("cadastroCliente");
+        mv.addObject("cliente", cliente);    	
+        return mv;
     }
 
     @PostMapping("/saveCliente") //salvar usuario no BD
     public String saveCliente(@ModelAttribute("cliente") Cliente cliente) {
         clienteService.saveCliente(cliente);
-        return "cadastroEndereco";
-         
+        return "redirect:/cliente/login";    
     }
 
     @GetMapping("/conta")
@@ -54,11 +57,10 @@ public class ClienteController {
         return "minhaConta";
     }
 
-    @GetMapping("/atualizar")
-    public String showAtualizarClienteForm(@PathVariable(value = "email") String email, Model model) {
-        Cliente cliente = clienteService.findEmail(email);
-        model.addAttribute("cliente", cliente);
-        return "atualizarCliente";
+    @GetMapping("/atualizar/{id}")
+    public ModelAndView showAtualizarClienteForm(@PathVariable(value = "id") Long id, Model model) {
+        Cliente cliente = clienteService.findById(id);
+        return cadastrar(cliente);
     }
 
 }

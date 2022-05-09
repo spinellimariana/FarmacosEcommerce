@@ -3,9 +3,12 @@ package com.farmacos.ecommerce.config;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +22,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
 @Configuration
 @EnableWebSecurity
-public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
+@Order(1)
+public class SecurityCliente extends WebSecurityConfigurerAdapter {
 
 	private static final String[] PUBLIC_ENDPOINT = { "/js/**", "/css/**", "/img/**", "/produtos/**", "/banner.jpg",
 			"/bannerMobile.jpg", "/slide01.jpg", "/slide01small.jpg"
@@ -30,37 +34,31 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 			"/page/**", "/cliente/cadastro", "/cliente/login", "/cliente/saveCliente" };
 
 	@Autowired
-	private UserDetailsService userService;
+	private DataSource dataSource;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-		auth.setUserDetailsService(userService);
-		auth.setPasswordEncoder(passwordEncoder);
-		return auth;
-	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authenticationProvider());
+		auth.jdbcAuthentication().dataSource(dataSource)
+		.usersByUsernameQuery(
+				"select email as username, senha as password, 1 as enable from cliente where email=?")
+		.authoritiesByUsernameQuery(
+				"select email as username, 'cliente' as authority from cliente where email=?")
+		.passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(PUBLIC_ENDPOINT).permitAll().antMatchers("/login*").permitAll()
-				.antMatchers(PUBLIC_ENDPOINT_POST).permitAll().anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").defaultSuccessUrl("/index", true).permitAll().and().logout()
-				.invalidateHttpSession(true).clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-				.permitAll()
-				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
-
-	}
+	http.antMatcher("/finalizar/**").authorizeRequests().anyRequest().hasAnyAuthority("cliente").and().csrf()
+	.disable().formLogin().loginPage("/cliente/cadastrar").permitAll().failureUrl("/cliente/cadastrar")
+	.loginProcessingUrl("/finalizar/login").defaultSuccessUrl("/finalizar").usernameParameter("username")
+	.passwordParameter("password").and().logout()
+	.logoutRequestMatcher(new AntPathRequestMatcher("/finalizar/logout")).logoutSuccessUrl("/").permitAll()
+	.and().exceptionHandling().accessDeniedPage("/negado");
+}
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		exposeDirectory("produtos", registry);
