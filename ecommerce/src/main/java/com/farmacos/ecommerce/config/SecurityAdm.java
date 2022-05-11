@@ -31,7 +31,7 @@ public class SecurityAdm extends WebSecurityConfigurerAdapter {
 	};
 
 	private static final String[] PUBLIC_ENDPOINT_POST = { "/autenticacao", "/usuarios", "/produto/**", "/index", "/",
-			"/page/**", "/cliente/cadastro", "/cliente/login", "/cliente/saveCliente" };
+			"/page/**", "/cliente/cadastro", "/cliente/login", "/cliente/saveCliente", "**/carrinho/**", "/adicionarCarrinho" };
 
 	@Autowired
 	private UserDetailsService userService;

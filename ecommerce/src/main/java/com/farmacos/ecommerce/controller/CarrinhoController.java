@@ -6,6 +6,7 @@
 package com.farmacos.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,13 +17,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.farmacos.ecommerce.model.Cliente;
 import com.farmacos.ecommerce.model.ItensVenda;
 import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Venda;
+import com.farmacos.ecommerce.repository.ItensVendaRepository;
 import com.farmacos.ecommerce.repository.ProdutoRepository;
+import com.farmacos.ecommerce.repository.VendaRepository;
 import com.farmacos.ecommerce.service.ClienteService;
 import com.farmacos.ecommerce.service.ProdutoService;
 
@@ -42,15 +46,20 @@ public class CarrinhoController {
 
 	@Autowired
 	private ClienteService clienteService;
-	
+
+	@Autowired
+	private VendaRepository vendaRepository;
+
+	@Autowired
+	private ItensVendaRepository itensVendaRepository;
+
 	private void calcularTotal() {
 		venda.setValorTotal(0.);
 		for (ItensVenda it : itensVenda) {
 			venda.setValorTotal(venda.getValorTotal() + it.getValorTotal());
 		}
 	}
-	
-	
+
 	@GetMapping("/carrinho")
 	public ModelAndView chamarCarrinho() {
 		ModelAndView mv = new ModelAndView("carrinho");
@@ -59,7 +68,7 @@ public class CarrinhoController {
 		mv.addObject("listaItens", itensVenda);
 		return mv;
 	}
-	
+
 	@GetMapping("/finalizar")
 	public ModelAndView finalizarCompra() {
 		buscarUsuarioAutenticado();
@@ -68,6 +77,24 @@ public class CarrinhoController {
 		mv.addObject("venda", venda);
 		mv.addObject("listaItens", itensVenda);
 		mv.addObject("cliente", cliente);
+		return mv;
+	}
+
+	@PostMapping("/finalizar/confirmar")
+	public ModelAndView confirmarCompra(String formaPagamento) {
+		ModelAndView mv = new ModelAndView("paginaPrincipal");
+		venda.setCliente(cliente);
+		venda.setFormaPagamento(formaPagamento);
+		venda.setDataCompra(new Date());
+		vendaRepository.saveAndFlush(venda);
+
+		for (ItensVenda item : itensVenda) {
+			item.setVenda(venda);
+			itensVendaRepository.saveAndFlush(item);
+		}
+		itensVenda = new ArrayList<>();
+		venda = new Venda();
+
 		return mv;
 	}
 
@@ -84,7 +111,7 @@ public class CarrinhoController {
 					it.setQuantidade(it.getQuantidade() - 1);
 					it.setValorTotal(0.);
 					it.setValorTotal(it.getValorTotal() + (it.getQuantidade() * it.getValorUnidade()));
-					if(it.getQuantidade() == 0) {
+					if (it.getQuantidade() == 0) {
 						itensVenda.remove(it);
 					}
 
@@ -95,14 +122,14 @@ public class CarrinhoController {
 
 		return "redirect:/carrinho";
 	}
-	
+
 	@GetMapping("/removerProduto/{id}")
 	public String removerProduto(@PathVariable Long id) {
 
 		for (ItensVenda it : itensVenda) {
 			if (it.getProduto().getId().equals(id)) {
-			itensVenda.remove(it);
-			break;
+				itensVenda.remove(it);
+				break;
 			}
 		}
 
@@ -139,12 +166,11 @@ public class CarrinhoController {
 
 	private void buscarUsuarioAutenticado() {
 		Authentication autenticado = SecurityContextHolder.getContext().getAuthentication();
-		if(!(autenticado instanceof AnonymousAuthenticationToken)) {
+		if (!(autenticado instanceof AnonymousAuthenticationToken)) {
 			String email = autenticado.getName();
 			cliente = clienteService.findEmail(email);
 		}
-		
+
 	}
-	
-	
+
 }

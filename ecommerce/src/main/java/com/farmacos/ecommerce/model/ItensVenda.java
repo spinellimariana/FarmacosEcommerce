@@ -34,7 +34,7 @@ public class ItensVenda {
 	private Produto produto;
 	
 	@ManyToOne
-	private Cliente cliente;
+	private Venda venda;
 	
 	private int quantidade = 0;
 	
