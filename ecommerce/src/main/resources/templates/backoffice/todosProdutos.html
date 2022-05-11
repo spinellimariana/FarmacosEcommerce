@@ -80,7 +80,7 @@ and open the template in the editor.
             <br>
             <div class="row">
                 <div class="col-12 col-md-5"> <!-- FORMULARIO DE PESQUISA -->
-                    <form th:action="@{/produto}" method="GET" class="justify-content-center justify-content-md-start mb-3 mb-md-0">
+                    <form th:action="@{/backoffice/produto}" method="GET" class="justify-content-center justify-content-md-start mb-3 mb-md-0">
                         <div class="input-group mb-3">
                             <input class=form-control type="text" name="keyword" placeholder="Pesquisa por nome*">
                             <input type="submit" value="Search" class="btn btn-primary">
@@ -90,7 +90,7 @@ and open the template in the editor.
                 <div class="col-12 col-md-7">
                     <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start">
                         <form class="ml-3 d-inline-block">
-                            <a th:href="@{/produto/showNewProdutoForm}" class="btn btn-primary btn-lg mb-3">+</a>
+                            <a th:href="@{/backoffice/produto/showNewProdutoForm}" class="btn btn-primary btn-lg mb-3">+</a>
                         </form>
                     </div>
                 </div>
@@ -125,10 +125,10 @@ and open the template in the editor.
                             <td><img class="imgProduto" height="50px" width="50px"  th:src="@{${produto.getFoto}}" /></td>
                             <td th:text="${produto.status}"></td>
 
-                            <td> <a th:href="@{/produto/showFormForUptade/{id}(id=${produto.id})}"
+                            <td> <a th:href="@{/backoffice/produto/showFormForUptade/{id}(id=${produto.id})}"
                                     class="btn btn-primary">Atualizar</a> </td>
 
-                            <td> <a th:href="@{/produto/ativoInativo/{id}(id=${produto.id})}"
+                            <td> <a th:href="@{/backoffice/produto/ativoInativo/{id}(id=${produto.id})}"
                                     class="btn btn-primary">Ativar/Inativar</a> </td>
 
                             <td> <a th:href="@{/produto/showVerProduto/{id}(id=${produto.id})}"

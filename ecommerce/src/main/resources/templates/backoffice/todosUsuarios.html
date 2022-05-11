@@ -80,7 +80,7 @@ and open the template in the editor.
             <br>
             <div class="row">
                 <div class="col-12 col-md-5">
-                    <form th:action="@{/usuario}" method="GET">
+                    <form th:action="@{/backoffice/usuario}" method="GET">
                         <div class="input-group mb-3">
                         <input class=form-control type="text" name="keyword" placeholder="Pesquisa por nome*">
                         <input type="submit" value="Search" class="btn btn-primary">
@@ -122,10 +122,10 @@ and open the template in the editor.
                             <td th:text="${usuario.cargo}"></td>
                             <td th:text="${usuario.status}"></td>
 
-                            <td> <a th:href="@{/usuario/showFormForUptade/{id}(id=${usuario.id})}"
+                            <td> <a th:href="@{/backoffice/usuario/showFormForUptade/{id}(id=${usuario.id})}"
                                     class="btn btn-primary">Atualizar</a> </td>
 
-                            <td> <a th:href="@{/usuario/ativoInativo/{id}(id=${usuario.id})}"
+                            <td> <a th:href="@{/backoffice/usuario/ativoInativo/{id}(id=${usuario.id})}"
                                     class="btn btn-primary">Ativar/Inativar</a> </td>
                         </tr>
                     </tbody>

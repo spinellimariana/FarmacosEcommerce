@@ -31,7 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author maris
  */
 @Controller
-@RequestMapping(value = "/produto") //o que esta no get maping
+@RequestMapping //o que esta no get maping
 public class ProdutoController {
 
     
@@ -40,14 +40,14 @@ public class ProdutoController {
    
 
     //listar todos produtos
-    @GetMapping()
+    @GetMapping("/backoffice/produto")
     public String viewHomePage(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         return findPaginated(1, model, keyword);
         //chamo o método paginated abaixo e aí ele dá o display de todos os produtos
 
     }
 
-    @GetMapping("/page/{pageNo}") //listar todos os produtos com paginação
+    @GetMapping("/backoffice/produto/page/{pageNo}") //listar todos os produtos com paginação
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         int pageSize = 10;
 
@@ -59,42 +59,42 @@ public class ProdutoController {
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listaProdutos", listProdutos);
 
-        return "todosProdutos";
+        return "/backoffice/todosProdutos";
 
     }
 
-    @GetMapping("/ativoInativo/{id}") //metodo para ativar/inativar no BD
+    @GetMapping("/backoffice/produto/ativoInativo/{id}") //metodo para ativar/inativar no BD
     public String ativoInativo(@PathVariable(value = "id") long id, Model model) {
         //chama o metodo que tá na service impl
         produtoService.status(id);
-        return "redirect:/produto";
+        return "redirect:/backoffice/produto";
     }
 
-    @GetMapping("/showNewProdutoForm") 
+    @GetMapping("/backoffice/produto/showNewProdutoForm") 
     public String showNewProdutoForm(Model model) {
         Produto produto = new Produto();
         model.addAttribute("produto", produto);
-        return "novoProduto";
+        return "/backoffice/novoProduto";
     }
 
-    @PostMapping("/saveProduto") //salvar produto funcionando
+    @PostMapping("/backoffice/produto/saveProduto") //salvar produto funcionando
     public String saveProduto(@ModelAttribute("produto") Produto produto, @RequestParam("file") MultipartFile foto) throws IOException{
         produtoService.saveProduto(produto, foto);
-        return "redirect:/produto";
+        return "redirect:/backoffice/produto";
     }
     
-    @GetMapping("/showVerProduto/{id}") //visualizar pagina do produto
+    @GetMapping("/produto/showVerProduto/{id}") //visualizar pagina do produto
     public String showVerProduto(@PathVariable(value = "id") long id, Model model) {
         Produto produto = produtoService.getProdutoID(id);
         model.addAttribute("produto", produto);
         return "verProduto";
     }
     
-    @GetMapping("/showFormForUptade/{id}") //atualizar produto no BD
+    @GetMapping("/backoffice/produto/showFormForUptade/{id}") //atualizar produto no BD
     public String showFormForUptade(@PathVariable(value = "id") long id, Model model) {
         Produto produto = produtoService.getProdutoID(id);
         model.addAttribute("produto", produto);
-        return "atualizarProduto";
+        return "/backoffice/atualizarProduto";
     }
 
 }

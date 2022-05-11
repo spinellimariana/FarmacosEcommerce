@@ -31,40 +31,41 @@ public class SecurityAdm extends WebSecurityConfigurerAdapter {
 	};
 
 	private static final String[] PUBLIC_ENDPOINT_POST = { "/autenticacao", "/usuarios", "/produto/**", "/index", "/",
-			"/page/**", "/cliente/cadastro", "/cliente/login", "/cliente/saveCliente", "**/carrinho/**", "/adicionarCarrinho" };
+			"/page/**", "/cliente/cadastro", "/cliente/login", "/cliente/saveCliente", "**/carrinho/**",
+			"/adicionarCarrinho" };
 
 	@Autowired
 	private UserDetailsService userService;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private DataSource dataSource;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery(
-				"select email as username, senha as password, 1 as enable from usuario where email=?")
-		.authoritiesByUsernameQuery(
-				"select email as username, 'adm' as authority from usuario where email=?")
-		.passwordEncoder(new BCryptPasswordEncoder());
+				.usersByUsernameQuery(
+						"select email as username, senha as password, 1 as enable from usuario where email=?")
+				.authoritiesByUsernameQuery("select email as username, 'adm' as authority from usuario where email=?")
+				.passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(PUBLIC_ENDPOINT).permitAll().antMatchers("/login*").permitAll()
-				.antMatchers(PUBLIC_ENDPOINT_POST).permitAll().anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").defaultSuccessUrl("/index", true).permitAll().and().logout()
-				.invalidateHttpSession(true).clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-				.permitAll()
-				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+	http.authorizeRequests().antMatchers("/login").permitAll()
+//	.antMatchers("/administrativo/cadastrar/").hasAnyAuthority("gerente")
+	.antMatchers("/backoffice/**").authenticated()
+	.and().formLogin().loginPage("/login").failureUrl("/login")
+	.defaultSuccessUrl("/index", true).usernameParameter("username")
+	.passwordParameter("password")
+	.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/administrativo/logout"))
+	.logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+	.and().exceptionHandling().accessDeniedPage("/negado")
+	.and().csrf().disable();
+}
 
-	}
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		exposeDirectory("produtos", registry);

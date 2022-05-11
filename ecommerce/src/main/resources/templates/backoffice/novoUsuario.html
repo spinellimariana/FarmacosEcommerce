@@ -5,9 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
     <head>
-        <title>Gerenciamento de Produtos</title>
+        <title>Gerenciamento de Usuários</title>
         <!-- BOOTSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -34,7 +33,6 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-
     <body style="min-width: 372px;">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
             <!-- barra de navegação -->
@@ -65,52 +63,79 @@ and open the template in the editor.
 
             </div>
         </nav>
-        <!-- fim da barra de navegacao -->
 
         <main class="flex-fill">
             <div class="container">
                 <div class="row justify-content-center">
-                    <form class="col-sm-12 col-md-6 col-lg-8" action="#" enctype="multipart/form-data" th:action="@{/produto/saveProduto}" th:object="${produto}"
-                          method="POST">
-                        <h2 class="text-primary">Atualizar Produto</h2>
-                        <input type="hidden" th:field="*{id}" />
+                    <!-- th action precisa colocar toda a url request mapin + get/post maping da classe controller -->
+                    <form class="col-sm-12 col-md-6 col-lg-8" action="#" th:action="@{/backoffice/usuario/saveUsuario}" 
+                          th:object="${usuario}" method="POST">
+                        <h2 class="text-primary">Novo Usuário</h2>`
                         <div class="form-floating mb-3">
-                            <input id="nome" name="nome" type="text" required nome="nome" th:field="*{nome}"
-                                   placeholder="Nome do Produto*" class="form-control" autofocus>
-                            <label for="txtNomeCompleto">Produto</label>
+                            <input id="nome" type="text" required nome="nome" th:field="*{nome}" placeholder="Nome do Usuário*" 
+                                   class="form-control" autofocus>
+                            <label for="txtNomeCompleto">Nome*</label>
+
                         </div>
                         <div class="form-floating mb-3">
-                            <input id="qtd" name="qtd" type="number" required nome="qtd" th:field="*{qtdEstoque}" 
-                                   placeholder="QTD*"
+                            <input id="cpf" type="text" required cpf="cpf" oninput="mascara(this)" th:field="*{cpf}"
+                                   placeholder="CPF*" class="form-control">
+                            <label for="txtCpf">CPF*</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input id="email" type="email" required email="email" th:field="*{email}" 
+                                   placeholder="E-mail*" class="form-control">
+                            <label for="txtEmail">E-mail*</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" id="phone" name="phone" 
+                                   th:field="*{telefone}" placeholder="Telefone" class="form-control">
+                            <label for="txtTelefone">Telefone</label>
+
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" th:field="*{dtNascimento}" placeholder="Data de Nascimento" 
                                    class="form-control">
-                            <label for="txtQtd">Quantidade em Estoque</label>
-
+                            <label for="txtData">Data de Nascimento</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input id="preco" name="preco" type="number" required nome="preco" th:field="*{valorVenda}"
-                                   placeholder="Preço*" step="0.01" min="0" max="10000" class="form-control">
-                            <label for="txtPreco">Preço R$</label>
-                        </div>
-                        <div class="form-floating mb-3" height="50">
-                            <textarea class="form-control" height="50" id="descricao" name="descricao" rows='10'
-                                      placeholder="Descrição" th:field="*{descricao}"></textarea>
-                            <label for="txtDescricao">Descrição</label>
-
+                            <input id="senha" type="password" required senha="senha" th:field="*{senha}" placeholder="Senha*" 
+                                   class="form-control">
+                            <label for="txtSenha">Senha*</label>
                         </div>
                         <div class="form-floating mb-3">
+                              <select class="form-select" th:field="*{cargo}">
+                                <option th:value="'ADM'" th:text="Administrador"></option>
+                                <option th:value="'ESTOQUISTA'" th:text="Estoquista"></option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3">
+
                             <select class="form-select" th:field="*{status}">
                                 <option th:value="'ATIVO'" th:text="Ativo"></option>
                                 <option th:value="'INATIVO'" th:text="Inativo"></option>
-                            </select><br>
-
+                            </select>
                         </div>
                         <div class="form-floating mb-3">
-                            <input id="imagem" type="file" name="file" class="form-control-file">
-                        </div>
-                        <div class="form-floating mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg col-3">Atualizar</button>
+                            <button type="submit" class="btn btn-primary btn-lg col-3">Salvar</button>
                         </div>
                     </form>
+
+                    <!-- VALIDAÇÃO DO FORMATO DE ENTRADA DO CPF -->
+                    <script>
+                        function mascara(i) {
+                            var v = i.value;
+                            if (isNaN(v[v.length - 1])) { // impede entrar outro caractere que não seja número
+                                i.value = v.substring(0, v.length - 1);
+                                return;
+                            }
+                            i.setAttribute("maxlength", "14");
+                            if (v.length == 3 || v.length == 7)
+                                i.value += ".";
+                            if (v.length == 11)
+                                i.value += "-";
+                        }
+                    </script>
                 </div>
             </div>
         </main>
@@ -135,5 +160,4 @@ and open the template in the editor.
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
-
 </html>

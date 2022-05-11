@@ -18,7 +18,7 @@ import com.farmacos.ecommerce.repository.UsuarioRepository;
 import com.farmacos.ecommerce.service.UsuarioService;
 
 @Controller
-@RequestMapping(value = "/usuario") //o que esta no get maping
+@RequestMapping(value = "/backoffice/usuario") //o que esta no get maping
 public class UsuarioController {
 
     @Autowired
@@ -49,7 +49,7 @@ public class UsuarioController {
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listaUsuarios", listUsuarios);
 
-        return "todosUsuarios";
+        return "/backoffice/todosUsuarios";
 
     }
 
@@ -57,20 +57,20 @@ public class UsuarioController {
     public String showNewUsuarioForm(Model model) {
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
-        return "novoUsuario"; // mesmo nome do html
+        return "/backoffice/novoUsuario"; // mesmo nome do html
     }
 
     @PostMapping("/saveUsuario") //salvar usuario no BD
     public String saveUsuario(@ModelAttribute("usuario") Usuario usuario) {
         usuarioService.saveUsuario(usuario);
-        return "redirect:/usuario";
+        return "redirect:/backoffice/usuario";
     }
 
     @GetMapping("/showFormForUptade/{id}") //atualizar usuario no BD
     public String showFormForUptade(@PathVariable(value = "id") long id, Model model) {
         Usuario usuario = usuarioService.getUsuarioID(id);
         model.addAttribute("usuario", usuario);
-        return "atualizarUsuario";
+        return "/backoffice/atualizarUsuario";
     }
 
     @GetMapping("/ativoInativo/{id}") //metodo para ativar/inativar no BD
@@ -78,7 +78,7 @@ public class UsuarioController {
         //chama o metodo que tá na service impl
         usuarioService.status(id);
         //como programar ativação inativação?
-        return "redirect:/usuario";
+        return "redirect:/backoffice/usuario";
     }
 
 }
