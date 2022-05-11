@@ -24,21 +24,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 @EnableWebSecurity
 @Order(1)
 public class SecurityCliente extends WebSecurityConfigurerAdapter {
-
-	private static final String[] PUBLIC_ENDPOINT = { "/js/**", "/css/**", "/img/**", "/produtos/**", "/banner.jpg",
-			"/bannerMobile.jpg", "/slide01.jpg", "/slide01small.jpg"
-
-	};
-
-	private static final String[] PUBLIC_ENDPOINT_POST = { "/autenticacao", "/usuarios", "/produto/**", "/index", "/",
-			"/page/**", "/cliente/cadastro", "/cliente/login", "/cliente/saveCliente" };
-
 	@Autowired
 	private DataSource dataSource;
-
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,7 +40,7 @@ public class SecurityCliente extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	http.antMatcher("/finalizar/**").authorizeRequests().anyRequest().hasAnyAuthority("cliente").and().csrf()
-	.disable().formLogin().loginPage("/cliente/cadastrar").permitAll().failureUrl("/cliente/cadastrar")
+	.disable().formLogin().loginPage("/cliente/login").permitAll().failureUrl("/cliente/login")
 	.loginProcessingUrl("/finalizar/login").defaultSuccessUrl("/finalizar").usernameParameter("username")
 	.passwordParameter("password").and().logout()
 	.logoutRequestMatcher(new AntPathRequestMatcher("/finalizar/logout")).logoutSuccessUrl("/").permitAll()
