@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.farmacos.ecommerce.enums.StatusPedido;
 import com.farmacos.ecommerce.model.Cliente;
 import com.farmacos.ecommerce.model.ItensVenda;
 import com.farmacos.ecommerce.model.Produto;
@@ -86,6 +87,7 @@ public class CarrinhoController {
 		venda.setCliente(cliente);
 		venda.setFormaPagamento(formaPagamento);
 		venda.setDataCompra(new Date());
+		venda.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
 		vendaRepository.saveAndFlush(venda);
 
 		for (ItensVenda item : itensVenda) {

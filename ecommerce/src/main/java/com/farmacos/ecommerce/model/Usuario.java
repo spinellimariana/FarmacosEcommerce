@@ -67,7 +67,7 @@ public class Usuario {
 	private String senha;
 
 	@Column(name = "STS", nullable = false)
-	@Enumerated(value = EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	private StatusUsuario status;
 
 	@Column(name = "CPF", nullable = false, unique = true)

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.farmacos.ecommerce.enums.StatusPedido;
 import com.farmacos.ecommerce.enums.StatusUsuario;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -54,4 +55,7 @@ public class Venda {
 	private String formaPagamento;
 	
 	private Double valorTotal = 0.;
+	
+	@Enumerated(value = EnumType.ORDINAL)
+	private StatusPedido status;
 }

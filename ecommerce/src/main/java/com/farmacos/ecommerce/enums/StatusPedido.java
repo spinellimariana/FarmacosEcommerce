@@ -1,0 +1,11 @@
+package com.farmacos.ecommerce.enums;
+
+public enum StatusPedido {
+
+	AGUARDANDO_PAGAMENTO,
+	PAGEMENTO_REJEITADO,
+	PAGAMENTO_SUCESSO,
+	AGUARDANDO_RETIRADA,
+	EM_TRANSITO,
+	ENTREGUE
+}
