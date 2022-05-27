@@ -180,18 +180,53 @@ and open the template in the editor.
                 <!-- resumo do pedido -->
 
                 <h4 class="text-decoration-none text-primary">Resumo do Pedido:</h4>
-                <div class="card bg-light">
-                    <div class="py-2">
+                <div class="card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Foto</th>
+                                    <th>QTD</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item px-5 py-0">item</li>
-                        <li class="list-group-item px-5 py-0">item</li>
-                        <li class="list-group-item px-5 py-0">item</li>
-                    </ul>
-                    <div>
+                                <!-- INSERIR AQUI UM FOR EACH DOS PRODUTOS DAQUELE PEDIDO
+                                <tr th:each="produto : ${listaProdutos}">
+                                    <td th:text="${produto.id}"></td>
+                                    <td th:text="${produto.nome}"></td>
+                                    <td><img class="imgProduto" height="50px" width="50px"  th:src="@{${produto.getFoto}}" /></td>
+                                    <td th:text="${produto.qtd}"></td>
+                                    <td th:text="${produto.valorVenda}"></td>  
+                                </tr>-->
 
-                    </div>
+                                <!-- EXEMPLO ESTÁTICO DE COMO VAI FICAR EXCLUIR DEPOIS -->
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Fralda Infantil Descartável</td>
+                                    <td><img class="imgProduto" height="30px" width="30px"  src="img/fralda.webp" /></td>
+                                    <td>1</td>
+                                    <td>R$ 64,50</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Advil</td>
+                                    <td><img class="imgProduto" height="30px" width="30px"  src="img/advil.webp" /></td>
+                                    <td>2</td>
+                                    <td>R$ 5,98</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Shampoo</td>
+                                    <td><img class="imgProduto" height="30px" width="30px"  src="img/shampoo.webp" /></td>
+                                    <td>2</td>
+                                    <td>R$ 57,80</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     <h4 class="text-dark text-end px-3 pt-4"> Total com frete: R$ 384,58</h4>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end px-3 pb-4">
 
