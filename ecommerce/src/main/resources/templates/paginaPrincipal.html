@@ -167,7 +167,7 @@ and open the template in the editor.
 				<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch"
 					th:each="produto : ${listaProdutos}">
 					<!--<!-- responsividade -->
-					<div class="card text-center bg-light">
+					<div class="card text-center bg-light" >
 						<img class="card-img-top" height="150px" width="150px" th:src="@{${produto.getFoto}}" />
 						<div class="card-header">
 							R$ <span th:text="${produto.valorVenda}"></span>

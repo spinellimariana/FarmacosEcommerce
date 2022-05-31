@@ -46,7 +46,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
         if (keyword == null) {
-            return this.produtoRepository.findAll(pageable);
+            return this.produtoRepository.findByStatus(StatusUsuario.ATIVO, pageable);
         }
         return this.produtoRepository.search(keyword, pageable);
     }

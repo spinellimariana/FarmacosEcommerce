@@ -5,6 +5,7 @@
  */
 package com.farmacos.ecommerce.repository;
 
+import com.farmacos.ecommerce.enums.StatusUsuario;
 import com.farmacos.ecommerce.model.Produto;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -26,5 +27,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT u FROM Produto u WHERE u.nome like %?1%")
     public Page<Produto> search(String keyword, Pageable page);
+    
+    public Page<Produto> findByStatus(StatusUsuario status, Pageable page);
 
 }
