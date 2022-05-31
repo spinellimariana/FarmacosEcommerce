@@ -14,6 +14,8 @@ import com.farmacos.ecommerce.repository.ClienteRepository;
 import com.farmacos.ecommerce.repository.VendaRepository;
 import com.farmacos.ecommerce.service.ClienteService;
 import com.farmacos.ecommerce.service.VendaService;
+import org.springframework.data.domain.Sort;
+
 
 @Service
 public class VendaServiceImpl implements VendaService{
@@ -33,7 +35,7 @@ public class VendaServiceImpl implements VendaService{
 	@Override
 	public Page<Venda> findPaginated(int pageNo, int pageSize, String email) {
 		
-		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("dataCompra").descending());
 		
 		Cliente cliente = this.clienteRepository.findByEmail(email);
 		

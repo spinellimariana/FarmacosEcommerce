@@ -30,6 +30,8 @@ and open the template in the editor.
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 
+
+
 	<!-- LIMITAR TAMANHO DA DESCRIÇÃO -->
 	<style>
 		p.truncate-3l {
@@ -40,6 +42,7 @@ and open the template in the editor.
 			text-overflow: ellipsis;
 		}
 	</style>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -97,82 +100,157 @@ and open the template in the editor.
 	<main>
 
 		<div class="container">
-			<form action="/finalizar/confirmar" method="POST">
-
-				<div class="row">
-					<div class="col-12">
-						<h1>Informações do Usuario</h1>
-
-						<div class="col-5">
-							<small class="form-control" th:text="${cliente.nome}"></small>
+			<h2 class="text-decoration-none text-primary">Entrega e Pagamento</h2>
+			<hr>
+			<!-- resumo do cliente -->
+			<div class="row">
+				<div class="col">
+					<h4 class="text-decoration-none text-primary">Seus Dados:</h4>
+					<div class="card bg-light">
+						<div class="mx-2 my-2">
+							<p th:text="${cliente.nome}"></p>
+							<p th:text="${cliente.cpf}"></p>
 						</div>
-						</br>
-						<div class="col-5">
-							<small class="form-control" th:text="${cliente.cpf}"></small>
-						</div>
-						</br>
-						<div class="col-5">
-							<small class="form-control" th:text="${cliente.email}"></small>
-						</div>
-						</br>
-
-					</div>
-					<div class="col-4">
-						<select class="form-select" name="formaPagamento">
-							<option value="Cartão de Crédito">Cartão de Crédito</option>
-							<option value="Cartão de Débito">Cartão de Débito</option>
-							<option value="Boleto">Boleto</option>
-
-						</select>
-
 					</div>
 				</div>
-
-				<h2 class="text-decoration-none text-primary">Carrinho de Compras</h2>
-				<hr>
-				<ul class="list-group mb-3">
-					<li class="list-group-item py-3" th:each="item : ${listaItens}">
-						<div class="row g-3">
-							<div class="col-4 col-md-3 col-lg-2">
-								<a href="#">
-									<img th:src="@{${item.produto.getFoto}}" class="img-thumbnail">
-								</a>
-							</div>
-							<div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left align-self-center">
-								<h4><b><a href="#" class="text-decoration-none text-primary"
-											th:text="${item.produto.nome}"></a></b></h4>
-								<small th:text="${item.produto.descricao}"></small>
-							</div>
-							<div class="col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 
-                                 align-self-center mt-3">
-								<div class="input-group">
-									<h3><small class="text-decoration-none text-primary"
-											th:text="${item.quantidade}"></small></h3>
-								</div>
-								<div class="text-right mt-2">
-									<small class="text-secondary" th:text="${item.valorUnidade}"></small>
-									<hr>
-									<p style="color:green;"><b><small th:text="${item.valorTotal}"></small></b></p>
-
-								</div>
-
-							</div>
+				<div class="col">
+					<h4 class="text-decoration-none text-primary">Endereço de Entrega:</h4>
+					<div class="card bg-light">
+						<div class="mx-2 my-2">
+							<p>Rua João da Silva, 345 - São Paulo/SP</p>
+							<p>CEP 11.111-11</p>
 						</div>
-					</li>
-					<li class="list-group-item py-3">
-						<div>
-							<h4 class="text-dark mb-3 text-end"><small th:text="${venda.valorTotal}"></small></h4>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+
+			<form action="/finalizar/frete" method="POST">
+				<div class="row">
+					<div class="col">
+						<h4 class="text-decoration-none text-primary">Selecione o Frete:</h4>
+						<div class="list-group mx-0 w-auto">
+							<label class="list-group-item d-flex gap-2 px-5">
+								<input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
+									id="listGroupRadios1" th:field="${venda.frete}" th:value="0.0" checked>
+								<span>
+									Econômica
+									<small class="d-block text-muted">Frete Grátis - 5 dias úteis</small>
+								</span>
+							</label>
+							<label class="list-group-item d-flex gap-2 px-5">
+								<input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
+									id="listGroupRadios2" th:field="${venda.frete}" th:value="9.90">
+								<span>
+									Expressa
+									<small class="d-block text-muted">R$9.90 - 2 dias úteis</small>
+								</span>
+							</label>
+							<label class="list-group-item d-flex gap-2 px-5">
+								<input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
+									id="listGroupRadios3" th:field="${venda.frete}" th:value="18.90">
+								<span>
+									Super Expressa
+									<small class="d-block text-muted">R$18.90 - Receba amanhã</small>
+								</span>
+							</label>
 						</div>
-
-						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
-							<button class="btn btn-primary btn-lg col-3">Confirmar Pedido</button>
-
-						</div>
-
-					</li>
-				</ul>
+						<button class="btn btn-success btn-lg">Confirmar frete</button>
+					</div>
 			</form>
+
+			<form action="/finalizar/confirmar" method="POST">
+
+				<div class="col">
+					<h4 class="text-decoration-none text-primary">Pagamento:</h4>
+					<select class="form-select" aria-label="Default select example" name="formaPagamento"
+						id="formaPagamento">
+						<option selected>Selecione o método de pagamento:</option>
+						<option value="Cartao">Cartão de Crédito</option>
+						<option value="Pix">Pix</option>
+						<option value="Boleto">Boleto</option>
+					</select>
+
+					<div class="row gy-3 pt-2">
+						<div class="col-md-6" >
+							<label for="cc-name" class="form-label">Titular do Cartão:</label>
+							<input type="text" class="form-control" id="cc-name" placeholder="" required>
+
+							<div class="invalid-feedback">
+								Name on card is required
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<label for="cc-number" class="form-label">Número do Cartão</label>
+							<input type="text" class="form-control" id="cc-number" placeholder="" required>
+							<div class="invalid-feedback">
+								Credit card number is required
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<label for="cc-expiration" class="form-label">Vencimento:</label>
+							<input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+							<div class="invalid-feedback">
+								Expiration date required
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<label for="cc-cvv" class="form-label">CVV</label>
+							<input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+							<div class="invalid-feedback">
+								Security code required
+							</div>
+						</div>
+					</div>
+
+				</div>
+		</div>
+		<!-- fim do frete e pagamento -->
+		<hr>
+		<!-- resumo do pedido -->
+
+		<h4 class="text-decoration-none text-primary">Resumo do Pedido:</h4>
+		<div class="card">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Foto</th>
+						<th>QTD</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="item : ${listaItens}">
+						<td th:text="${item.produto.id}"></td>
+						<td th:text="${item.produto.nome}"></td>
+						<td><img class="imgProduto" height="50px" width="50px" th:src="@{${item.produto.getFoto}}" />
+						</td>
+						<td th:text="${item.quantidade}"></td>
+						<td th:text="${item.produto.valorVenda}"></td>
+					</tr>
+
+				</tbody>
+			</table>
+			<h4 class="text-dark text-end px-3 pt-4" th:text="${venda.valorTotal}"></h4>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end px-3 pb-4">
+
+				<a href="#" class="btn btn-outline-primary btn-lg">Voltar</a>
+				<button class="btn btn-success btn-lg">Comprar</button>
+
+
+			</div>
+
+		</div>
+
+		<!-- fim do resumo do pedido -->
+		</form>
 		</div>
 
 

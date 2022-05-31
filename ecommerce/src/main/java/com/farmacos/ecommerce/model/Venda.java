@@ -54,6 +54,8 @@ public class Venda {
 
 	private String formaPagamento;
 	
+	private Double frete = 0.;
+	
 	private Double valorTotal = 0.;
 	
 	@Enumerated(value = EnumType.ORDINAL)

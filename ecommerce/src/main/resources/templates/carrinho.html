@@ -115,22 +115,26 @@ and open the template in the editor.
                                  align-self-center mt-3">
 							<div class="input-group">
 
-								<a type="button" class="btn btn-outline-dark btn-sm" th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${0})}">
+								<a type="button" class="btn btn-outline-dark btn-sm"
+									th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${0})}">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 										class="bi bi-caret-down" viewBox="0 0 16 16">
 										<path
 											d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
 									</svg>
 								</a>
-								<h3><small class="text-decoration-none text-primary" th:text="${item.quantidade}"></small></h3>
-								<a class="btn btn-outline-dark btn-sm" th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${1})}">
+								<h3><small class="text-decoration-none text-primary"
+										th:text="${item.quantidade}"></small></h3>
+								<a class="btn btn-outline-dark btn-sm"
+									th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${1})}">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 										class="bi bi-caret-up" viewBox="0 0 16 16">
 										<path
 											d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
 									</svg>
 								</a>
-								<a class="btn btn-outline-danger border-dark btn-sm" th:href="@{/removerProduto/{id}(id=${item.produto.id})}">
+								<a class="btn btn-outline-danger border-dark btn-sm"
+									th:href="@{/removerProduto/{id}(id=${item.produto.id})}">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 										class="bi bi-trash" viewBox="0 0 16 16">
 										<path
@@ -142,10 +146,10 @@ and open the template in the editor.
 
 							</div>
 							<div class="text-right mt-2">
+								<small class="text-secondary">Valor Unitário:</small>
 								<small class="text-secondary" th:text="${item.valorUnidade}"></small>
 								<hr>
-								<p style="color:green;"><b><small th:text="${item.valorTotal}"></small></b></p>
-
+								<p style="color:green;"><b><small>Total do Item: </small> <small th:text="${item.valorTotal}"></small></b></p>
 							</div>
 
 						</div>

@@ -5,8 +5,12 @@
  */
 package com.farmacos.ecommerce.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +30,6 @@ import com.farmacos.ecommerce.model.ItensVenda;
 import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Venda;
 import com.farmacos.ecommerce.repository.ItensVendaRepository;
-import com.farmacos.ecommerce.repository.ProdutoRepository;
 import com.farmacos.ecommerce.repository.VendaRepository;
 import com.farmacos.ecommerce.service.ClienteService;
 import com.farmacos.ecommerce.service.ProdutoService;
@@ -41,6 +44,10 @@ public class CarrinhoController {
 	private List<ItensVenda> itensVenda = new ArrayList<ItensVenda>();
 	private Venda venda = new Venda();
 	private Cliente cliente;
+	
+	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	
 
 	@Autowired
 	private ProdutoService produtoService;
@@ -55,7 +62,7 @@ public class CarrinhoController {
 	private ItensVendaRepository itensVendaRepository;
 
 	private void calcularTotal() {
-		venda.setValorTotal(0.);
+		venda.setValorTotal(venda.getFrete());
 		for (ItensVenda it : itensVenda) {
 			venda.setValorTotal(venda.getValorTotal() + it.getValorTotal());
 		}
@@ -80,13 +87,22 @@ public class CarrinhoController {
 		mv.addObject("cliente", cliente);
 		return mv;
 	}
+	
+	@PostMapping("/finalizar/frete")
+	public String acrescentarFrete(Double frete) {
+		
+		venda.setFrete(frete);
+		buscarUsuarioAutenticado();
+		calcularTotal();
+		
+		return "redirect:/finalizar";
+	}
 
 	@PostMapping("/finalizar/confirmar")
-	public ModelAndView confirmarCompra(String formaPagamento) {
-		ModelAndView mv = new ModelAndView("paginaPrincipal");
+	public String confirmarCompra(String formaPagamento) throws ParseException {
 		venda.setCliente(cliente);
 		venda.setFormaPagamento(formaPagamento);
-		venda.setDataCompra(new Date());
+		venda.setDataCompra(getDate());
 		venda.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
 		vendaRepository.saveAndFlush(venda);
 
@@ -97,7 +113,14 @@ public class CarrinhoController {
 		itensVenda = new ArrayList<>();
 		venda = new Venda();
 
-		return mv;
+		return "redirect:/pedido";
+	}
+	
+	private Date getDate() throws ParseException {
+		
+		String date = format.format(new Date());
+		
+		return format.parse(date);
 	}
 
 	@GetMapping("/alterarQuantidade/{id}/{acao}")
