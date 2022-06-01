@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.farmacos.ecommerce.model.Cliente;
 import com.farmacos.ecommerce.model.Venda;
+import com.farmacos.ecommerce.model.dto.response.VendaResponse;
 import com.farmacos.ecommerce.repository.ClienteRepository;
+import com.farmacos.ecommerce.repository.ItensVendaRepository;
 import com.farmacos.ecommerce.repository.VendaRepository;
 import com.farmacos.ecommerce.service.ClienteService;
 import com.farmacos.ecommerce.service.VendaService;
@@ -25,6 +27,9 @@ public class VendaServiceImpl implements VendaService{
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private ItensVendaRepository itensVendaRepository;
 	
 	@Override
 	public List<Venda> getAllVendaByClient() {
@@ -45,6 +50,27 @@ public class VendaServiceImpl implements VendaService{
 			return this.vendaRepository.findAll(pageable);
 		}
 			
+	}
+
+	@Override
+	public VendaResponse findVendaByid(long id) {
+		VendaResponse vendaResponse = new VendaResponse();
+		Venda venda = vendaRepository.getById(id);
+		
+		vendaResponse.setVenda(venda);
+		vendaResponse.setItensPedido(itensVendaRepository.findByVenda(venda));
+		
+		if(venda.getFrete() == 18.9) {
+			vendaResponse.setFrete("Super Expressa: " + venda.getFrete());
+		}else if(venda.getFrete() == 9.9) {
+			vendaResponse.setFrete("Expressa: "  + venda.getFrete());
+		}else {
+			vendaResponse.setFrete("Econômica: " + venda.getFrete());
+		}
+		
+		
+		
+		return vendaResponse;
 	}
 	
 }

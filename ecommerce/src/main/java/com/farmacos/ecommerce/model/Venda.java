@@ -1,31 +1,23 @@
 package com.farmacos.ecommerce.model;
 
-import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.farmacos.ecommerce.enums.StatusPedido;
-import com.farmacos.ecommerce.enums.StatusUsuario;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -60,4 +52,9 @@ public class Venda {
 	
 	@Enumerated(value = EnumType.ORDINAL)
 	private StatusPedido status;
+	
+	@ManyToOne
+	private Endereco endereco;
+	
+	
 }

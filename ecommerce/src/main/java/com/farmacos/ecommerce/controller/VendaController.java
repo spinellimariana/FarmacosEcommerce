@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.farmacos.ecommerce.model.Cliente;
+import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Venda;
+import com.farmacos.ecommerce.model.dto.response.VendaResponse;
 import com.farmacos.ecommerce.service.VendaService;
 
 @Controller
@@ -32,6 +34,13 @@ public class VendaController {
     @GetMapping()
     public String viewHomePage(Model model, @RequestParam(value="keyword", required = false) String keyword) {
         return findPaginated(1, model);
+    }
+    
+    @GetMapping("/showVerPedido/{id}") //visualizar pagina do produto
+    public String showVerProduto(@PathVariable(value = "id") long id, Model model) {
+        VendaResponse pedido = vendaService.findVendaByid(id);
+        model.addAttribute("pedido", pedido);
+        return "verPedido";
     }
 
     @GetMapping("/page/{pageNo}") //listar todos os usuários com paginação

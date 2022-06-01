@@ -110,10 +110,11 @@ public class CarrinhoController {
 			item.setVenda(venda);
 			itensVendaRepository.saveAndFlush(item);
 		}
+		Long idVenda = venda.getId();
 		itensVenda = new ArrayList<>();
 		venda = new Venda();
 
-		return "redirect:/pedido";
+		return "redirect:/pedido/showVerPedido/" + idVenda;
 	}
 	
 	private Date getDate() throws ParseException {
