@@ -103,22 +103,20 @@ and open the template in the editor.
 			<hr>
 			<div class="row">
 				<div class="col">
-					<h2 class="text-decorath2 n-none text-primary">Número do pedido:</h2>
-					<h2 class="text-decoration-none text-primary" th:text="${pedido.venda.id}"></h2>
+					<h2 class="text-decoration-none text-primary" th:text="${'Número do pedido: ' + pedido.venda.id}"></h2>
 				</div>
 				<div class="col">
-					<h2 class="text-decorath2 n-none text-primary">Valor Total: R$</h2>
-					<h2 class="text-decoration-none text-primary" th:text="${pedido.venda.valorTotal}"></h2>
+					<h2 class="text-decoration-none text-primary" th:text="${'Valor Total: R$: ' + pedido.venda.valorTotal}"></h2>
 				</div>
 			</div>
 			<hr>
 			<div class="row">
 				<div class="col">
 					<h4 class="text-decoration-none text-primary">Endereço de Entrega:</h4>
-					<div class="card bg-light">
+					<div class="card bg-light"> 
 						<div class="mx-2 my-2">
-							<p th:text="${pedido.venda.cliente.nome}"></p>
-							<p>Rua João da Silva, 345 - São Paulo/SP - CEP 11.111-11</p>
+							<p th:text="${'Nome cliente: ' + pedido.venda.cliente.nome}"></p>
+							<p th:text="${pedido.venda.endereco.logradouro + ' ' + pedido.venda.endereco.numero  + ' - CEP: ' +  pedido.venda.endereco.cep}">Rua João da Silva, 345 - São Paulo/SP - CEP 11.111-11</p>
 
 						</div>
 					</div>
@@ -127,10 +125,8 @@ and open the template in the editor.
 					<h4 class="text-decoration-none text-primary">Frete e pagamento:</h4>
 					<div class="card bg-light">
 						<div class="mx-2 my-2">
-							<h4>Forma de pagamento: </h4>
-							<p th:text="${pedido.venda.formaPagamento}"></p>
-							<h4>Frete: </h4>
-							<p th:text="${pedido.frete}"></p>
+							<p th:text="${'Forma de pagamento: ' + pedido.venda.formaPagamento}"></p>
+							<p th:text="${'Frete: ' + pedido.frete}"></p>
 						</div>
 					</div>
 				</div>

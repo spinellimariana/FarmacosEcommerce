@@ -82,6 +82,7 @@ public class CarrinhoController {
 		buscarUsuarioAutenticado();
 		ModelAndView mv = new ModelAndView("finalizar");
 		calcularTotal();
+		venda.setEndereco(cliente.getEndereco().get(0));
 		mv.addObject("venda", venda);
 		mv.addObject("listaItens", itensVenda);
 		mv.addObject("cliente", cliente);
@@ -104,6 +105,7 @@ public class CarrinhoController {
 		venda.setFormaPagamento(formaPagamento);
 		venda.setDataCompra(getDate());
 		venda.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
+		
 		vendaRepository.saveAndFlush(venda);
 
 		for (ItensVenda item : itensVenda) {
