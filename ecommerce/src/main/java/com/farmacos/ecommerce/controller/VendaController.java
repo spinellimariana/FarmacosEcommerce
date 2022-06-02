@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.farmacos.ecommerce.model.Cliente;
-import com.farmacos.ecommerce.model.Produto;
 import com.farmacos.ecommerce.model.Venda;
 import com.farmacos.ecommerce.model.dto.response.VendaResponse;
 import com.farmacos.ecommerce.service.VendaService;
@@ -60,12 +56,8 @@ public class VendaController {
     }
     
 	private String buscarUsuarioAutenticado() {
-		Authentication autenticado = SecurityContextHolder.getContext().getAuthentication();
-		if (!(autenticado instanceof AnonymousAuthenticationToken)) {
-			return autenticado.getName();
-			
-		}
-		return null;
+	
+		return "vini@vini.com";
 
 	}
 	

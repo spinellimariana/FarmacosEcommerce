@@ -5,19 +5,13 @@
  */
 package com.farmacos.ecommerce.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Formatter;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,10 +38,8 @@ public class CarrinhoController {
 	private List<ItensVenda> itensVenda = new ArrayList<ItensVenda>();
 	private Venda venda = new Venda();
 	private Cliente cliente;
-	
+
 	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	
-	
 
 	@Autowired
 	private ProdutoService produtoService;
@@ -68,13 +60,34 @@ public class CarrinhoController {
 		}
 	}
 
-	@GetMapping("/carrinho")
+	@GetMapping()
 	public ModelAndView chamarCarrinho() {
 		ModelAndView mv = new ModelAndView("carrinho");
+		populateCarrinho();
 		calcularTotal();
 		mv.addObject("venda", venda);
 		mv.addObject("listaItens", itensVenda);
 		return mv;
+	}
+
+	private void populateCarrinho() {
+		if(itensVenda.isEmpty()) {
+			adicionarCarrinho(20l);
+			adicionarCarrinho(21l);
+			adicionarCarrinho(21l);
+			adicionarCarrinho(21l);
+			adicionarCarrinho(22l);
+			adicionarCarrinho(22l);
+			adicionarCarrinho(14l);
+			adicionarCarrinho(14l);
+			adicionarCarrinho(14l);
+			adicionarCarrinho(14l);
+			adicionarCarrinho(18l);
+			adicionarCarrinho(18l);
+			adicionarCarrinho(18l);
+			adicionarCarrinho(18l);
+			adicionarCarrinho(18l);
+		}
 	}
 
 	@GetMapping("/finalizar")
@@ -88,14 +101,14 @@ public class CarrinhoController {
 		mv.addObject("cliente", cliente);
 		return mv;
 	}
-	
+
 	@PostMapping("/finalizar/frete")
 	public String acrescentarFrete(Double frete) {
-		
+
 		venda.setFrete(frete);
 		buscarUsuarioAutenticado();
 		calcularTotal();
-		
+
 		return "redirect:/finalizar";
 	}
 
@@ -105,7 +118,7 @@ public class CarrinhoController {
 		venda.setFormaPagamento(formaPagamento);
 		venda.setDataCompra(getDate());
 		venda.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
-		
+
 		vendaRepository.saveAndFlush(venda);
 
 		for (ItensVenda item : itensVenda) {
@@ -118,11 +131,11 @@ public class CarrinhoController {
 
 		return "redirect:/pedido/showVerPedido/" + idVenda;
 	}
-	
+
 	private Date getDate() throws ParseException {
-		
+
 		String date = format.format(new Date());
-		
+
 		return format.parse(date);
 	}
 
@@ -148,7 +161,7 @@ public class CarrinhoController {
 			}
 		}
 
-		return "redirect:/carrinho";
+		return "redirect:/";
 	}
 
 	@GetMapping("/removerProduto/{id}")
@@ -161,7 +174,7 @@ public class CarrinhoController {
 			}
 		}
 
-		return "redirect:/carrinho";
+		return "redirect:/";
 	}
 
 	@GetMapping("/adicionarCarrinho/{id}")
@@ -189,16 +202,13 @@ public class CarrinhoController {
 			item.setValorTotal(item.getValorTotal() + (item.getQuantidade() * item.getValorUnidade()));
 			itensVenda.add(item);
 		}
-		return "redirect:/carrinho";
+		return "redirect:/";
 	}
 
 	private void buscarUsuarioAutenticado() {
-		Authentication autenticado = SecurityContextHolder.getContext().getAuthentication();
-		if (!(autenticado instanceof AnonymousAuthenticationToken)) {
-			String email = autenticado.getName();
-			cliente = clienteService.findEmail(email);
-		}
 
+			cliente = clienteService.findEmail("vini@vini.com");
+		
 	}
 
 }

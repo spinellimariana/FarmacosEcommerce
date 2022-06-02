@@ -20,32 +20,39 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
-@Configuration
-@EnableWebSecurity
-@Order(1)
+//@Configuration
+//@EnableWebSecurity
+//@Order(1)
 public class SecurityCliente extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery(
-				"select email as username, senha as password, 1 as enable from cliente where email=?")
-		.authoritiesByUsernameQuery(
-				"select email as username, 'cliente' as authority from cliente where email=?")
-		.passwordEncoder(new BCryptPasswordEncoder());
-	}
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.jdbcAuthentication().dataSource(dataSource)
+//		.usersByUsernameQuery(
+//				"select email as username, senha as password, 1 as enable from cliente where email=?")
+//		.authoritiesByUsernameQuery(
+//				"select email as username, 'cliente' as authority from cliente where email=?")
+//		.passwordEncoder(new BCryptPasswordEncoder());
+//	}
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-	http.antMatcher("/finalizar/**").authorizeRequests().anyRequest().hasAnyAuthority("cliente").and().csrf()
-	.disable().formLogin().loginPage("/cliente/login").permitAll().failureUrl("/cliente/login")
-	.loginProcessingUrl("/finalizar/login").defaultSuccessUrl("/finalizar").usernameParameter("username")
-	.passwordParameter("password").and().logout()
-	.logoutRequestMatcher(new AntPathRequestMatcher("/finalizar/logout")).logoutSuccessUrl("/").permitAll()
-	.and().exceptionHandling().accessDeniedPage("/negado");
+	
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
 }
+	
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.authorizeRequests().antMatchers("**/**").permitAll();
+//	http.antMatcher("/finalizar/**").authorizeRequests().anyRequest().hasAnyAuthority("cliente").and().csrf()
+//	.disable().formLogin().loginPage("/cliente/login").permitAll().failureUrl("/cliente/login")
+//	.loginProcessingUrl("/finalizar/login").defaultSuccessUrl("/finalizar").usernameParameter("username")
+//	.passwordParameter("password").and().logout()
+//	.logoutRequestMatcher(new AntPathRequestMatcher("/finalizar/logout")).logoutSuccessUrl("/").permitAll()
+//	.and().exceptionHandling().accessDeniedPage("/negado");
+//}
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		exposeDirectory("produtos", registry);
