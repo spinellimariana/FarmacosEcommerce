@@ -96,5 +96,7 @@ public class ProdutoController {
         model.addAttribute("produto", produto);
         return "/backoffice/atualizarProduto";
     }
+    
+    //show ver pedido
 
 }

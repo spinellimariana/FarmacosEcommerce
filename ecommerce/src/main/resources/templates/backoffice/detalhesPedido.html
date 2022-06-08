@@ -4,10 +4,10 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Loja Farmacos - Finalizar Compra</title>
+        <title>Gerenciamento de Usuários</title>
         <!-- BOOTSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -15,6 +15,7 @@ and open the template in the editor.
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
         <!-- BOOTSTRAP ICONS -->
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
 
@@ -30,8 +31,6 @@ and open the template in the editor.
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
-
         <!-- LIMITAR TAMANHO DA DESCRIÇÃO -->
         <style>
             p.truncate-3l {
@@ -42,15 +41,15 @@ and open the template in the editor.
                 text-overflow: ellipsis;
             }
         </style>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body style="min-width: 372px;">
-
-        <!-- início barra de navegação -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom shadow-sm mb-3">
+            <!-- barra de navegação -->
+            <!-- ATENÇÀO DEPOIS TROCAR TODOS OS HREF PELO MODELO DO THYMELEAF -->
+
             <div class="container">
                 <a class="navbar-brand" th:href="@{/}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -58,64 +57,53 @@ and open the template in the editor.
                     <path fill-rule="evenodd"
                           d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z" />
                     </svg>
-                    <strong>Farmacos Online</strong></a>
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
+                    <strong>Farmacos Online</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-toogle="collapse" data-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse justify-content-end" id="navbar">
-                    <ul class="navbar-nav mr-auto">
-                        <li>
-                            <a href="#" class="nav-link text-white">Item 1</a>
-                        </li>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-white">Item 2</a>
+                            <span sec:authentication="principal.username" class="nav-link text-white"></span>
+                        </li>
+                        <li sec:authorize="isAuthenticated()" class="nav-item">
+                            <a th:href="@{/finalizar/logout}" class="nav-link text-white"> Logout</a>
+                        </li>
                         </li>
                     </ul>
-
-                    <div class="align-self-end">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a th:href="@{/cliente/conta}" class="nav-link text-white">Minha Conta</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link text-white">Entrar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a th:href="@{/carrinho}" class="nav-link text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                         class="bi bi-cart3" viewBox="0 0 16 16">
-                                    <path
-                                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
+
+            </div>
         </nav>
-        <!-- fim barra de navegação -->
 
-
-        <!-- inicio da area de conteúdo -->
         <main>
             <div class="container">
-                <h1 class="text-decoration-none text-success">Compra concluída com sucesso!</h1>
+                <h1 class="text-decoration-none text-primary" th:text="${'Número do pedido: ' + pedido.venda.id}">Pedido n.: xxxxxx</h1>
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <h2 class="text-decoration-none text-primary" th:text="${'Número do pedido: ' + pedido.venda.id}"></h2>
+                        <h2 class="text-decoration-none text-primary" th:text="${'Valor Total: R$: ' + pedido.venda.valorTotal}">Valor Total: R$120,23</h2>
                     </div>
                     <div class="col">
-                        <h2 class="text-decoration-none text-primary" th:text="${'Valor Total: R$: ' + pedido.venda.valorTotal}"></h2>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Atualizar status do pedido:</option>
+                            <option value="1">Aguardando pagamento</option>
+                            <option value="2">Pago</option>
+                            <option value="3">Aguardando envio</option>
+                            <option value="4">Enviado - Em trânsito</option>
+                            <option value="4">Enviado - Entregue</option>
+                        </select>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col">
                         <h4 class="text-decoration-none text-primary">Endereço de Entrega:</h4>
-                        <div class="card bg-light"> 
+                        <div class="card bg-light">
                             <div class="mx-2 my-2">
-                                <p th:text="${'Nome cliente: ' + pedido.venda.cliente.nome}"></p>
+                                <p th:text="${'Nome cliente: ' + pedido.venda.cliente.nome}">Nome: João Silva</p>
                                 <p th:text="${pedido.venda.endereco.logradouro + ' ' + pedido.venda.endereco.numero  + ' - CEP: ' +  pedido.venda.endereco.cep}">Rua João da Silva, 345 - São Paulo/SP - CEP 11.111-11</p>
 
                             </div>
@@ -125,8 +113,8 @@ and open the template in the editor.
                         <h4 class="text-decoration-none text-primary">Frete e pagamento:</h4>
                         <div class="card bg-light">
                             <div class="mx-2 my-2">
-                                <p th:text="${'Forma de pagamento: ' + pedido.venda.formaPagamento}"></p>
-                                <p th:text="${'Frete: ' + pedido.frete}"></p>
+                                <p th:text="${'Forma de pagamento: ' + pedido.venda.formaPagamento}">Forma de pagamento escolhida: Cartão de crédito final: XXXX</p>
+                                <p th:text="${'Frete: ' + pedido.frete}">Forma de entrega: Normal - Frete grátis</p>
                             </div>
                         </div>
                     </div>
@@ -146,6 +134,7 @@ and open the template in the editor.
                         </tr>
                     </thead>
                     <tbody>
+
                         <tr th:each="item : ${pedido.itensPedido}">
                             <td th:text="${item.produto.id}"></td>
                             <td th:text="${item.produto.nome}"></td>
@@ -157,23 +146,15 @@ and open the template in the editor.
                     </tbody>
                 </table>
                 <!-- fim da tabela de produtos comprados -->
-
-
-
-            </div> <!-- fim do container -->
-
+            </div><!-- fim do container -->
         </main>
 
 
-        <!-- fim da área de conteúdo -->
-
-
-
-        <!-- início do rodapé -->
         <div style="height: 273px;" class="d-block d-md-none"></div>
         <div style="height: 153px;" class="d-none d-md-block d-lg-none"></div>
         <div style="height: 129px;" class="d-none d-lg-block"></div>
         <footer class="border-top fixed-bottom text-muted bg-light">
+
             <div class="container">
                 <div class="row py-3">
                     <div class="col-12 col-md-4 text-center text-md-left">
@@ -185,14 +166,11 @@ and open the template in the editor.
                     <div class="col-12 col-md-4 text-center text-md-right">
                         <a href="#" th:href="@{/login}" class="text-decoration-none text-dark">Administrar</a>
                     </div>
+
                 </div>
             </div>
         </footer>
-        <!-- fim do rodapé -->
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
     </body>
+
 
 </html>
